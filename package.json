@@ -15,6 +15,7 @@
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
     "lint:check": "eslint . --ext .ts,.tsx --ignore-path .gitignore",
+    "formatter:check": "prettier --check **/*.ts **/*.tsx",
     "build": "tsc && vite build"
   },
   "repository": {
