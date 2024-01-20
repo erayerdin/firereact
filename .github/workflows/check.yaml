@@ -10,7 +10,7 @@ jobs:
       - name: "Install dependencies"
         run: npm i
       - name: "Run Firebase Emulators"
-        run: npm run firebase:emulators &
+        run: npm run firebase:emulators:run &
       - name: "Wait for Firebase Emulators"
         run: sleep 10
       - name: "Test"

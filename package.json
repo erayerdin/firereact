@@ -10,7 +10,7 @@
     "/dist"
   ],
   "scripts": {
-    "firebase:emulators": "firebase emulators:start --only firestore",
+    "firebase:emulators:run": "firebase emulators:start --only firestore",
     "firebase:emulators:download": "concurrently \"firebase setup:emulators:firestore\"",
     "test": "vitest run",
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
