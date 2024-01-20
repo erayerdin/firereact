@@ -10,9 +10,11 @@ import useDocument from "./useDocument";
 
 const docRef = doc(firestore, "profiles", "profile1");
 const docData = { displayName: "Vort the Wise" } as const;
+const sleep = (ms: number) =>
+  new Promise<void>((resolve) => setTimeout(resolve, ms));
 
-describe("useDocument hook", () => {
-  it("should be initially loading state", async () => {
+describe("initially useDocument hook", () => {
+  it("should be loading state", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
@@ -26,7 +28,7 @@ describe("useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("should initially have no snapshot", async () => {
+  it("should have no snapshot", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
@@ -40,13 +42,60 @@ describe("useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("should initially have no error", async () => {
+  it("should have no error", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
 
     // test
     const { result } = renderHook(() => useDocument({ reference: docRef }));
+    const { error } = result.current;
+    expect(error).toBeUndefined();
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+});
+
+describe("later useDocument hook", () => {
+  it("should not be loading state", async () => {
+    // setup
+    await deleteDoc(docRef);
+    await setDoc(docRef, docData);
+
+    // test
+    const { result } = renderHook(() => useDocument({ reference: docRef }));
+    await sleep(100);
+    const { loading } = result.current;
+    expect(loading).toBe(false);
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+
+  it("later have no snapshot", async () => {
+    // setup
+    await deleteDoc(docRef);
+    await setDoc(docRef, docData);
+
+    // test
+    const { result } = renderHook(() => useDocument({ reference: docRef }));
+    await sleep(100);
+    const { snapshot } = result.current;
+    expect(snapshot?.data()).toStrictEqual(docData);
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+
+  it("later have no error", async () => {
+    // setup
+    await deleteDoc(docRef);
+    await setDoc(docRef, docData);
+
+    // test
+    const { result } = renderHook(() => useDocument({ reference: docRef }));
+    await sleep(100);
     const { error } = result.current;
     expect(error).toBeUndefined();
 
