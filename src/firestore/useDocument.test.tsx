@@ -5,13 +5,12 @@
 
 import { renderHook } from "@testing-library/react";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import sleep from "sleep-sleep";
 import { firestore } from "../firebase";
 import useDocument from "./useDocument";
 
 const docRef = doc(firestore, "profiles", "profile1");
 const docData = { displayName: "Vort the Wise" } as const;
-const sleep = (ms: number) =>
-  new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 describe("initially useDocument hook", () => {
   it("should be loading state", async () => {
