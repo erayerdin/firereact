@@ -10,6 +10,7 @@
     "/dist"
   ],
   "scripts": {
+    "firebase:emulators": "firebase emulators:start --only firestore",
     "test": "vitest run",
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
