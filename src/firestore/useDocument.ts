@@ -42,18 +42,24 @@ const useDocument = ({
       if (listen) {
         const unsub = onSnapshot(reference, (snap) => {
           setSnapshot(snap);
+          setLoading(false);
         });
         return unsub;
       } else {
         const snapshot = await getDoc(reference);
         setSnapshot(snapshot);
+        setLoading(false);
       }
     } catch (e) {
       if (e instanceof FirebaseError) {
         setError(e);
+        setLoading(false);
       } else {
+        setLoading(false);
         throw e;
       }
+    } finally {
+      setLoading(false);
     }
   }, []);
 
