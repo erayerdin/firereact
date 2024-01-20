@@ -24,3 +24,12 @@ jobs:
         run: npm i
       - name: "Check Linting"
         run: npm run lint:check
+  formatter:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+      - name: "Install dependencies"
+        run: npm i
+      - name: "Check Formatting"
+        run: npm run formatter:check
