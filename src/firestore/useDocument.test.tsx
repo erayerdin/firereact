@@ -39,4 +39,18 @@ describe("useDocument hook", () => {
     // teardown
     await deleteDoc(docRef);
   });
+
+  it("should initially have no error", async () => {
+    // setup
+    await deleteDoc(docRef);
+    await setDoc(docRef, docData);
+
+    // test
+    const { result } = renderHook(() => useDocument({ reference: docRef }));
+    const { error } = result.current;
+    expect(error).toBeUndefined();
+
+    // teardown
+    await deleteDoc(docRef);
+  });
 });
