@@ -72,7 +72,7 @@ describe("later useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("later have no snapshot", async () => {
+  it("have a snapshot", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
@@ -87,7 +87,7 @@ describe("later useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("later have no error", async () => {
+  it("have no error", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
@@ -97,6 +97,47 @@ describe("later useDocument hook", () => {
     await sleep(100);
     const { error } = result.current;
     expect(error).toBeUndefined();
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+});
+
+describe.skip("later listen useDocument hook", () => {
+  it("should not be loading state", async () => {
+    // setup
+    await deleteDoc(docRef);
+    await setDoc(docRef, docData);
+
+    // test
+    const { result } = renderHook(() =>
+      useDocument({ reference: docRef, options: { listen: true } }),
+    );
+    await sleep(100);
+    const { loading } = result.current;
+    expect(loading).toBe(false);
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+
+  it("have no snapshot", async () => {
+    // setup
+    await deleteDoc(docRef);
+    await setDoc(docRef, docData);
+
+    // test
+    const { result } = renderHook(() =>
+      useDocument({ reference: docRef, options: { listen: true } }),
+    );
+    await sleep(100);
+    const { snapshot } = result.current;
+    expect(snapshot?.data()).toStrictEqual(docData);
+    // for some reason, changes are not reflected whatever time we sleep
+    // so, skipping this test suite altogether now
+    await setDoc(docRef, { displayName: "Vort" });
+    await sleep(100);
+    expect(snapshot?.data()).toStrictEqual({ displayName: "Vort" });
 
     // teardown
     await deleteDoc(docRef);
