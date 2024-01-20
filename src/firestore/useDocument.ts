@@ -15,7 +15,7 @@ import useAsyncEffect from "use-async-effect";
 
 type UseDocumentParams = {
   reference: DocumentReference;
-  options: {
+  options?: {
     listen: boolean;
   };
 };
