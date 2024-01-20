@@ -8,6 +8,6 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   test: {
     globals: true,
-    environment: "happy-dom",
+    environment: "happy-dom", // jsdom does not work for some reason
   },
 });
