@@ -9,6 +9,7 @@
         "node_modules": true,
         "package-lock.json": true,
         "dist": true,
+        "coverage": true,
     },
     "explorerExclude.backup": {},
     "licenser.license": "MIT",
