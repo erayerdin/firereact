@@ -40,10 +40,15 @@ const useDocument = ({
     setLoading(true);
     try {
       if (listen) {
-        const unsub = onSnapshot(reference, (snap) => {
-          setSnapshot(snap);
-          setLoading(false);
-        });
+        const unsub = onSnapshot(
+          reference,
+          (snap) => {
+            setSnapshot(snap);
+            setLoading(false);
+          },
+          (error) => setError(error),
+          () => setLoading(false),
+        );
         return unsub;
       } else {
         const snapshot = await getDoc(reference);
