@@ -3,3 +3,5 @@ dist
 
 #storybook build directory
 storybook-static
+
+**/*.log
