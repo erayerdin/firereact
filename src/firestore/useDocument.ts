@@ -42,6 +42,7 @@ const useDocument = ({
       if (listen) {
         const unsub = onSnapshot(
           reference,
+          { includeMetadataChanges: true },
           (snap) => {
             setSnapshot(snap);
             setLoading(false);
