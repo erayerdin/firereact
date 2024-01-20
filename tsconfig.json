@@ -20,9 +20,12 @@
     "noUnusedParameters": true, // Flags unused function parameters.
     "noFallthroughCasesInSwitch": true, // Requires handling all cases in a switch statement.
     "declaration": true, // Generates declaration files for TypeScript.
+    "types": [
+      "vitest/globals"
+    ]
   },
   "include": ["src"], // Specifies the directory to include when searching for TypeScript files.
   "exclude": [
     "src/**/__docs__","src/**/__test__"
-  ]
+  ],
 }
