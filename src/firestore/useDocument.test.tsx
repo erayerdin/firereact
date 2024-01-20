@@ -3,22 +3,25 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { render, renderHook, screen } from "@testing-library/react";
+import { renderHook } from "@testing-library/react";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import { firestore } from "../firebase";
+import useDocument from "./useDocument";
 
-const useSampleHook = () => {
-  return "foo";
-};
+describe("useDocument hook", () => {
+  it("should be initially loading state", async () => {
+    // setup
+    console.log("setting up");
+    const docRef = doc(firestore, "profiles", "profile1");
+    await deleteDoc(docRef);
+    await setDoc(docRef, { displayName: "Vort the Wise" });
 
-test("2 + 2 equals to 4", () => {
-  expect(2 + 2).toBe(4);
-});
+    // test
+    const { result } = renderHook(() => useDocument({ reference: docRef }));
+    const { loading } = result.current;
+    expect(loading).toBe(true);
 
-test("div exists", async () => {
-  render(<div>foo</div>);
-  await screen.findByText(/foo/i);
-});
-
-test("useSampleHook", () => {
-  const { result } = renderHook(() => useSampleHook());
-  expect(result.current).toBe("foo");
+    // teardown
+    await deleteDoc(docRef);
+  });
 });
