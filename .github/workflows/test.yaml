@@ -7,11 +7,11 @@ jobs:
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v3
+      - name: "Install dependencies"
+        run: npm i
       - name: "Run Firebase Emulators"
         run: npm run firebase:emulators &
       - name: "Wait for Firebase Emulators"
         run: sleep 10
-      - name: "Install dependencies"
-        run: npm i
       - name: "Test"
         run: npm run test
