@@ -5,7 +5,8 @@ jobs:
   test:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
       - name: "Install dependencies"
         run: npm i
       - name: "Test"
