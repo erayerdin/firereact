@@ -9,6 +9,8 @@ jobs:
         uses: actions/checkout@v3
       - name: "Install dependencies"
         run: npm i
+      - name: "Download Firebase Emulators"
+        run: npm run firebase:emulators:download
       - name: "Run Firebase Emulators"
         run: npm run firebase:emulators:run &
       - name: "Wait for Firebase Emulators"
