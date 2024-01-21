@@ -3,6 +3,6 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export * from "./useCollection";
+const useCollection = () => {};
 
-export * from "./useDocument";
+export default useCollection;
