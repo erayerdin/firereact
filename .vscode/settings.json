@@ -11,6 +11,7 @@
         "dist": true,
         "coverage": true,
         ".venv": true,
+        ".cache": true,
     },
     "explorerExclude.backup": {},
     "licenser.license": "MIT",
