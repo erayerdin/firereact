@@ -6,6 +6,7 @@
 import { FirebaseError } from "firebase/app";
 import { Query, QuerySnapshot } from "firebase/firestore";
 import { useState } from "react";
+import useAsyncEffect from "use-async-effect";
 
 type UseCollectionParams = {
   query: Query;
@@ -29,6 +30,8 @@ const useCollection = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [snapshot, setSnapshot] = useState<QuerySnapshot | undefined>();
   const [error, setError] = useState<FirebaseError | undefined>();
+
+  useAsyncEffect(async () => {}, []);
 
   return { loading, snapshot, error };
 };
