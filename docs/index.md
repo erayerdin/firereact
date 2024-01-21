@@ -1,17 +1,18 @@
-# Welcome to MkDocs
+# Introduction
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/erayerdin/firereact/check.yaml?branch=main&style=flat-square&logo=github&logoColor=white&label=check)
+![Codecov](https://img.shields.io/codecov/c/github/erayerdin/firereact?token=Nw2dQOJfbC&style=flat-square&logo=codecov&logoColor=white)
 
-## Commands
+Firereact is a helper hooks and component library for Firebase and React.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+## Installation
 
-## Project layout
+You can use `npm` to install `firereact`:
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+```bash
+npm i firereact
+```
+
+## License
+
+Firereact is licensed under the terms of [MIT License](https://www.tldrlegal.com/license/mit-license).
