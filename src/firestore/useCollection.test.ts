@@ -40,4 +40,18 @@ describe("initially useCollection hook", () => {
     // teardown
     await deleteDoc(docRef);
   });
+
+  it("should have no error", async () => {
+    // setup
+    await deleteDoc(docRef);
+    await setDoc(docRef, docData);
+
+    // test
+    const { result } = renderHook(() => useCollection({ query: colRef }));
+    const { error } = result.current;
+    expect(error).toBeUndefined();
+
+    // teardown
+    await deleteDoc(docRef);
+  });
 });
