@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "peterschmalfeldt.explorer-exclude",
-        "ymotongpoo.licenser"
+        "ymotongpoo.licenser",
+        "redhat.vscode-yaml"
     ]
 }
