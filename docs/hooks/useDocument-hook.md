@@ -12,10 +12,10 @@ const docRef = doc(firestore, "collectionName", "documentId");
 const { loading, snapshot, error } = useDocument(docRef);
 ```
 
-By default, `useDocument` retrieves a document only once. If you need realtime updates, you can set `options.live` to `true` as below:
+By default, `useDocument` retrieves a document only once. If you need realtime updates, you can set `options.listen` to `true` as below:
 
 ```typescript
-const { loading, snapshot, error } = useDocument(docRef, { live: true });
+const { loading, snapshot, error } = useDocument(docRef, { listen: true });
 ```
 
 ## Input Parameters
