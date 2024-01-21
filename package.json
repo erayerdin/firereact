@@ -1,5 +1,5 @@
 {
-  "name": "fireact",
+  "name": "firereact",
   "version": "0.1.0",
   "description": "React hooks for Firebase",
   "type": "module",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/erayerdin/fireact.git"
+    "url": "git+https://github.com/erayerdin/firereact.git"
   },
   "keywords": [
     "react",
@@ -32,9 +32,9 @@
   "author": "Eray Erdin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/erayerdin/fireact/issues"
+    "url": "https://github.com/erayerdin/firereact/issues"
   },
-  "homepage": "https://github.com/erayerdin/fireact#readme",
+  "homepage": "https://github.com/erayerdin/firereact#readme",
   "devDependencies": {
     "@testing-library/react": "^14.1.2",
     "@types/react": "^18.2.48",
