@@ -1,1 +1,39 @@
-site_name: My Docs
+site_name: Firereact
+site_url: https://firereact.erayerdin.com
+repo_url: https://github.com/erayerdin/firereact
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.sections
+    - toc.follow
+    - toc.integrate
+    - navigation.top
+  palette: 
+    # Palette toggle for light mode
+    - scheme: slate
+      media: "(prefers-color-scheme: dark)"
+      primary: orange
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4 
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: default
+      media: "(prefers-color-scheme: light)"
+      primary: orange
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+
+plugins:
+  - privacy
+  - social
+  - tags
