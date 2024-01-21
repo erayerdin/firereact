@@ -1,0 +1,46 @@
+name: "Check"
+on:
+  pull_request:
+  push:
+    branches: main
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+      - name: "Install dependencies"
+        run: npm i
+      - name: "Download Firebase Emulators"
+        run: npm run firebase:emulators:download
+      - name: "Run Firebase Emulators"
+        run: npm run firebase:emulators:run &
+      - name: "Wait for Firebase Emulators"
+        run: sleep 10
+      - name: "Test"
+        run: npm run test
+      - name: "Analyze Coverage"
+        run: npm run test:coverage
+      - name: "Upload Coverage"
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+      - name: "Install dependencies"
+        run: npm i
+      - name: "Check Linting"
+        run: npm run lint:check
+  formatter:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+      - name: "Install dependencies"
+        run: npm i
+      - name: "Check Formatting"
+        run: npm run formatter:check

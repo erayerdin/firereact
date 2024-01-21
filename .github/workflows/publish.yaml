@@ -1,0 +1,24 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v4
+      - name: "Setup Node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.16.0"
+          registry-url: "https://registry.npmjs.org"
+      - name: "Switch to Node CI Environment"
+        run: npm ci
+      - name: "Build Project"
+        run: rm -rfv dist && npm run build
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
