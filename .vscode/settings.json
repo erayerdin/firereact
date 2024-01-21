@@ -10,6 +10,7 @@
         "package-lock.json": true,
         "dist": true,
         "coverage": true,
+        ".venv": true,
     },
     "explorerExclude.backup": {},
     "licenser.license": "MIT",

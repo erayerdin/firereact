@@ -6,3 +6,4 @@ storybook-static
 
 **/*.log
 coverage/
+.venv/
