@@ -9,6 +9,14 @@
 
 Firereact is a helper hooks and component library for Firebase and React.
 
+## Documentation
+
+Documentation is available [here](https://firereact.erayerdin.com/).
+
+## License
+
+This library is licensed under [MIT License](https://www.tldrlegal.com/license/mit-license#w-tabs-0-data-w-pane-1).
+
 [npm_link]: https://www.npmjs.com/package/firereact
 [actions_link]: https://github.com/erayerdin/firereact/actions
 [codecov_link]: https://app.codecov.io/gh/erayerdin/firereact
