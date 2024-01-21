@@ -26,4 +26,18 @@ describe("initially useCollection hook", () => {
     // teardown
     await deleteDoc(docRef);
   });
+
+  it("should have no snapshot", async () => {
+    // setup
+    await deleteDoc(docRef);
+    await setDoc(docRef, docData);
+
+    // test
+    const { result } = renderHook(() => useCollection({ query: colRef }));
+    const { snapshot } = result.current;
+    expect(snapshot).toBeUndefined();
+
+    // teardown
+    await deleteDoc(docRef);
+  });
 });
