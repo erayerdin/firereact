@@ -5,10 +5,10 @@
 
 import { FirebaseError } from "firebase/app";
 import {
-    DocumentData,
-    DocumentReference,
-    SetOptions,
-    setDoc,
+  DocumentData,
+  DocumentReference,
+  SetOptions,
+  setDoc,
 } from "firebase/firestore";
 import { useState } from "react";
 
