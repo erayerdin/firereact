@@ -32,7 +32,7 @@ const useAddDocument = ({
   reference,
 }: UseAddDocumentParams): UseAddDocument => {
   const [state, setState] = useState<UseAddDocumentState>("ready");
-  const [ref, setRef] = useState<DocumentReference | undefined>();
+  const [refer, setRefer] = useState<DocumentReference | undefined>();
   const [error, setError] = useState<FirebaseError | undefined>();
 
   const dispatch: UseAddDocumentDispatcher = async (data: DocumentData) => {
@@ -40,7 +40,7 @@ const useAddDocument = ({
 
     try {
       const docRef = await addDoc(reference, data);
-      setRef(docRef);
+      setRefer(docRef);
       setState("done");
       return docRef;
     } catch (error) {
@@ -55,7 +55,7 @@ const useAddDocument = ({
     }
   };
 
-  return { state, dispatch, reference: ref, error };
+  return { state, dispatch, reference: refer, error };
 };
 
 export default useAddDocument;
