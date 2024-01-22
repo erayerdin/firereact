@@ -71,4 +71,21 @@ describe("after dispatched, useAddDocument hook", () => {
     // teardown
     await deleteDoc(docRef);
   });
+
+  it("should return reference", async () => {
+    // setup
+    await deleteDoc(docRef);
+
+    // test
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { dispatch } = result.current;
+    await dispatch(docData);
+    await sleep(200);
+
+    const { reference } = result.current;
+    expect(reference).not.toBeUndefined();
+
+    // teardown
+    await deleteDoc(docRef);
+  });
 });
