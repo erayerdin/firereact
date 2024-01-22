@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { renderHook } from "@testing-library/react";
-import { collection, deleteDoc, doc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc } from "firebase/firestore";
 import sleep from "sleep-sleep";
 import { firestore } from "../firebase";
 import useAddDocument from "./useAddDocument";
@@ -84,6 +84,24 @@ describe("after dispatched, useAddDocument hook", () => {
 
     const { reference } = result.current;
     expect(reference).not.toBeUndefined();
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+
+  it("should really add document", async () => {
+    // setup
+    await deleteDoc(docRef);
+
+    // test
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { dispatch } = result.current;
+    await dispatch(docData);
+    await sleep(200);
+
+    const { reference } = result.current;
+    const docSnapshot = await getDoc(reference!);
+    expect(docSnapshot.exists()).toBe(true);
 
     // teardown
     await deleteDoc(docRef);
