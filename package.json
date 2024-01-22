@@ -6,6 +6,10 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.es.js",
+    "./*": "./dist/*.js"
+  },
   "files": [
     "/dist"
   ],
@@ -17,7 +21,8 @@
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
     "lint:check": "eslint . --ext .ts,.tsx --ignore-path .gitignore",
-    "formatter:check": "prettier --no-error-on-unmatched-pattern --check **/*.ts **/*.tsx",
+    "formatter:run": "prettier --no-error-on-unmatched-pattern --write src/**/*.ts src/**/*.tsx *.ts *.tsx",
+    "formatter:check": "prettier --no-error-on-unmatched-pattern --check src/**/*.ts src/**/*.tsx *.ts *.tsx",
     "build": "tsc && vite build"
   },
   "repository": {
