@@ -5,10 +5,10 @@
 
 import { FirebaseError } from "firebase/app";
 import {
-  DocumentReference,
-  DocumentSnapshot,
-  getDoc,
-  onSnapshot,
+    DocumentReference,
+    DocumentSnapshot,
+    getDoc,
+    onSnapshot,
 } from "firebase/firestore";
 import { useState } from "react";
 import useAsyncEffect from "use-async-effect";
@@ -26,7 +26,7 @@ type UseDocument = {
   error?: FirebaseError;
 };
 
-const useDocument = ({
+export const useDocument = ({
   reference,
   options = { listen: false },
 }: UseDocumentParams): UseDocument => {

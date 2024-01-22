@@ -5,10 +5,10 @@
 
 import { FirebaseError } from "firebase/app";
 import {
-  DocumentData,
-  DocumentReference,
-  SetOptions,
-  setDoc,
+    DocumentData,
+    DocumentReference,
+    SetOptions,
+    setDoc,
 } from "firebase/firestore";
 import { useState } from "react";
 
@@ -28,7 +28,7 @@ type UseSetDocument = {
   error?: FirebaseError;
 };
 
-const useSetDocument = ({
+export const useSetDocument = ({
   reference,
 }: UseSetDocumentParams): UseSetDocument => {
   const [state, setState] = useState<UseSetDocumentState>("ready");
