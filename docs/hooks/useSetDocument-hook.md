@@ -56,7 +56,7 @@ Input parameters for `useSetDocument` hook is as follows:
 
 | Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
-| `reference` | [`firebase/firestore/DocumentReferen`][DocumentReferenceRefDoc] | Reference to a document in Firestore. | ✅ | - |
+| `reference` | [`firebase/firestore/DocumentReference`][DocumentReferenceRefDoc] | Reference to a document in Firestore. | ✅ | - |
 
 ## Return Type
 
@@ -66,7 +66,7 @@ Input parameters for `useSetDocument` hook is as follows:
 |---|---|---|
 | `state` | `"ready"` or `"loading"` or `"done"`  | Whether this hook is ready to dispatch, currently dispatching or has dispatched successfully. |
 | `error` | [`firebase/FirebaseError`][FirebaseErrorRefDoc] or `undefined` | The instance of error if any. |
-| `dispatch` | `(data: DocumentData, options?: SetOptions) => Promise<DocumentReference | undefined>`[^1] | A function to start adding a document. |
+| `dispatch` | `(data: DocumentData, options?: SetOptions) => Promise<DocumentReference | undefined>`[^1] | A function to set the content of a document. |
 
 [^1]: You can see API docs for `SetOptions` [here][SetOptionsRefDoc] or read its usage document [here][SetADocumentDoc]. To keep it simple, it is simply a `{ merge: boolean, mergeFields: string[] }` type where `merge` is to merge given data into the document and `mergeFields` to specify which fields to specifically merge (useful especially in batch operations).
 
