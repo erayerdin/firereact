@@ -14,6 +14,9 @@ type UseSetDocumentParams = {
 type UseSetDocumentState = "ready" | "loading" | "done";
 type UseSetDocumentDispatcher = (
   data: DocumentData,
+  options: {
+    merge: boolean;
+  },
 ) => Promise<DocumentReference | undefined>;
 
 type UseSetDocument = {
@@ -30,7 +33,14 @@ const useSetDocument = ({
   const [refer, setRefer] = useState<DocumentReference | undefined>();
   const [error, setError] = useState<FirebaseError | undefined>();
 
-  const dispatch: UseSetDocumentDispatcher = async (data: DocumentData) => {};
+  const dispatch: UseSetDocumentDispatcher = async (
+    data: DocumentData,
+    options = { merge: true },
+  ) => {
+    const { merge } = options;
+
+    throw "tbi";
+  };
 
   return { state, dispatch, reference: refer, error };
 };
