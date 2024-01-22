@@ -26,19 +26,6 @@ describe("initially useSetDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("should return no reference", async () => {
-    // setup
-    await deleteDoc(docRef);
-
-    // test
-    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
-    const { reference } = result.current;
-    expect(reference).toBeUndefined();
-
-    // teardown
-    await deleteDoc(docRef);
-  });
-
   it("should return no error", async () => {
     // setup
     await deleteDoc(docRef);
@@ -91,7 +78,7 @@ describe("after dispatched, useSetDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("should return reference", async () => {
+  it("should really set document", async () => {
     // setup
     await deleteDoc(docRef);
 
@@ -101,25 +88,7 @@ describe("after dispatched, useSetDocument hook", () => {
     await dispatch(docData);
     await sleep(250);
 
-    const { reference } = result.current;
-    expect(reference).not.toBeUndefined();
-
-    // teardown
-    await deleteDoc(docRef);
-  });
-
-  it("should really add document", async () => {
-    // setup
-    await deleteDoc(docRef);
-
-    // test
-    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
-    const { dispatch } = result.current;
-    await dispatch(docData);
-    await sleep(250);
-
-    const { reference } = result.current;
-    const docSnapshot = await getDoc(reference!);
+    const docSnapshot = await getDoc(docRef);
     expect(docSnapshot.exists()).toBe(true);
 
     // teardown
@@ -137,8 +106,7 @@ describe("after dispatched, useSetDocument hook", () => {
     await dispatch({ username: "useSetDocument" }, { merge: true });
     await sleep(250);
 
-    const { reference } = result.current;
-    const docSnapshot = await getDoc(reference!);
+    const docSnapshot = await getDoc(docRef);
     expect(docSnapshot.data()).toStrictEqual({
       displayName: "Use Set Document",
       username: "useSetDocument",

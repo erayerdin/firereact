@@ -4,7 +4,12 @@
 // https://opensource.org/licenses/MIT
 
 import { FirebaseError } from "firebase/app";
-import { DocumentData, DocumentReference } from "firebase/firestore";
+import {
+  DocumentData,
+  DocumentReference,
+  SetOptions,
+  setDoc,
+} from "firebase/firestore";
 import { useState } from "react";
 
 type UseSetDocumentParams = {
@@ -14,15 +19,12 @@ type UseSetDocumentParams = {
 type UseSetDocumentState = "ready" | "loading" | "done";
 type UseSetDocumentDispatcher = (
   data: DocumentData,
-  options?: {
-    merge: boolean;
-  },
-) => Promise<DocumentReference | undefined>;
+  options?: SetOptions,
+) => Promise<void>;
 
 type UseSetDocument = {
   state: UseSetDocumentState;
   dispatch: UseSetDocumentDispatcher;
-  reference?: DocumentReference;
   error?: FirebaseError;
 };
 
@@ -30,19 +32,32 @@ const useSetDocument = ({
   reference,
 }: UseSetDocumentParams): UseSetDocument => {
   const [state, setState] = useState<UseSetDocumentState>("ready");
-  const [refer, setRefer] = useState<DocumentReference | undefined>();
   const [error, setError] = useState<FirebaseError | undefined>();
 
   const dispatch: UseSetDocumentDispatcher = async (
     data: DocumentData,
-    options = { merge: true },
+    options,
   ) => {
-    const { merge } = options;
-
-    throw "tbi";
+    setState("loading");
+    try {
+      await (options
+        ? setDoc(reference, data, options)
+        : setDoc(reference, data));
+      setState("done");
+    } catch (e) {
+      if (e instanceof FirebaseError) {
+        setState("ready");
+        setError(e);
+      } else {
+        setState("loading");
+        throw e;
+      }
+      return;
+    }
+    setState("done");
   };
 
-  return { state, dispatch, reference: refer, error };
+  return { state, dispatch, error };
 };
 
 export default useSetDocument;
