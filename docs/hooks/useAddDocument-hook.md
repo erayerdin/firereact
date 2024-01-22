@@ -26,7 +26,7 @@ Input parameters for `useAddDocument` hook is as follows:
 
 | Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
-| `reference` | [`firebase/firestore/CollectionRefference`][CollectionReferenceRefDoc] | Reference to a collection in Firestore or a query. | ✅ | - |
+| `reference` | [`firebase/firestore/CollectionReference`][CollectionReferenceRefDoc] | Reference to a collection in Firestore or a query. | ✅ | - |
 
 ## Return Type
 
