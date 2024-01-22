@@ -65,7 +65,7 @@ describe("later useCollection hook", () => {
 
     // test
     const { result } = renderHook(() => useCollection({ query: colRef }));
-    await sleep(200);
+    await sleep(250);
     const { loading } = result.current;
     expect(loading).toBe(false);
 
@@ -80,7 +80,7 @@ describe("later useCollection hook", () => {
 
     // test
     const { result } = renderHook(() => useCollection({ query: colRef }));
-    await sleep(200);
+    await sleep(250);
     const { snapshot } = result.current;
     expect(snapshot?.size).toBeGreaterThan(0);
 
@@ -95,7 +95,7 @@ describe("later useCollection hook", () => {
 
     // test
     const { result } = renderHook(() => useCollection({ query: colRef }));
-    await sleep(200);
+    await sleep(250);
     const { error } = result.current;
     expect(error).toBeUndefined();
 

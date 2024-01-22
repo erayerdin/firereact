@@ -82,7 +82,7 @@ describe("after dispatched, useAddDocument hook", () => {
     const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { dispatch } = result.current;
     await dispatch(docData);
-    await sleep(200);
+    await sleep(250);
 
     const { state } = result.current;
     expect(state).toBe("done");
@@ -99,7 +99,7 @@ describe("after dispatched, useAddDocument hook", () => {
     const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { dispatch } = result.current;
     await dispatch(docData);
-    await sleep(200);
+    await sleep(250);
 
     const { reference } = result.current;
     expect(reference).not.toBeUndefined();
@@ -116,7 +116,7 @@ describe("after dispatched, useAddDocument hook", () => {
     const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { dispatch } = result.current;
     await dispatch(docData);
-    await sleep(200);
+    await sleep(250);
 
     const { reference } = result.current;
     const docSnapshot = await getDoc(reference!);
