@@ -54,6 +54,25 @@ describe("initially useAddDocument hook", () => {
   });
 });
 
+describe("as soon as dispatched, useAddDocument hook", () => {
+  it("should return loading", async () => {
+    // setup
+    await deleteDoc(docRef);
+
+    // test
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { dispatch } = result.current;
+    dispatch(docData);
+    await sleep(10);
+
+    const { state } = result.current;
+    expect(state).toBe("loading");
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+});
+
 describe("after dispatched, useAddDocument hook", () => {
   it("should return done", async () => {
     // setup
