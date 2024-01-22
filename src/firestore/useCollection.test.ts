@@ -7,7 +7,7 @@ import { renderHook } from "@testing-library/react";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore";
 import sleep from "sleep-sleep";
 import { firestore } from "../firebase";
-import useCollection from "./useCollection";
+import { useCollection } from "./useCollection";
 
 const colRef = collection(firestore, "useCollection");
 const docRef = doc(firestore, "useCollection", "doc1");

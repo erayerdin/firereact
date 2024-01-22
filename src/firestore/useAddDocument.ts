@@ -57,5 +57,3 @@ export const useAddDocument = ({
 
   return { state, dispatch, reference: refer, error };
 };
-
-export default useAddDocument;

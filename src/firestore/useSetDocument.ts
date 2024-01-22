@@ -59,5 +59,3 @@ export const useSetDocument = ({
 
   return { state, dispatch, error };
 };
-
-export default useSetDocument;

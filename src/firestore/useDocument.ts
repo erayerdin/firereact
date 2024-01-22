@@ -71,5 +71,3 @@ export const useDocument = ({
 
   return { loading, snapshot, error };
 };
-
-export default useDocument;

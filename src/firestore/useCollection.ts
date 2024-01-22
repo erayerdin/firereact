@@ -67,5 +67,3 @@ export const useCollection = ({
 
   return { loading, snapshot, error };
 };
-
-export default useCollection;
