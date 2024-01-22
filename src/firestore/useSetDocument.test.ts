@@ -18,7 +18,7 @@ describe("initially useSetDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: colRef }));
+    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
     const { state } = result.current;
     expect(state).toBe("ready");
 
@@ -31,7 +31,7 @@ describe("initially useSetDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: colRef }));
+    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
     const { reference } = result.current;
     expect(reference).toBeUndefined();
 
@@ -44,7 +44,7 @@ describe("initially useSetDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: colRef }));
+    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
     const { error } = result.current;
     expect(error).toBeUndefined();
 
@@ -60,7 +60,7 @@ describe("as soon as dispatched, useSetDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: colRef }));
+    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
     const { dispatch } = result.current;
     dispatch(docData);
     await sleep(30);
@@ -79,7 +79,7 @@ describe("after dispatched, useSetDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: colRef }));
+    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
     const { dispatch } = result.current;
     await dispatch(docData);
     await sleep(250);
@@ -96,7 +96,7 @@ describe("after dispatched, useSetDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: colRef }));
+    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
     const { dispatch } = result.current;
     await dispatch(docData);
     await sleep(250);
@@ -113,7 +113,7 @@ describe("after dispatched, useSetDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: colRef }));
+    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
     const { dispatch } = result.current;
     await dispatch(docData);
     await sleep(250);
@@ -132,7 +132,7 @@ describe("after dispatched, useSetDocument hook", () => {
     await setDoc(docRef, { displayName: "Use Set Document" });
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: colRef }));
+    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
     const { dispatch } = result.current;
     await dispatch(docData, { merge: true });
     await sleep(250);
