@@ -9,8 +9,8 @@ import sleep from "sleep-sleep";
 import { firestore } from "../firebase";
 import useCollection from "./useCollection";
 
-const colRef = collection(firestore, "profiles");
-const docRef = doc(firestore, "profiles", "profile1");
+const colRef = collection(firestore, "useCollection");
+const docRef = doc(firestore, "useCollection", "doc1");
 const docData = { displayName: "Vort the Wise" } as const;
 
 describe("initially useCollection hook", () => {

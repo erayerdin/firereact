@@ -9,7 +9,7 @@ import sleep from "sleep-sleep";
 import { firestore } from "../firebase";
 import useDocument from "./useDocument";
 
-const docRef = doc(firestore, "profiles", "profile1");
+const docRef = doc(firestore, "useDocument", "doc1");
 const docData = { displayName: "Vort the Wise" } as const;
 
 describe("initially useDocument hook", () => {
