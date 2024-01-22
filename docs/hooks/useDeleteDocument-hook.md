@@ -1,0 +1,3 @@
+# `useDeleteDocument` hook
+
+Hello.
