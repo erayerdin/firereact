@@ -134,12 +134,15 @@ describe("after dispatched, useSetDocument hook", () => {
     // test
     const { result } = renderHook(() => useSetDocument({ reference: docRef }));
     const { dispatch } = result.current;
-    await dispatch(docData, { merge: true });
+    await dispatch({ username: "useSetDocument" }, { merge: true });
     await sleep(250);
 
     const { reference } = result.current;
     const docSnapshot = await getDoc(reference!);
-    expect(docSnapshot.exists()).toBe(true);
+    expect(docSnapshot.data()).toStrictEqual({
+      displayName: "Use Set Document",
+      username: "useSetDocument",
+    });
 
     // teardown
     await deleteDoc(docRef);
