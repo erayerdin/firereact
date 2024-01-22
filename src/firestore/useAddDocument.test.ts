@@ -18,11 +18,35 @@ describe("initially useAddDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() =>
-      useAddDocument({ reference: colRef, data: docData }),
-    );
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { state } = result.current;
     expect(state).toBe("ready");
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+
+  it("should return no reference", async () => {
+    // setup
+    await deleteDoc(docRef);
+
+    // test
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { reference } = result.current;
+    expect(reference).toBeUndefined();
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+
+  it("should return no error", async () => {
+    // setup
+    await deleteDoc(docRef);
+
+    // test
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { error } = result.current;
+    expect(error).toBeUndefined();
 
     // teardown
     await deleteDoc(docRef);
