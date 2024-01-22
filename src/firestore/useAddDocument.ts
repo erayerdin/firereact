@@ -41,17 +41,17 @@ const useAddDocument = ({
     try {
       const docRef = await addDoc(reference, data);
       setRef(docRef);
+      setState("done");
       return docRef;
     } catch (error) {
       if (error instanceof FirebaseError) {
-        setState("ready");
         setError(error);
+        setState("ready");
         return;
       } else {
+        setState("ready");
         throw error;
       }
-    } finally {
-      setState("done");
     }
   };
 

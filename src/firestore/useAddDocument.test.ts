@@ -5,7 +5,6 @@
 
 import { renderHook } from "@testing-library/react";
 import { collection, deleteDoc, doc } from "firebase/firestore";
-import sleep from "sleep-sleep";
 import { firestore } from "../firebase";
 import useAddDocument from "./useAddDocument";
 
@@ -61,9 +60,9 @@ describe("after dispatched, useAddDocument hook", () => {
 
     // test
     const { result } = renderHook(() => useAddDocument({ reference: colRef }));
-    const { state, dispatch } = result.current;
-    dispatch(docData);
-    sleep(200);
+    const { dispatch } = result.current;
+    await dispatch(docData);
+    const { state } = result.current;
     expect(state).toBe("done");
 
     // teardown
