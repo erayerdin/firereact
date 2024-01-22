@@ -63,7 +63,7 @@ describe("as soon as dispatched, useAddDocument hook", () => {
     const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { dispatch } = result.current;
     dispatch(docData);
-    await sleep(50);
+    await sleep(30);
 
     const { state } = result.current;
     expect(state).toBe("loading");
