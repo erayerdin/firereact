@@ -1,7 +1,7 @@
 {
   "name": "firereact",
-  "version": "0.1.1",
-  "description": "React hooks for Firebase",
+  "version": "0.1.2",
+  "description": "React hooks and components for Firebase",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -27,7 +27,8 @@
   "keywords": [
     "react",
     "firebase",
-    "hooks"
+    "hooks",
+    "components"
   ],
   "author": "Eray Erdin",
   "license": "MIT",
