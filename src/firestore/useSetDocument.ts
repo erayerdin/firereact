@@ -14,7 +14,7 @@ type UseSetDocumentParams = {
 type UseSetDocumentState = "ready" | "loading" | "done";
 type UseSetDocumentDispatcher = (
   data: DocumentData,
-  options: {
+  options?: {
     merge: boolean;
   },
 ) => Promise<DocumentReference | undefined>;
