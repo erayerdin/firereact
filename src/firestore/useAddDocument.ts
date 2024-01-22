@@ -17,7 +17,9 @@ type UseAddDocumentParams = {
 };
 
 type UseAddDocumentState = "ready" | "loading" | "done";
-type UseAddDocumentDispatcher = (data: DocumentData) => Promise<void>;
+type UseAddDocumentDispatcher = (
+  data: DocumentData,
+) => Promise<DocumentReference | undefined>;
 
 type UseAddDocument = {
   state: UseAddDocumentState;
@@ -39,6 +41,7 @@ const useAddDocument = ({
     try {
       const docRef = await addDoc(reference, data);
       setRef(docRef);
+      return docRef;
     } catch (error) {
       if (error instanceof FirebaseError) {
         setState("ready");
@@ -50,8 +53,6 @@ const useAddDocument = ({
     } finally {
       setState("done");
     }
-
-    setState("done");
   };
 
   return { state, dispatch, reference: ref, error };

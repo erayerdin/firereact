@@ -5,11 +5,12 @@
 
 import { renderHook } from "@testing-library/react";
 import { collection, deleteDoc, doc } from "firebase/firestore";
+import sleep from "sleep-sleep";
 import { firestore } from "../firebase";
 import useAddDocument from "./useAddDocument";
 
 const colRef = collection(firestore, "profiles");
-const docRef = doc(firestore, "profiles", "addDocumentProfile");
+const docRef = doc(firestore, "useAddDocument", "doc1");
 const docData = { displayName: "Add Document" };
 
 describe("initially useAddDocument hook", () => {
@@ -47,6 +48,23 @@ describe("initially useAddDocument hook", () => {
     const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { error } = result.current;
     expect(error).toBeUndefined();
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+});
+
+describe("after dispatched, useAddDocument hook", () => {
+  it("should return done", async () => {
+    // setup
+    await deleteDoc(docRef);
+
+    // test
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { state, dispatch } = result.current;
+    dispatch(docData);
+    sleep(200);
+    expect(state).toBe("done");
 
     // teardown
     await deleteDoc(docRef);
