@@ -5,6 +5,7 @@
 
 import { FirebaseError } from "firebase/app";
 import { DocumentData, DocumentReference } from "firebase/firestore";
+import { useState } from "react";
 
 type UseSetDocumentParams = {
   reference: DocumentReference;
@@ -25,7 +26,13 @@ type UseSetDocument = {
 const useSetDocument = ({
   reference,
 }: UseSetDocumentParams): UseSetDocument => {
-  throw "tbi";
+  const [state, setState] = useState<UseSetDocumentState>("ready");
+  const [ref, setRef] = useState<DocumentReference | undefined>();
+  const [error, setError] = useState<FirebaseError | undefined>();
+
+  const dispatch: UseSetDocumentDispatcher = async (data: DocumentData) => {};
+
+  return { state, dispatch, reference: ref, error };
 };
 
 export default useSetDocument;
