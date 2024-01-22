@@ -10,7 +10,7 @@ import { firestore } from "../firebase";
 import useDocument from "./useDocument";
 
 const docRef = doc(firestore, "useDocument", "doc1");
-const docData = { displayName: "Vort the Wise" } as const;
+const docData = { displayName: "Use Document" } as const;
 
 describe("initially useDocument hook", () => {
   it("should be loading state", async () => {

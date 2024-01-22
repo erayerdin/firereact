@@ -11,7 +11,7 @@ import useCollection from "./useCollection";
 
 const colRef = collection(firestore, "useCollection");
 const docRef = doc(firestore, "useCollection", "doc1");
-const docData = { displayName: "Vort the Wise" } as const;
+const docData = { displayName: "Use Collection" } as const;
 
 describe("initially useCollection hook", () => {
   it("should be loading state", async () => {

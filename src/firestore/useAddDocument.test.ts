@@ -11,7 +11,7 @@ import useAddDocument from "./useAddDocument";
 
 const colRef = collection(firestore, "useAddDocument");
 const docRef = doc(firestore, "useAddDocument", "doc1");
-const docData = { displayName: "Add Document" };
+const docData = { displayName: "Use Add Document" };
 
 describe("initially useAddDocument hook", () => {
   it("should return ready", async () => {
