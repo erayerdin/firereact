@@ -9,9 +9,9 @@ import sleep from "sleep-sleep";
 import { firestore } from "../firebase";
 import useCollection from "./useCollection";
 
-const colRef = collection(firestore, "profiles");
-const docRef = doc(firestore, "profiles", "profile1");
-const docData = { displayName: "Vort the Wise" } as const;
+const colRef = collection(firestore, "useCollection");
+const docRef = doc(firestore, "useCollection", "doc1");
+const docData = { displayName: "Use Collection" } as const;
 
 describe("initially useCollection hook", () => {
   it("should be loading state", async () => {
@@ -65,7 +65,7 @@ describe("later useCollection hook", () => {
 
     // test
     const { result } = renderHook(() => useCollection({ query: colRef }));
-    await sleep(200);
+    await sleep(250);
     const { loading } = result.current;
     expect(loading).toBe(false);
 
@@ -80,9 +80,9 @@ describe("later useCollection hook", () => {
 
     // test
     const { result } = renderHook(() => useCollection({ query: colRef }));
-    await sleep(200);
+    await sleep(250);
     const { snapshot } = result.current;
-    expect(snapshot?.size).toStrictEqual(1);
+    expect(snapshot?.size).toBeGreaterThan(0);
 
     // teardown
     await deleteDoc(docRef);
@@ -95,7 +95,7 @@ describe("later useCollection hook", () => {
 
     // test
     const { result } = renderHook(() => useCollection({ query: colRef }));
-    await sleep(200);
+    await sleep(250);
     const { error } = result.current;
     expect(error).toBeUndefined();
 

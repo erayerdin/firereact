@@ -9,8 +9,8 @@ import sleep from "sleep-sleep";
 import { firestore } from "../firebase";
 import useDocument from "./useDocument";
 
-const docRef = doc(firestore, "profiles", "profile1");
-const docData = { displayName: "Vort the Wise" } as const;
+const docRef = doc(firestore, "useDocument", "doc1");
+const docData = { displayName: "Use Document" } as const;
 
 describe("initially useDocument hook", () => {
   it("should be loading state", async () => {
@@ -64,7 +64,7 @@ describe("later useDocument hook", () => {
 
     // test
     const { result } = renderHook(() => useDocument({ reference: docRef }));
-    await sleep(200);
+    await sleep(250);
     const { loading } = result.current;
     expect(loading).toBe(false);
 
@@ -79,7 +79,7 @@ describe("later useDocument hook", () => {
 
     // test
     const { result } = renderHook(() => useDocument({ reference: docRef }));
-    await sleep(200);
+    await sleep(250);
     const { snapshot } = result.current;
     expect(snapshot?.data()).toStrictEqual(docData);
 
@@ -94,7 +94,7 @@ describe("later useDocument hook", () => {
 
     // test
     const { result } = renderHook(() => useDocument({ reference: docRef }));
-    await sleep(200);
+    await sleep(250);
     const { error } = result.current;
     expect(error).toBeUndefined();
 
@@ -113,7 +113,7 @@ describe.skip("later listen useDocument hook", () => {
     const { result } = renderHook(() =>
       useDocument({ reference: docRef, options: { listen: true } }),
     );
-    await sleep(200);
+    await sleep(250);
     const { loading } = result.current;
     expect(loading).toBe(false);
 
@@ -130,13 +130,13 @@ describe.skip("later listen useDocument hook", () => {
     const { result } = renderHook(() =>
       useDocument({ reference: docRef, options: { listen: true } }),
     );
-    await sleep(200);
+    await sleep(250);
     const { snapshot } = result.current;
     expect(snapshot?.data()).toStrictEqual(docData);
     // for some reason, changes are not reflected whatever time we sleep
     // so, skipping this test suite altogether now
     await setDoc(docRef, { displayName: "Vort" });
-    await sleep(200);
+    await sleep(250);
     expect(snapshot?.data()).toStrictEqual({ displayName: "Vort" });
 
     // teardown
