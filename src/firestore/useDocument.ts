@@ -26,7 +26,7 @@ type UseDocument = {
   error?: FirebaseError;
 };
 
-export const useDocument = ({
+const useDocument = ({
   reference,
   options = { listen: false },
 }: UseDocumentParams): UseDocument => {
@@ -71,3 +71,5 @@ export const useDocument = ({
 
   return { loading, snapshot, error };
 };
+
+export default useDocument;
