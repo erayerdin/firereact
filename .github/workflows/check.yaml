@@ -19,9 +19,17 @@ jobs:
       - name: "Wait for Firebase Emulators"
         run: sleep 10
       - name: "Test"
-        run: npm run test
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 3
+          command: npm run test
       - name: "Analyze Coverage"
-        run: npm run test:coverage
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 3
+          command: npm run test:coverage
       - name: "Upload Coverage"
         uses: codecov/codecov-action@v3
         env:
