@@ -21,7 +21,7 @@ type UseCollection = {
   error?: FirebaseError;
 };
 
-export const useCollection = ({
+const useCollection = ({
   query,
   options = { listen: false },
 }: UseCollectionParams): UseCollection => {
@@ -67,3 +67,5 @@ export const useCollection = ({
 
   return { loading, snapshot, error };
 };
+
+export default useCollection;

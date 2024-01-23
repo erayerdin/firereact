@@ -3,12 +3,12 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export * from "./useCollection";
+export { default as useAddDocument } from "./useAddDocument";
 
-export * from "./useDocument";
+export { default as useCollection } from "./useCollection";
 
-export * from "./useAddDocument";
+export { default as useDeleteDocument } from "./useDeleteDocument";
 
-export * from "./useSetDocument";
+export { default as useDocument } from "./useDocument";
 
-export * from "./useDeleteDocument";
+export { default as useSetDocument } from "./useSetDocument";
