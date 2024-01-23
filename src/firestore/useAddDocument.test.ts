@@ -4,23 +4,37 @@
 // https://opensource.org/licenses/MIT
 
 import { renderHook } from "@testing-library/react";
-import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc } from "firebase/firestore";
 import sleep from "sleep-sleep";
-import useSetDocument from "../src/firestore/useSetDocument";
-import { firestore } from "./firebase";
+import { firestore } from "../firebase";
+import { useAddDocument } from "./useAddDocument";
 
-const docRef = doc(firestore, "useSetDocument", "doc1");
-const docData = { displayName: "Use Set Document" };
+const colRef = collection(firestore, "useAddDocument");
+const docRef = doc(firestore, "useAddDocument", "doc1");
+const docData = { displayName: "Use Add Document" };
 
-describe("initially useSetDocument hook", () => {
+describe("initially useAddDocument hook", () => {
   it("should return ready", async () => {
     // setup
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { state } = result.current;
     expect(state).toBe("ready");
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+
+  it("should return no reference", async () => {
+    // setup
+    await deleteDoc(docRef);
+
+    // test
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { reference } = result.current;
+    expect(reference).toBeUndefined();
 
     // teardown
     await deleteDoc(docRef);
@@ -31,7 +45,7 @@ describe("initially useSetDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { error } = result.current;
     expect(error).toBeUndefined();
 
@@ -40,14 +54,14 @@ describe("initially useSetDocument hook", () => {
   });
 });
 
-describe("as soon as dispatched, useSetDocument hook", () => {
+describe("as soon as dispatched, useAddDocument hook", () => {
   // it's too hard to guess how many ms to wait to check loading state
   it.skip("should return loading", async () => {
     // setup
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { dispatch } = result.current;
     dispatch(docData);
     await sleep(30);
@@ -60,13 +74,13 @@ describe("as soon as dispatched, useSetDocument hook", () => {
   });
 });
 
-describe("after dispatched, useSetDocument hook", () => {
+describe("after dispatched, useAddDocument hook", () => {
   it("should return done", async () => {
     // setup
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { dispatch } = result.current;
     await dispatch(docData);
     await sleep(250);
@@ -78,39 +92,36 @@ describe("after dispatched, useSetDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("should really set document", async () => {
+  it("should return reference", async () => {
     // setup
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { dispatch } = result.current;
     await dispatch(docData);
     await sleep(250);
 
-    const docSnapshot = await getDoc(docRef);
-    expect(docSnapshot.exists()).toBe(true);
+    const { reference } = result.current;
+    expect(reference).not.toBeUndefined();
 
     // teardown
     await deleteDoc(docRef);
   });
 
-  it("should merge into document", async () => {
+  it("should really add document", async () => {
     // setup
     await deleteDoc(docRef);
-    await setDoc(docRef, { displayName: "Use Set Document" });
 
     // test
-    const { result } = renderHook(() => useSetDocument({ reference: docRef }));
+    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
     const { dispatch } = result.current;
-    await dispatch({ username: "useSetDocument" }, { merge: true });
+    await dispatch(docData);
     await sleep(250);
 
-    const docSnapshot = await getDoc(docRef);
-    expect(docSnapshot.data()).toStrictEqual({
-      displayName: "Use Set Document",
-      username: "useSetDocument",
-    });
+    const { reference } = result.current;
+    const docSnapshot = await getDoc(reference!);
+    expect(docSnapshot.exists()).toBe(true);
 
     // teardown
     await deleteDoc(docRef);

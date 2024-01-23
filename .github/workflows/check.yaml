@@ -18,14 +18,14 @@ jobs:
         run: npm run firebase:emulators:run &
       - name: "Wait for Firebase Emulators"
         run: sleep 10
-      - uses: nick-fields/retry@v2
-        name: "Test"
+      - name: "Test"
+        uses: nick-fields/retry@v2
         with:
           timeout_minutes: 3
           max_attempts: 3
           command: npm run test
-      - uses: nick-fields/retry@v2
-        name: "Analyze Coverage"
+      - name: "Analyze Coverage"
+        uses: nick-fields/retry@v2
         with:
           timeout_minutes: 3
           max_attempts: 3

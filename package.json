@@ -1,13 +1,17 @@
 {
   "name": "firereact",
-  "version": "0.1.7",
+  "version": "0.1.6",
   "description": "React hooks and components for Firebase",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.es.js",
+    "./*": "./dist/*.js"
+  },
   "files": [
-    "dist/*.js"
+    "/dist"
   ],
   "scripts": {
     "firebase:emulators:run": "firebase emulators:start --only firestore",
