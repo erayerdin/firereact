@@ -28,7 +28,7 @@ type UseAddDocument = {
   error?: FirebaseError;
 };
 
-export const useAddDocument = ({
+const useAddDocument = ({
   reference,
 }: UseAddDocumentParams): UseAddDocument => {
   const [state, setState] = useState<UseAddDocumentState>("ready");
@@ -57,3 +57,5 @@ export const useAddDocument = ({
 
   return { state, dispatch, reference: refer, error };
 };
+
+export default useAddDocument;

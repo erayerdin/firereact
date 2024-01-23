@@ -14,15 +14,15 @@ type UseSetDocumentParams = {
 type UseSetDocumentState = "ready" | "loading" | "done";
 type UseSetDocumentDispatcher = () => Promise<void>;
 
-type UseSetDocument = {
+type UseDeleteDocument = {
   state: UseSetDocumentState;
   dispatch: UseSetDocumentDispatcher;
   error?: FirebaseError;
 };
 
-export const useDeleteDocument = ({
+const useDeleteDocument = ({
   reference,
-}: UseSetDocumentParams): UseSetDocument => {
+}: UseSetDocumentParams): UseDeleteDocument => {
   const [state, setState] = useState<UseSetDocumentState>("ready");
   const [error, setError] = useState<FirebaseError | undefined>();
 
@@ -44,3 +44,5 @@ export const useDeleteDocument = ({
 
   return { state, dispatch, error };
 };
+
+export default useDeleteDocument;
