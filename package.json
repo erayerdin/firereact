@@ -1,6 +1,6 @@
 {
   "name": "firereact",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "React hooks and components for Firebase",
   "type": "module",
   "main": "dist/index.cjs.js",
