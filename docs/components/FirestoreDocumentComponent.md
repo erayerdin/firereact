@@ -1,0 +1,8 @@
+---
+tags:
+  - component
+---
+
+# `FirestoreDocumentComponent`
+
+Hello.
