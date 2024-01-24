@@ -4,9 +4,12 @@
 // https://opensource.org/licenses/MIT
 
 import { render, screen } from "@testing-library/react";
+import { FirestoreDocument } from ".";
 
 it("sample component test", async () => {
-  render(<div>foo</div>);
+  render(<FirestoreDocument />);
 
-  expect(screen.getByText("foo").innerHTML).toBe("foo");
+  expect(screen.getByText("FirestoreDocument").innerHTML).toBe(
+    "FirestoreDocument",
+  );
 });
