@@ -13,7 +13,7 @@
 </a>
 </center>
 
-Firereact is hooks, component and utilities library for Firebase and React.
+<center>Firereact is hooks, component and utilities library for Firebase and React.</center>
 
 ## Documentation
 
