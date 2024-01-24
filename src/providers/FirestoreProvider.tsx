@@ -7,7 +7,7 @@ import { Firestore } from "firebase/firestore";
 import { createContext } from "react";
 import { NodeComponent } from "../types";
 
-const FirestoreContext = createContext<Firestore | undefined>(undefined);
+export const FirestoreContext = createContext<Firestore | undefined>(undefined);
 
 type FirestoreProviderProps = {
   firestore: Firestore;

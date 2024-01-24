@@ -2,7 +2,9 @@ import { FirebaseApp } from "firebase/app";
 import { createContext } from "react";
 import { NodeComponent } from "../types";
 
-const FirebaseAppContext = createContext<FirebaseApp | undefined>(undefined);
+export const FirebaseAppContext = createContext<FirebaseApp | undefined>(
+  undefined,
+);
 
 type FirebaseProviderProps = {
   app: FirebaseApp;
