@@ -10,19 +10,21 @@ import { useDocument } from ".";
 type FirestoreDocumentProps = {
   reference: DocumentReference;
   loading?: () => ReactNode;
+  error?: () => ReactNode;
   done: (snapshot: DocumentSnapshot) => ReactNode;
 };
 
 export const FirestoreDocument = ({
   reference,
   loading = () => <></>,
+  error = () => <></>,
   done,
 }: FirestoreDocumentProps) => {
-  const { loading: processing, snapshot, error } = useDocument({ reference });
+  const {
+    loading: processing,
+    snapshot,
+    error: err,
+  } = useDocument({ reference });
 
-  if (error) {
-    throw error;
-  }
-
-  return processing ? loading() : done(snapshot!);
+  return processing ? loading() : err ? error() : done(snapshot!);
 };
