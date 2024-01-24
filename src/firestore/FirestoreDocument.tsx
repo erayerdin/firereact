@@ -12,6 +12,7 @@ type FirestoreDocumentProps = {
   loading?: () => ReactNode;
   error?: () => ReactNode;
   done: (snapshot: DocumentSnapshot) => ReactNode;
+  listen?: boolean;
 };
 
 export const FirestoreDocument = ({
@@ -19,12 +20,13 @@ export const FirestoreDocument = ({
   loading = () => <></>,
   error = () => <></>,
   done,
+  listen = false,
 }: FirestoreDocumentProps) => {
   const {
     loading: processing,
     snapshot,
     error: err,
-  } = useDocument({ reference });
+  } = useDocument({ reference, options: { listen } });
 
   return processing ? loading() : err ? error() : done(snapshot!);
 };
