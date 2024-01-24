@@ -7,7 +7,7 @@ import { DocumentReference, DocumentSnapshot } from "firebase/firestore";
 import { ReactNode } from "react";
 import { useDocument } from ".";
 
-type FirestoreDocumentComponentProps = {
+type FirestoreDocumentProps = {
   reference: DocumentReference;
   loading?: () => ReactNode;
   error?: () => ReactNode;
@@ -15,13 +15,13 @@ type FirestoreDocumentComponentProps = {
   listen?: boolean;
 };
 
-export const FirestoreDocumentComponent = ({
+export const FirestoreDocument = ({
   reference,
   loading = () => <></>,
   error = () => <></>,
   done,
   listen = false,
-}: FirestoreDocumentComponentProps) => {
+}: FirestoreDocumentProps) => {
   const {
     loading: processing,
     snapshot,

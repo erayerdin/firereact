@@ -13,4 +13,4 @@ export * from "./useSetDocument";
 
 export * from "./useDeleteDocument";
 
-export * from "./FirestoreDocumentComponent";
+export * from "./FirestoreDocument";

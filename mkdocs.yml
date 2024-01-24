@@ -49,7 +49,7 @@ nav:
       - hooks/useDeleteDocument-hook.md
   - Components:
     - Firestore:
-      - components/FirestoreDocumentComponent.md
+      - components/FirestoreDocument.md
 
 plugins:
   - privacy

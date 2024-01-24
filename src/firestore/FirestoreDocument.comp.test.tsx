@@ -6,20 +6,20 @@
 import { render, screen } from "@testing-library/react";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import sleep from "sleep-sleep";
-import { FirestoreDocumentComponent } from ".";
 import { firestore } from "../firebase";
+import { FirestoreDocument } from "./FirestoreDocument";
 
-const docRef = doc(firestore, "FirestoreDocumentComponent", "doc1");
+const docRef = doc(firestore, "FirestoreDocument", "doc1");
 const docData = { displayName: "Firestore Document" };
 
-describe("initially FirestoreDocumentComponent component", () => {
+describe("initially FirestoreDocument component", () => {
   it("should return loading", async () => {
     // setup
     await deleteDoc(docRef);
 
     // test
     render(
-      <FirestoreDocumentComponent
+      <FirestoreDocument
         reference={docRef}
         loading={() => <div>Loading...</div>}
         done={() => <></>}
@@ -29,7 +29,7 @@ describe("initially FirestoreDocumentComponent component", () => {
   });
 });
 
-describe("later FirestoreDocumentComponent component", () => {
+describe("later FirestoreDocument component", () => {
   it("should return display name", async () => {
     // setup
     await deleteDoc(docRef);
@@ -37,7 +37,7 @@ describe("later FirestoreDocumentComponent component", () => {
 
     // test
     render(
-      <FirestoreDocumentComponent
+      <FirestoreDocument
         reference={docRef}
         loading={() => <div>Loading...</div>}
         done={(snapshot) => <div>{snapshot.data()?.displayName}</div>}

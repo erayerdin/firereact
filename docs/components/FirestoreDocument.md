@@ -3,6 +3,6 @@ tags:
   - component
 ---
 
-# `FirestoreDocumentComponent`
+# `FirestoreDocument`
 
 Hello.
