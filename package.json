@@ -18,6 +18,7 @@
     "firebase:emulators:download": "concurrently \"firebase setup:emulators:firestore\"",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
+    "test:only:hooks": "vitest run hook.test.ts",
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
     "lint:check": "eslint . --ext .ts,.tsx --ignore-path .gitignore",
