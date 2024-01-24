@@ -7,7 +7,7 @@
 [![Read the Docs](https://img.shields.io/readthedocs/firereact?style=flat-square&logo=readthedocs&logoColor=white)
 ][docs_link]
 
-Firereact is a helper hooks and component library for Firebase and React.
+Firereact is hooks, component and utilities library for Firebase and React.
 
 ## Documentation
 
