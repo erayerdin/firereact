@@ -20,7 +20,7 @@ type UseSetDocument = {
   error?: FirebaseError;
 };
 
-export const useDeleteDocument = ({
+const useDeleteDocument = ({
   reference,
 }: UseSetDocumentParams): UseSetDocument => {
   const [state, setState] = useState<UseSetDocumentState>("ready");
@@ -44,3 +44,5 @@ export const useDeleteDocument = ({
 
   return { state, dispatch, error };
 };
+
+export default useDeleteDocument;
