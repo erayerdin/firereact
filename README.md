@@ -2,6 +2,8 @@
 
 <center><h1>Firereact</h1></center>
 
+<center><em>This project is a 3rd-party project and is not affiliated or endorsed by React or Firebase and their owners, Alphabet and Meta.</em></center>
+
 [![NPM Version](https://img.shields.io/npm/v/firereact?style=flat-square&logo=npm&logoColor=white)][npm_link]
 ![NPM License](https://img.shields.io/npm/l/firereact?style=flat-square&logo=npm&logoColor=white)
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/erayerdin/firereact/check.yaml?branch=main&style=flat-square&logo=github&logoColor=white&label=check)][actions_link]
