@@ -1,7 +1,10 @@
 // Copyright (c) 2024 Eray Erdin
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export * from "./firestore";
+import { ReactNode } from "react";
 
-export * from "./providers";
+export type NodeComponent = {
+  children: ReactNode;
+};

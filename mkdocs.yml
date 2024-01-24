@@ -36,6 +36,7 @@ theme:
 nav:
   - index.md
   - hooks-vs-components.md
+  - contexts-and-providers.md
   - Firestore:
     - firestore/reading-a-single-document.md
     - firestore/listing-a-collection.md
