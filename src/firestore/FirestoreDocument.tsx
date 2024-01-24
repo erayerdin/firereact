@@ -3,6 +3,12 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export const FirestoreDocument = () => {
-  return <div>FirestoreDocument</div>;
+import { ReactNode } from "react";
+
+type FirestoreDocumentProps = {
+  loading: () => ReactNode;
+};
+
+export const FirestoreDocument = ({ loading }: FirestoreDocumentProps) => {
+  return loading();
 };
