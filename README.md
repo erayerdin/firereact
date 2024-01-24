@@ -17,7 +17,7 @@
 
 ## Documentation
 
-Documentation is available [here](https://firereact.erayerdin.com/).
+To use this library, check out the documentation [here](https://firereact.erayerdin.com/).
 
 ## License
 
