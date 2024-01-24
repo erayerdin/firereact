@@ -13,7 +13,7 @@ const SampleComponent = () => {
   return <div>{firestore?.app.name}</div>;
 };
 
-it("firebase instance should be accessible", async () => {
+it("firestore instance should be accessible", async () => {
   render(
     <FirestoreProvider firestore={firestore}>
       <SampleComponent />
