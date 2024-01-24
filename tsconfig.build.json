@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "!src/",
+    "src/**/__docs__",
+    "src/**/__test__",
+    "src/**/*.test.ts",
+    "src/firebase.ts",
+  ],
+}
