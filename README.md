@@ -1,4 +1,4 @@
-<center><img src="assets/brand/logo.svg" width="128" /></center>
+<center><img src="assets/brand/logo.svg" width="256" /></center>
 
 <center><h1>Firereact</h1></center>
 
