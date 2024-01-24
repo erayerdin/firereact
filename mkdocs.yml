@@ -33,6 +33,21 @@ theme:
         icon: material/brightness-7
         name: Switch to light mode
 
+nav:
+  - Firestore:
+    - firestore/reading-a-single-document.md
+    - firestore/listing-a-collection.md
+    - firestore/creating-documents.md
+    - firestore/updating-documents.md
+    - firestore/deleting-documents.md
+  - Hooks:
+    - Firestore:
+      - hooks/useDocument-hook.md
+      - hooks/useCollection-hook.md
+      - hooks/useAddDocument-hook.md
+      - hooks/useSetDocument-hook.md
+      - hooks/useDeleteDocument-hook.md
+
 plugins:
   - privacy
   - social
