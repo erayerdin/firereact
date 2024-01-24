@@ -9,13 +9,13 @@ import { useDocument } from ".";
 
 type FirestoreDocumentProps = {
   reference: DocumentReference;
-  loading: () => ReactNode;
+  loading?: () => ReactNode;
   done: (snapshot: DocumentSnapshot) => ReactNode;
 };
 
 export const FirestoreDocument = ({
   reference,
-  loading,
+  loading = () => <></>,
   done,
 }: FirestoreDocumentProps) => {
   const { loading: processing, snapshot, error } = useDocument({ reference });
