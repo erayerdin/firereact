@@ -3,6 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+import { FirebaseError } from "firebase/app";
 import { DocumentReference, DocumentSnapshot } from "firebase/firestore";
 import { ReactNode } from "react";
 import { useDocument } from ".";
@@ -10,7 +11,7 @@ import { useDocument } from ".";
 type FirestoreDocumentProps = {
   reference: DocumentReference;
   loading?: () => ReactNode;
-  error?: () => ReactNode;
+  error?: (error: FirebaseError) => ReactNode;
   done: (snapshot: DocumentSnapshot) => ReactNode;
   listen?: boolean;
 };
@@ -18,7 +19,8 @@ type FirestoreDocumentProps = {
 export const FirestoreDocument = ({
   reference,
   loading = () => <></>,
-  error = () => <></>,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  error = (_err) => <></>,
   done,
   listen = false,
 }: FirestoreDocumentProps) => {
@@ -28,5 +30,5 @@ export const FirestoreDocument = ({
     error: err,
   } = useDocument({ reference, options: { listen } });
 
-  return processing ? loading() : err ? error() : done(snapshot!);
+  return processing ? loading() : err ? error(err) : done(snapshot!);
 };
