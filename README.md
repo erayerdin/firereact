@@ -19,6 +19,13 @@
 
 To use this library, check out the documentation [here](https://firereact.erayerdin.com/).
 
+## Contributing
+
+You are welcome to contribute to the project. Before contributing:
+
+ - Always send pull requests to `dev` branch, which is the default branch of this repository. `main` branch is used for latest published version.
+ - You agree our [code of conduct](CODE_OF_CONDUCT.md).
+
 ## License
 
 This library is licensed under [MIT License](https://www.tldrlegal.com/license/mit-license#w-tabs-0-data-w-pane-1).
