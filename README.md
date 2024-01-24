@@ -1,4 +1,6 @@
-# Firereact
+<center><img src="assets/brand/logo.svg" width="128" /></center>
+
+<center><h1>Firereact</h1></center>
 
 [![NPM Version](https://img.shields.io/npm/v/firereact?style=flat-square&logo=npm&logoColor=white)][npm_link]
 ![NPM License](https://img.shields.io/npm/l/firereact?style=flat-square&logo=npm&logoColor=white)
