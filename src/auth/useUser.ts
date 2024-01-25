@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 type UseAuthStateParams = {
   auth: Auth;
   onError?: ErrorFn;
-  onComplete?: CompleteFn;
+  onChange?: CompleteFn;
 };
 
 type UseAuthState = {
@@ -25,7 +25,7 @@ type UseAuthState = {
 export const useUser = ({
   auth,
   onError,
-  onComplete,
+  onChange,
 }: UseAuthStateParams): UseAuthState => {
   const [user, setUser] = useState<User | null>(auth.currentUser);
 
@@ -34,10 +34,10 @@ export const useUser = ({
       auth,
       (user) => setUser(user),
       onError,
-      onComplete,
+      onChange,
     );
     return unsub;
-  }, [auth, onError, onComplete]);
+  }, [auth, onError, onChange]);
 
   return { user };
 };
