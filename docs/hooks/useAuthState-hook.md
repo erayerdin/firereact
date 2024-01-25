@@ -35,4 +35,14 @@ Input parameters for `useAuthState` hook is as follows:
 | `onError` | `(error: Error) => void` or `undefined` | A function to handle errors. | ❌ | `undefined` |
 | `onComplete` | `() => void` or `undefined` | A function to run after state changes. | ❌ | `undefined` |
 
+## Return Type
+
+`useAuthState` hook return only an instance of `{ user: User | undefined }`. When the user has not signed it, `user` will be `undefined`. If user has signed in, it will be an instance of [`User`][UserRefDoc].
+
+!!! warning
+    Remember that `user` will not be undefined if [`signInAnonymously`][signInAnonymouslyDoc] is used to authenticate a user. Firebase-based anonymous users are technically autenticated. If you used [`signInAnonymously`][signInAnonymouslyDoc], you must rely on [`user.isAnonymous`][UserIsAnonymousRefDoc] property.
+
 [AuthRefDoc]: https://firebase.google.com/docs/reference/node/firebase.auth.Auth
+[UserRefDoc]: https://firebase.google.com/docs/reference/node/firebase.User
+[UserIsAnonymousRefDoc]: https://firebase.google.com/docs/reference/node/firebase.User#isanonymous
+[signInAnonymouslyDoc]: https://firebase.google.com/docs/auth/web/anonymous-auth
