@@ -4,6 +4,7 @@ repo_url: https://github.com/erayerdin/firereact
 
 theme:
   name: material
+  logo: assets/brand/logo-black.svg
   icon:
     repo: fontawesome/brands/github
   features:
@@ -43,6 +44,8 @@ nav:
     - firestore/creating-documents.md
     - firestore/updating-documents.md
     - firestore/deleting-documents.md
+  - Auth:
+    - auth/get-user.md
   - Hooks:
     - Firestore:
       - hooks/useDocument-hook.md
@@ -50,6 +53,8 @@ nav:
       - hooks/useAddDocument-hook.md
       - hooks/useSetDocument-hook.md
       - hooks/useDeleteDocument-hook.md
+    - Auth:
+      - hooks/useUser-hook.md
   - Components:
     - Firestore:
       - components/FirestoreDocument.md
@@ -64,3 +69,6 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
   - footnotes
+
+extra_css:
+  - stylesheets/socialbutton.css
