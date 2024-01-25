@@ -54,7 +54,7 @@ nav:
       - hooks/useSetDocument-hook.md
       - hooks/useDeleteDocument-hook.md
     - Auth:
-      - hooks/useAuthState-hook.md
+      - hooks/useUser-hook.md
   - Components:
     - Firestore:
       - components/FirestoreDocument.md

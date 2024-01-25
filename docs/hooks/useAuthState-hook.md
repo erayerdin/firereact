@@ -3,12 +3,12 @@ tags:
   - hook
 ---
 
-# `useAuthState` hook
+# `useUser` hook
 
-`useAuthState` hook is used to listen to authentication state and get the current user. A very simple example would be:
+`useUser` hook is used to listen to authentication state and get the current user. A very simple example would be:
 
 ```typescript
-const { user } = useAuthState({ auth });
+const { user } = useUser({ auth });
 ```
 
 You can also dispatch actions when state changes or an error occurs.
@@ -22,12 +22,12 @@ const onComplete = () => {
   // do something after state changes
 }
 
-const { user } = useAuthState({ auth, onError, onComplete });
+const { user } = useUser({ auth, onError, onComplete });
 ```
 
 ## Input Parameters
 
-Input parameters for `useAuthState` hook is as follows:
+Input parameters for `useUser` hook is as follows:
 
 | Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
@@ -37,7 +37,7 @@ Input parameters for `useAuthState` hook is as follows:
 
 ## Return Type
 
-`useAuthState` hook return only an instance of `{ user: User | undefined }`. When the user has not signed it, `user` will be `undefined`. If user has signed in, it will be an instance of [`User`][UserRefDoc].
+`useUser` hook return only an instance of `{ user: User | undefined }`. When the user has not signed it, `user` will be `undefined`. If user has signed in, it will be an instance of [`User`][UserRefDoc].
 
 !!! warning
     Remember that `user` will not be undefined if [`signInAnonymously`][signInAnonymouslyDoc] is used to authenticate a user. Firebase-based anonymous users are technically autenticated. If you used [`signInAnonymously`][signInAnonymouslyDoc], you must rely on [`user.isAnonymous`][UserIsAnonymousRefDoc] property.

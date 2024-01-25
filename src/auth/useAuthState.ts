@@ -22,7 +22,7 @@ type UseAuthState = {
   user: User | null;
 };
 
-export const useAuthState = ({
+export const useUser = ({
   auth,
   onError,
   onComplete,

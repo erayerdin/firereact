@@ -5,20 +5,20 @@
 
 import { render, screen } from "@testing-library/react";
 import {
-  UserCredential,
-  createUserWithEmailAndPassword,
-  deleteUser,
-  signInAnonymously,
-  signInWithEmailAndPassword,
-  signOut,
+    UserCredential,
+    createUserWithEmailAndPassword,
+    deleteUser,
+    signInAnonymously,
+    signInWithEmailAndPassword,
+    signOut,
 } from "firebase/auth";
 import sleep from "sleep-sleep";
-import { useAuthState } from ".";
+import { useUser } from ".";
 import { auth } from "../firebase";
 
-describe("when real anon, useAuthState hook", () => {
+describe("when real anon, useUser hook", () => {
   const RealAnonUserComponent = () => {
-    const { user } = useAuthState({ auth });
+    const { user } = useUser({ auth });
     return <div>{user ? "not real anon detected" : "real anon detected"}</div>;
   };
 
@@ -32,9 +32,9 @@ describe("when real anon, useAuthState hook", () => {
   });
 });
 
-describe("when anon, useAuthState", () => {
+describe("when anon, useUser", () => {
   const AnonUserComponent = () => {
-    const { user } = useAuthState({ auth });
+    const { user } = useUser({ auth });
     return (
       <div>{user?.isAnonymous ? "anon detected" : "non anon detected"}</div>
     );
@@ -58,9 +58,9 @@ describe("when anon, useAuthState", () => {
   });
 });
 
-describe("when authed, useAuthState", () => {
+describe("when authed, useUser", () => {
   const AuthedUserComponent = () => {
-    const { user } = useAuthState({ auth });
+    const { user } = useUser({ auth });
     console.log(user);
     return <div>{user?.email}</div>;
   };

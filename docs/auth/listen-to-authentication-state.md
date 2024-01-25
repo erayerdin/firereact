@@ -4,4 +4,4 @@ You might like to listen to the authentication state changes to reflect your con
 
 You can use one of the methods below to listen authentication state changes:
 
- - [`useAuthState` hook](../hooks/useAuthState-hook.md)
+ - [`useUser` hook](../hooks/useUser-hook.md)
