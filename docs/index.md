@@ -19,6 +19,17 @@
 
 <p align="center">Firereact is hooks, component and utilities library for Firebase and React.</p>
 
+<div align="center">
+<a href="https://github.com/erayerdin/firereact/" class="md-button md-button--primary socialbutton">
+    <img src="./assets/brand/github.svg" alt="github logo" />
+    <span>View on Github</span>
+</a>
+<a href="https://www.npmjs.com/package/firereact" class="md-button md-button--primary socialbutton">
+    <img src="./assets/brand/npm.svg" alt="github logo" />
+    <span>View on NPM</span>
+</a>
+</div>
+
 ## Installation
 
 You can use `npm` to install `firereact`:
