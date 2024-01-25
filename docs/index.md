@@ -1,5 +1,11 @@
 # Introduction
 
+<center>
+<img src="../assets/brand/logo.svg" width="256" alt="firereact logo" />
+</center>
+
+# Firereact
+
 [![NPM Version](https://img.shields.io/npm/v/firereact?style=flat-square&logo=npm&logoColor=white)][npm_link]
 ![NPM License](https://img.shields.io/npm/l/firereact?style=flat-square&logo=npm&logoColor=white)
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/erayerdin/firereact/check.yaml?branch=main&style=flat-square&logo=github&logoColor=white&label=check)][actions_link]
