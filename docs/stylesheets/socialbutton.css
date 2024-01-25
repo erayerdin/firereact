@@ -1,0 +1,23 @@
+/**
+ * Copyright (c) 2024 Eray Erdin
+ * 
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
+.socialbutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.socialbutton > img {
+    width: 32px;
+}
+
+.socialbutton > span {
+    display: flex;
+    flex-grow: inherit;
+    justify-content: center;
+    align-items: center;
+}
