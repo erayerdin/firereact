@@ -4,6 +4,7 @@ repo_url: https://github.com/erayerdin/firereact
 
 theme:
   name: material
+  logo: assets/brand/logo-black.svg
   icon:
     repo: fontawesome/brands/github
   features:
