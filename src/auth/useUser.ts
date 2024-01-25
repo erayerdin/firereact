@@ -18,15 +18,11 @@ type UseAuthStateParams = {
   onChange?: CompleteFn;
 };
 
-type UseAuthState = {
-  user: User | null;
-};
-
 export const useUser = ({
   auth,
   onError,
   onChange,
-}: UseAuthStateParams): UseAuthState => {
+}: UseAuthStateParams): User | null => {
   const [user, setUser] = useState<User | null>(auth.currentUser);
 
   useEffect(() => {
@@ -39,5 +35,5 @@ export const useUser = ({
     return unsub;
   }, [auth, onError, onChange]);
 
-  return { user };
+  return user;
 };
