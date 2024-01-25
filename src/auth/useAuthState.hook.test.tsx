@@ -4,7 +4,14 @@
 // https://opensource.org/licenses/MIT
 
 import { render, screen } from "@testing-library/react";
-import { deleteUser, signInAnonymously, signOut } from "firebase/auth";
+import {
+  UserCredential,
+  createUserWithEmailAndPassword,
+  deleteUser,
+  signInAnonymously,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import sleep from "sleep-sleep";
 import { useAuthState } from ".";
 import { auth } from "../firebase";
@@ -33,13 +40,47 @@ describe("when anon, useAuthState", () => {
     );
   };
 
+  let credential: UserCredential;
+
+  beforeEach(async () => {
+    credential = await signInAnonymously(auth);
+  });
+
+  afterEach(async () => {
+    await deleteUser(credential.user);
+  });
+
   it("should return user instance", async () => {
     render(<AnonUserComponent />);
-    const credential = await signInAnonymously(auth);
+    await signInAnonymously(auth);
     await sleep(250);
     expect(screen.getByText("anon detected")).not.toBeUndefined();
+  });
+});
 
-    // teardown
+describe("when authed, useAuthState", () => {
+  const AuthedUserComponent = () => {
+    const { user } = useAuthState({ auth });
+    console.log(user);
+    return <div>{user?.email}</div>;
+  };
+
+  let credential: UserCredential;
+  const email = "useauthstate@firereact.erayerdin.com" as const; // camel case in email does not work
+  const password = "111111" as const;
+
+  beforeEach(async () => {
+    credential = await createUserWithEmailAndPassword(auth, email, password);
+  });
+
+  afterEach(async () => {
     await deleteUser(credential.user);
+  });
+
+  it("should return user instance", async () => {
+    render(<AuthedUserComponent />);
+    await signInWithEmailAndPassword(auth, email, password);
+    await sleep(250);
+    expect(screen.getByText(email)).not.toBeUndefined();
   });
 });
