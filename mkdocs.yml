@@ -45,7 +45,7 @@ nav:
     - firestore/updating-documents.md
     - firestore/deleting-documents.md
   - Auth:
-    - auth/listen-to-authentication-state.md
+    - auth/get-user.md
   - Hooks:
     - Firestore:
       - hooks/useDocument-hook.md
