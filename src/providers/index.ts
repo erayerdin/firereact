@@ -6,3 +6,5 @@
 export * from "./FirebaseProvider";
 
 export * from "./FirestoreProvider";
+
+export * from "./FirebaseAuthProvider.tsx";
