@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/brand/logo.svg" width="256" /></p>
 
-<p align="center"><h1>Firereact</h1></p>
+<h1 align="center">Firereact</h1>
 
 <p align="center"><em>This project is a 3rd-party project and is not affiliated or endorsed by React or Firebase and their owners, Alphabet and Meta.</em></p>
 
