@@ -4,8 +4,9 @@
 // https://opensource.org/licenses/MIT
 
 import { FirebaseApp } from "firebase/app";
+import { Auth } from "firebase/auth";
 import { Firestore } from "firebase/firestore";
-import { FirebaseProvider, FirestoreProvider } from ".";
+import { FirebaseAuthProvider, FirebaseProvider, FirestoreProvider } from ".";
 import { NodeComponent } from "../types";
 
 type ConditionalWrapProps = {
@@ -22,11 +23,13 @@ const ConditionalWrap = ({
 type FirebaseSuiteProviderProps = {
   app?: FirebaseApp;
   firestore?: Firestore;
+  auth?: Auth;
 } & NodeComponent;
 
 export const FirebaseSuiteProvider = ({
   app,
   firestore,
+  auth,
   children,
 }: FirebaseSuiteProviderProps) => {
   return (
@@ -40,7 +43,14 @@ export const FirebaseSuiteProvider = ({
           <FirestoreProvider firestore={firestore!}>{c}</FirestoreProvider>
         )}
       >
-        {children}
+        <ConditionalWrap
+          condition={auth !== undefined}
+          wrap={(c) => (
+            <FirebaseAuthProvider auth={auth!}>{c}</FirebaseAuthProvider>
+          )}
+        >
+          {children}
+        </ConditionalWrap>
       </ConditionalWrap>
     </ConditionalWrap>
   );

@@ -69,6 +69,31 @@ const firestore = useContext(FirestoreContext);
 !!! tip
     The type you get from `useContext` is `Firestore | undefined`. You can simply use `firestore!` (non-null assertion operator) as you guarantee it to be defined when you use `FirestoreProvider`.
 
+### Setting Up for Firebase Auth
+
+Head to your entry point and wrap your app with `FirebaseAuth`:
+
+```typescript
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <FirebaseAuth auth={auth}>
+      {/** the rest of your app */}
+    </FirebaseAuth>
+  </React.StrictMode>
+)
+```
+
+`FirebaseAuthProvider` only requires one parameter with signature `auth: Auth`.
+
+Now, you can get the instance of your `Auth` anywhere in the component tree by simply doing:
+
+```typescript
+const auth = useContext(FirebaseAuthContext);
+```
+
+!!! tip
+    The type you get from `useContext` is `Auth | undefined`. You can simply use `auth!` (non-null assertion operator) as you guarantee it to be defined when you use `FirebaseAuthProvider`.
+
 ### Setting Up for Multiple Instances
 
 Sometimes, wrapping your entry point with multiple providers might look ugly. In that case, you can use `FirebaseSuiteProvider`, which lets you selectively choose what types of Firebase services should be injected into your global app context.
@@ -81,6 +106,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <FirebaseSuiteProvider
       app={app} {/** optional */}
       firestore={firestore} {/** optional */}
+      auth={auth} {/** optional */}
     >
       {/** the rest of your app */}
     </FirebaseSuiteProvider>
@@ -95,6 +121,7 @@ Now, you can get the instance of any service anywhere in the component tree by s
 ```typescript
 const app = useContext(FirebaseAppContext);
 const firestore = useContext(FirestoreContext);
+const auth = useContext(FirebaseAuthContext);
 ```
 
 !!! warning
