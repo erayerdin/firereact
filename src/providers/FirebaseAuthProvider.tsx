@@ -3,8 +3,6 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export * from "./FirebaseProvider";
-
-export * from "./FirestoreProvider";
-
-export * from "./FirebaseAuthProvider.tsx";
+export const FirebaseAuthProvider = () => {
+  return <div>FirebaseAuthProvider</div>;
+};
