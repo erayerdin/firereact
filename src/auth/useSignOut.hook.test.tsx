@@ -49,12 +49,13 @@ describe("when authed, useSignOut hook", () => {
     expect(screen.getByText("real anon")).not.toBeUndefined();
   });
 
-  it("should have loading state while dispatching", async () => {
+  it("should have done state after dispatched", async () => {
     render(<SampleComponent />);
     const { result } = renderHook(() => useSignOut({ auth }));
     const { dispatch } = result.current;
-    dispatch();
+    await dispatch();
+    await sleep(100);
     const { state } = result.current;
-    expect(state).toBe("loading");
+    expect(state).toBe("done");
   });
 });
