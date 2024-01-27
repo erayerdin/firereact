@@ -61,7 +61,6 @@ describe("when anon, useUser", () => {
 describe("when authed, useUser", () => {
   const AuthedUserComponent = () => {
     const user = useUser({ auth });
-    console.log(user);
     return <div>{user?.email}</div>;
   };
 
