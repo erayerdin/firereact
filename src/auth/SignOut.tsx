@@ -9,13 +9,20 @@ import { UseSignOutDispatcher, useSignOut } from ".";
 
 type SignOutProps = {
   auth: Auth;
+  onlyRealAnon?: boolean;
   onReady?: (dispatch: UseSignOutDispatcher) => ReactNode;
   onLoading?: () => ReactNode;
-  onDone?: () => ReactNode;
+  onAnonymous?: () => ReactNode;
 };
 
-export const SignOut = ({ auth, onReady, onLoading, onDone }: SignOutProps) => {
-  const { state, dispatch } = useSignOut({ auth });
+export const SignOut = ({
+  auth,
+  onlyRealAnon = false,
+  onReady,
+  onLoading,
+  onAnonymous,
+}: SignOutProps) => {
+  const { state, dispatch } = useSignOut({ auth, onlyRealAnon });
 
   switch (state) {
     case "ready":
@@ -26,7 +33,7 @@ export const SignOut = ({ auth, onReady, onLoading, onDone }: SignOutProps) => {
       );
     case "loading":
       return onLoading ? onLoading() : <></>;
-    case "done":
-      return onDone ? onDone() : <></>;
+    case "anonymous":
+      return onAnonymous ? onAnonymous() : <></>;
   }
 };
