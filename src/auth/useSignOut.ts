@@ -16,7 +16,7 @@ type UseSignOutParams = {
 type UseSignOutState = "ready" | "loading" | "done";
 export type UseSignOutDispatcher = () => Promise<void>;
 
-type UseSignOUt = {
+type UseSignOut = {
   state: UseSignOutState;
   dispatch: UseSignOutDispatcher;
 };
@@ -25,7 +25,7 @@ export const useSignOut = ({
   auth,
   onError,
   onlyRealAnon = false,
-}: UseSignOutParams): UseSignOUt => {
+}: UseSignOutParams): UseSignOut => {
   const [state, setState] = useState<UseSignOutState>("ready");
   const user = useUser({ auth, onError });
 
