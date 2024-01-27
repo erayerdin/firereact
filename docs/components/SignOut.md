@@ -52,4 +52,4 @@ Input parameters for `FirestoreDocument` component is as follows:
 | `onAnonymous` | `() => ReactNode` | The component to render the user is anonymous. | ❌ | An empty component. |
 
 [AuthRefDoc]: https://firebase.google.com/docs/reference/node/firebase.auth.Auth
-[OnAnonymity]: ../hooks/useSignOut-hook.md#on-anonymity
+[OnAnonymity]: ../hooks/useSignOut.md#on-anonymity
