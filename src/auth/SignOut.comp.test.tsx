@@ -20,11 +20,11 @@ describe("when state is done, SignOut component", () => {
     render(
       <SignOut
         auth={auth}
-        onReady={() => <button>Sign Out</button>}
-        onDone={() => <div>Authed</div>}
+        onReady={(dispatch) => <button onClick={dispatch}>Sign Out</button>}
+        onDone={() => <div>anon now</div>}
       />,
     );
     await userEvent.click(screen.getByText("Sign Out"));
-    expect(screen.getByText("Authed")).not.toBeUndefined();
+    expect(screen.getByText("anon now")).not.toBeUndefined();
   });
 });

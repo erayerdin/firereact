@@ -5,11 +5,11 @@
 
 import { Auth } from "firebase/auth";
 import { ReactNode } from "react";
-import { useSignOut } from ".";
+import { UseSignOutDispatcher, useSignOut } from ".";
 
 type SignOutProps = {
   auth: Auth;
-  onReady: () => ReactNode;
+  onReady: (dispatch: UseSignOutDispatcher) => ReactNode;
   onLoading?: () => ReactNode;
   onDone?: () => ReactNode;
 };
@@ -19,7 +19,7 @@ export const SignOut = ({ auth, onReady, onLoading, onDone }: SignOutProps) => {
 
   switch (state) {
     case "ready":
-      return <div onClick={dispatch}>{onReady()}</div>;
+      return onReady(dispatch);
     case "loading":
       return onLoading ? onLoading() : <></>;
     case "done":
