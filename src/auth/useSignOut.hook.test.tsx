@@ -3,39 +3,58 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { renderHook } from "@testing-library/react";
+import { render, renderHook, screen } from "@testing-library/react";
 import {
   UserCredential,
   createUserWithEmailAndPassword,
   deleteUser,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { useSignOut } from ".";
+import sleep from "sleep-sleep";
+import { useSignOut, useUser } from ".";
 import { auth } from "../firebase";
 
 const email = "usesignout@hook.com" as const;
 const password = "111111";
 
 const SampleComponent = () => {
-  const currentUser = auth.currentUser;
+  const user = useUser({ auth });
 
-  return <div>{currentUser ? "authed" : "real anon"}</div>;
+  return <div>{user ? "authed" : "real anon"}</div>;
 };
 
 describe("when authed, useSignOut hook", () => {
   let credential: UserCredential;
 
   beforeEach(async () => {
-    credential = await createUserWithEmailAndPassword(auth, email, password);
-    await signInWithEmailAndPassword(auth, email, password);
+    await createUserWithEmailAndPassword(auth, email, password);
+    credential = await signInWithEmailAndPassword(auth, email, password);
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await deleteUser(credential.user);
   });
 
   it("should have ready state", () => {
     const { result } = renderHook(() => useSignOut({ auth }));
     expect(result.current.state).toBe("ready");
+  });
+
+  it("should sign out", async () => {
+    render(<SampleComponent />);
+    const { result } = renderHook(() => useSignOut({ auth }));
+    const { dispatch } = result.current;
+    await dispatch();
+    await sleep(100);
+    expect(screen.getByText("real anon")).not.toBeUndefined();
+  });
+
+  it("should have loading state while dispatching", async () => {
+    render(<SampleComponent />);
+    const { result } = renderHook(() => useSignOut({ auth }));
+    const { dispatch } = result.current;
+    dispatch();
+    const { state } = result.current;
+    expect(state).toBe("loading");
   });
 });
