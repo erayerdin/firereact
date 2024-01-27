@@ -4,10 +4,12 @@
 // https://opensource.org/licenses/MIT
 
 import { Auth } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useUser } from ".";
 
 type UseSignOutParams = {
   auth: Auth;
+  onError?: (error: Error) => void;
 };
 
 type UseSignOutState = "ready" | "loading" | "done";
@@ -18,8 +20,15 @@ type UseSignOUt = {
   dispatch: UseSignOutDispatcher;
 };
 
-export const useSignOut = ({ auth }: UseSignOutParams): UseSignOUt => {
+export const useSignOut = ({ auth, onError }: UseSignOutParams): UseSignOUt => {
   const [state, setState] = useState<UseSignOutState>("ready");
+  const user = useUser({ auth, onError });
+
+  useEffect(() => {
+    if (!user) {
+      setState("done");
+    }
+  }, [user]);
 
   const dispatch: UseSignOutDispatcher = async () => {
     setState("loading");
@@ -27,5 +36,5 @@ export const useSignOut = ({ auth }: UseSignOutParams): UseSignOUt => {
     setState("done");
   };
 
-  return { state, dispatch };
+  return { state, dispatch: state === "ready" ? dispatch : async () => {} };
 };
