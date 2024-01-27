@@ -31,8 +31,16 @@ describe("when authed, useSignUp hook", () => {
   });
 
   it("should have authenticated state", async () => {
-    const { result } = renderHook(() => useSignUp());
+    const { result } = renderHook(() => useSignUp({ auth }));
     const { state } = result.current;
     expect(state).toBe("authenticated");
+  });
+});
+
+describe("when real anon, useSignUp hook", () => {
+  it("should have ready state", async () => {
+    const { result } = renderHook(() => useSignUp({ auth }));
+    const { state } = result.current;
+    expect(state).toBe("ready");
   });
 });
