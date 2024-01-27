@@ -15,6 +15,9 @@ theme:
     - toc.follow
     - toc.integrate
     - navigation.top
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
   palette: 
     # Palette toggle for light mode
     - scheme: slate
