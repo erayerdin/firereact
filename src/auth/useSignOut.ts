@@ -11,7 +11,7 @@ type UseSignOutParams = {
 };
 
 type UseSignOutState = "ready" | "loading" | "done";
-type UseSignOutDispatcher = () => Promise<void>;
+export type UseSignOutDispatcher = () => Promise<void>;
 
 type UseSignOUt = {
   state: UseSignOutState;
