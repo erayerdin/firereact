@@ -3,6 +3,12 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export const SignOut = () => {
-  return <div>SignOut</div>;
+import { ReactNode } from "react";
+
+type SignOutProps = {
+  onReady: () => ReactNode;
+};
+
+export const SignOut = ({ onReady }: SignOutProps) => {
+  return onReady();
 };
