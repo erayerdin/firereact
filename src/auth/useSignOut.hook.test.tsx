@@ -8,6 +8,7 @@ import {
   UserCredential,
   createUserWithEmailAndPassword,
   deleteUser,
+  signInAnonymously,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import sleep from "sleep-sleep";
@@ -61,6 +62,17 @@ describe("when authed, useSignOut hook", () => {
 });
 
 describe("when real anon, useSignOut hook", () => {
+  it("should have done state", () => {
+    const { result } = renderHook(() => useSignOut({ auth }));
+    expect(result.current.state).toBe("done");
+  });
+});
+
+describe("when anon, useSignOut hook", () => {
+  beforeEach(async () => {
+    await signInAnonymously(auth);
+  });
+
   it("should have done state", () => {
     const { result } = renderHook(() => useSignOut({ auth }));
     expect(result.current.state).toBe("done");

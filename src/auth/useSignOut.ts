@@ -25,7 +25,7 @@ export const useSignOut = ({ auth, onError }: UseSignOutParams): UseSignOUt => {
   const user = useUser({ auth, onError });
 
   useEffect(() => {
-    if (!user) {
+    if (!user || user.isAnonymous) {
       setState("done");
     }
   }, [user]);
