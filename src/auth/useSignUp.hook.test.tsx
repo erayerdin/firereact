@@ -8,6 +8,7 @@ import {
   UserCredential,
   createUserWithEmailAndPassword,
   deleteUser,
+  signInAnonymously,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
@@ -39,6 +40,25 @@ describe("when authed, useSignUp hook", () => {
 
 describe("when real anon, useSignUp hook", () => {
   it("should have ready state", async () => {
+    const { result } = renderHook(() => useSignUp({ auth }));
+    const { state } = result.current;
+    expect(state).toBe("ready");
+  });
+});
+
+describe("when anon, useSignUp hook", () => {
+  let credential: UserCredential;
+
+  beforeEach(async () => {
+    credential = await signInAnonymously(auth);
+  });
+
+  afterEach(async () => {
+    await signOut(auth);
+    await deleteUser(credential.user);
+  });
+
+  it("should have ready state", () => {
     const { result } = renderHook(() => useSignUp({ auth }));
     const { state } = result.current;
     expect(state).toBe("ready");
