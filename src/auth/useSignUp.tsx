@@ -3,4 +3,10 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export const useSignUp = () => {};
+type SignUpParams = {
+  state: "ready";
+};
+
+export const useSignUp = (): SignUpParams => {
+  return { state: "ready" };
+};
