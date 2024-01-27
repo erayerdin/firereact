@@ -77,4 +77,11 @@ describe("when anon, useSignOut hook", () => {
     const { result } = renderHook(() => useSignOut({ auth }));
     expect(result.current.state).toBe("done");
   });
+
+  it("should have ready state if onlyRealAnon", () => {
+    const { result } = renderHook(() =>
+      useSignOut({ auth, onlyRealAnon: true }),
+    );
+    expect(result.current.state).toBe("ready");
+  });
 });

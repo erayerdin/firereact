@@ -10,6 +10,7 @@ import { useUser } from ".";
 type UseSignOutParams = {
   auth: Auth;
   onError?: (error: Error) => void;
+  onlyRealAnon?: boolean;
 };
 
 type UseSignOutState = "ready" | "loading" | "done";
@@ -20,15 +21,28 @@ type UseSignOUt = {
   dispatch: UseSignOutDispatcher;
 };
 
-export const useSignOut = ({ auth, onError }: UseSignOutParams): UseSignOUt => {
+export const useSignOut = ({
+  auth,
+  onError,
+  onlyRealAnon = false,
+}: UseSignOutParams): UseSignOUt => {
   const [state, setState] = useState<UseSignOutState>("ready");
   const user = useUser({ auth, onError });
 
   useEffect(() => {
-    if (!user || user.isAnonymous) {
-      setState("done");
+    // if (!user || user.isAnonymous) {
+    //   setState("done");
+    // }
+    if (onlyRealAnon) {
+      if (!user) {
+        setState("done");
+      }
+    } else {
+      if (!user || user.isAnonymous) {
+        setState("done");
+      }
     }
-  }, [user]);
+  }, [user, onlyRealAnon]);
 
   const dispatch: UseSignOutDispatcher = async () => {
     setState("loading");
