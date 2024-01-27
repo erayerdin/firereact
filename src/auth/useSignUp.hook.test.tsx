@@ -79,4 +79,20 @@ describe("when anon, useSignUp hook", () => {
     const { state } = result.current;
     expect(state).toBe("ready");
   });
+
+  it("should sign up", async () => {
+    const { result } = renderHook(() => useSignUp({ auth }));
+    const { dispatch } = result.current;
+    await dispatch(email, password);
+    const localCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+    expect(localCredential.user.email).toBe(email);
+
+    // teardown
+    await signOut(auth);
+    await deleteUser(localCredential.user);
+  });
 });
