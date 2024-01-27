@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { Auth } from "firebase/auth";
+import { Auth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useUser } from ".";
 
 type UseSignUpParams = {
@@ -11,13 +11,26 @@ type UseSignUpParams = {
 };
 
 type UseSignUpState = "ready" | "authenticated";
+type UseSignUpDispatcher = (email: string, password: string) => Promise<void>;
 type UseSignUp = {
   state: UseSignUpState;
+  dispatch: UseSignUpDispatcher;
 };
 
 export const useSignUp = ({ auth }: UseSignUpParams): UseSignUp => {
   const user = useUser({ auth });
+  const state: UseSignUpState = user
+    ? user.isAnonymous
+      ? "ready"
+      : "authenticated"
+    : "ready";
+
+  const dispatch: UseSignUpDispatcher = async (email, password) => {
+    await createUserWithEmailAndPassword(auth, email, password);
+  };
+
   return {
-    state: user ? (user.isAnonymous ? "ready" : "authenticated") : "ready",
+    state,
+    dispatch: state === "ready" ? dispatch : async () => {},
   };
 };

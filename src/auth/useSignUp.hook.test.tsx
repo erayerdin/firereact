@@ -15,15 +15,15 @@ import {
 import { useSignUp } from ".";
 import { auth } from "../firebase";
 
-const username = "usesignup@hoo.com" as const;
+const email = "usesignup@hoo.com" as const;
 const password = "111111" as const;
 
 describe("when authed, useSignUp hook", () => {
   let credential: UserCredential;
 
   beforeEach(async () => {
-    await createUserWithEmailAndPassword(auth, username, password);
-    credential = await signInWithEmailAndPassword(auth, username, password);
+    await createUserWithEmailAndPassword(auth, email, password);
+    credential = await signInWithEmailAndPassword(auth, email, password);
   });
 
   afterEach(async () => {
@@ -43,6 +43,22 @@ describe("when real anon, useSignUp hook", () => {
     const { result } = renderHook(() => useSignUp({ auth }));
     const { state } = result.current;
     expect(state).toBe("ready");
+  });
+
+  it("should sign up", async () => {
+    const { result } = renderHook(() => useSignUp({ auth }));
+    const { dispatch } = result.current;
+    await dispatch(email, password);
+    const localCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+    expect(localCredential.user.email).toBe(email);
+
+    // teardown
+    await signOut(auth);
+    await deleteUser(localCredential.user);
   });
 });
 
