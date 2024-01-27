@@ -9,7 +9,7 @@ import { UseSignOutDispatcher, useSignOut } from ".";
 
 type SignOutProps = {
   auth: Auth;
-  onReady: (dispatch: UseSignOutDispatcher) => ReactNode;
+  onReady?: (dispatch: UseSignOutDispatcher) => ReactNode;
   onLoading?: () => ReactNode;
   onDone?: () => ReactNode;
 };
@@ -19,7 +19,11 @@ export const SignOut = ({ auth, onReady, onLoading, onDone }: SignOutProps) => {
 
   switch (state) {
     case "ready":
-      return onReady(dispatch);
+      return onReady ? (
+        onReady(dispatch)
+      ) : (
+        <button onClick={dispatch}>Sign Out</button>
+      );
     case "loading":
       return onLoading ? onLoading() : <></>;
     case "done":
