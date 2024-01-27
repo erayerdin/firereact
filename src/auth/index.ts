@@ -6,3 +6,5 @@
 export * from "./useUser";
 
 export * from "./useSignOut";
+
+export * from "./SignOut";
