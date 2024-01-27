@@ -50,21 +50,21 @@ describe("when authed, useSignOut hook", () => {
     expect(screen.getByText("real anon")).not.toBeUndefined();
   });
 
-  it("should have done state after dispatched", async () => {
+  it("should have anonymous state after dispatched", async () => {
     render(<SampleComponent />);
     const { result } = renderHook(() => useSignOut({ auth }));
     const { dispatch } = result.current;
     await dispatch();
     await sleep(100);
     const { state } = result.current;
-    expect(state).toBe("done");
+    expect(state).toBe("anonymous");
   });
 });
 
 describe("when real anon, useSignOut hook", () => {
-  it("should have done state", () => {
+  it("should have anonymous state", () => {
     const { result } = renderHook(() => useSignOut({ auth }));
-    expect(result.current.state).toBe("done");
+    expect(result.current.state).toBe("anonymous");
   });
 });
 
@@ -73,9 +73,9 @@ describe("when anon, useSignOut hook", () => {
     await signInAnonymously(auth);
   });
 
-  it("should have done state", () => {
+  it("should have anonymous state", () => {
     const { result } = renderHook(() => useSignOut({ auth }));
-    expect(result.current.state).toBe("done");
+    expect(result.current.state).toBe("anonymous");
   });
 
   it("should have ready state if onlyRealAnon", () => {

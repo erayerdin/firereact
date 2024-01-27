@@ -13,7 +13,7 @@ type UseSignOutParams = {
   onlyRealAnon?: boolean;
 };
 
-type UseSignOutState = "ready" | "loading" | "done";
+type UseSignOutState = "ready" | "loading" | "anonymous";
 export type UseSignOutDispatcher = () => Promise<void>;
 
 type UseSignOut = {
@@ -31,15 +31,15 @@ export const useSignOut = ({
 
   useEffect(() => {
     // if (!user || user.isAnonymous) {
-    //   setState("done");
+    //   setState("anonymous");
     // }
     if (onlyRealAnon) {
       if (!user) {
-        setState("done");
+        setState("anonymous");
       }
     } else {
       if (!user || user.isAnonymous) {
-        setState("done");
+        setState("anonymous");
       }
     }
   }, [user, onlyRealAnon]);
@@ -47,7 +47,7 @@ export const useSignOut = ({
   const dispatch: UseSignOutDispatcher = async () => {
     setState("loading");
     await auth.signOut();
-    setState("done");
+    setState("anonymous");
   };
 
   return { state, dispatch: state === "ready" ? dispatch : async () => {} };
