@@ -8,6 +8,7 @@ import {
   UserCredential,
   createUserWithEmailAndPassword,
   deleteUser,
+  signInAnonymously,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import sleep from "sleep-sleep";
@@ -49,13 +50,38 @@ describe("when authed, useSignOut hook", () => {
     expect(screen.getByText("real anon")).not.toBeUndefined();
   });
 
-  it("should have done state after dispatched", async () => {
+  it("should have anonymous state after dispatched", async () => {
     render(<SampleComponent />);
     const { result } = renderHook(() => useSignOut({ auth }));
     const { dispatch } = result.current;
     await dispatch();
     await sleep(100);
     const { state } = result.current;
-    expect(state).toBe("done");
+    expect(state).toBe("anonymous");
+  });
+});
+
+describe("when real anon, useSignOut hook", () => {
+  it("should have anonymous state", () => {
+    const { result } = renderHook(() => useSignOut({ auth }));
+    expect(result.current.state).toBe("anonymous");
+  });
+});
+
+describe("when anon, useSignOut hook", () => {
+  beforeEach(async () => {
+    await signInAnonymously(auth);
+  });
+
+  it("should have anonymous state", () => {
+    const { result } = renderHook(() => useSignOut({ auth }));
+    expect(result.current.state).toBe("anonymous");
+  });
+
+  it("should have ready state if onlyRealAnon", () => {
+    const { result } = renderHook(() =>
+      useSignOut({ auth, onlyRealAnon: true }),
+    );
+    expect(result.current.state).toBe("ready");
   });
 });
