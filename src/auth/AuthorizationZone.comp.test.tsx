@@ -13,7 +13,7 @@ import {
   signOut,
 } from "firebase/auth";
 import sleep from "sleep-sleep";
-import { AuthorizationZone } from ".";
+import { AuthorizationZone, Validators } from ".";
 import { auth } from "../firebase";
 
 const generateEmail = (id: string) => `authenticatedzone_${id}@comp.com`;
@@ -97,5 +97,19 @@ describe("Validators.isAuthenticated", () => {
 
     // teardown
     await signOut(auth);
+  });
+});
+
+describe("Validators.isAnonymous", () => {
+  it("should succeed if real anon", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.isAnonymous()}
+        onSuccess={() => <div>anon</div>}
+        onFailure={() => <div>authed</div>}
+      />,
+    );
+    expect(screen.getByText("anon")).not.toBeUndefined();
   });
 });
