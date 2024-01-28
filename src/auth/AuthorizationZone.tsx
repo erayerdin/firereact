@@ -20,7 +20,7 @@ type AuthorizationZoneProps = {
 
 export const AuthorizationZone = ({
   auth,
-  validator = Validators.isAuthenticated,
+  validator = Validators.isAuthenticated(),
   onSuccess,
   onFailure = () => <></>,
 }: AuthorizationZoneProps) => {
@@ -41,7 +41,9 @@ export const AuthorizationZone = ({
 };
 
 export const Validators = {
-  isAuthenticated: (user: User | null) => {
-    return user ? !user.isAnonymous : false;
-  },
+  isAuthenticated:
+    (includeFirebaseAnon = false) =>
+    (user: User | null) => {
+      return user ? (includeFirebaseAnon ? true : !user.isAnonymous) : false;
+    },
 };
