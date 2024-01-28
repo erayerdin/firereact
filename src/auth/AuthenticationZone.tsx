@@ -20,5 +20,5 @@ export const AuthenticationZone = ({
 }: AuthenticationZoneProps) => {
   const user = useUser({ auth });
 
-  return user ? onAuthenticated(user) : <></>;
+  return user ? onAuthenticated(user) : onAnonymous();
 };

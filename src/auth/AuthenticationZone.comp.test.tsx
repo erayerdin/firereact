@@ -17,7 +17,7 @@ import { auth } from "../firebase";
 const generateEmail = (id: string) => `authenticatedzone_${id}@comp.com`;
 const password = "111111" as const;
 
-describe("when authenticated, AuthenticatedZone component", () => {
+describe("when authenticated, AuthenticationZone component", () => {
   let credential: UserCredential;
   let index: number = 0;
 
@@ -33,7 +33,7 @@ describe("when authenticated, AuthenticatedZone component", () => {
     await deleteUser(credential.user);
   });
 
-  it("should render children", async () => {
+  it("should render onAuthenticated", async () => {
     render(
       <AuthenticationZone
         auth={auth}
@@ -47,5 +47,23 @@ describe("when authenticated, AuthenticatedZone component", () => {
       />,
     );
     expect(screen.getByText("authed")).not.toBeUndefined();
+  });
+});
+
+describe("when anon, AuthenticationZone component", () => {
+  it("should render onAnonymous if real anon", async () => {
+    render(
+      <AuthenticationZone
+        auth={auth}
+        onAuthenticated={(user) => (
+          <>
+            <div>authed</div>
+            <div>{user.email}</div>
+          </>
+        )}
+        onAnonymous={() => <div>anon</div>}
+      />,
+    );
+    expect(screen.getByText("anon")).not.toBeUndefined();
   });
 });
