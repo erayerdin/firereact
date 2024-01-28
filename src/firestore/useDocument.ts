@@ -10,8 +10,7 @@ import {
   getDoc,
   onSnapshot,
 } from "firebase/firestore";
-import { useState } from "react";
-import useAsyncEffect from "use-async-effect";
+import { useEffect, useState } from "react";
 
 type UseDocumentParams = {
   reference: DocumentReference;
@@ -36,38 +35,38 @@ export const useDocument = ({
   const [snapshot, setSnapshot] = useState<DocumentSnapshot | undefined>();
   const [error, setError] = useState<FirebaseError | undefined>();
 
-  useAsyncEffect(async () => {
+  useEffect(() => {
     setLoading(true);
-    try {
-      if (listen) {
-        const unsub = onSnapshot(
-          reference,
-          { includeMetadataChanges: true },
-          (snap) => {
-            setSnapshot(snap);
+    if (listen) {
+      const unsub = onSnapshot(
+        reference,
+        { includeMetadataChanges: true },
+        (snap) => {
+          setSnapshot(snap);
+          setLoading(false);
+        },
+        (error) => setError(error),
+        () => setLoading(false),
+      );
+      return unsub;
+    } else {
+      getDoc(reference)
+        .then((snapshot) => {
+          setSnapshot(snapshot);
+          setLoading(false);
+        })
+        .catch((e) => {
+          if (e instanceof FirebaseError) {
+            setError(e);
             setLoading(false);
-          },
-          (error) => setError(error),
-          () => setLoading(false),
-        );
-        return unsub;
-      } else {
-        const snapshot = await getDoc(reference);
-        setSnapshot(snapshot);
-        setLoading(false);
-      }
-    } catch (e) {
-      if (e instanceof FirebaseError) {
-        setError(e);
-        setLoading(false);
-      } else {
-        setLoading(false);
-        throw e;
-      }
-    } finally {
-      setLoading(false);
+          } else {
+            setLoading(false);
+            throw e;
+          }
+        })
+        .finally(() => setLoading(false));
     }
-  }, []);
+  }, [listen, reference]);
 
   return { loading, snapshot, error };
 };
