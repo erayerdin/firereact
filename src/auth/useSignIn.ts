@@ -38,7 +38,7 @@ type UseSignInDispatcher = (
         provider: FacebookAuthProvider;
       }
     | {
-        type: "apple";
+        type: "apple" | "microsoft";
         provider: OAuthProvider;
       }
     | {
@@ -99,6 +99,11 @@ export const useSignIn = ({ auth }: UseSignInParams): UseSignIn => {
         return credential;
       }
       case "github": {
+        const { provider } = params;
+        const credential = await signInWithPopup(auth, provider);
+        return credential;
+      }
+      case "microsoft": {
         const { provider } = params;
         const credential = await signInWithPopup(auth, provider);
         return credential;
