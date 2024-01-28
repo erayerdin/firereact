@@ -49,17 +49,20 @@ nav:
     - firestore/deleting-documents.md
   - Auth:
     - auth/get-user.md
+    - auth/sign-up.md
     - auth/sign-out.md
+    - auth/delete-user.md
   - Hooks:
     - Firestore:
-      - hooks/useDocument-hook.md
-      - hooks/useCollection-hook.md
-      - hooks/useAddDocument-hook.md
-      - hooks/useSetDocument-hook.md
-      - hooks/useDeleteDocument-hook.md
+      - hooks/useDocument.md
+      - hooks/useCollection.md
+      - hooks/useAddDocument.md
+      - hooks/useSetDocument.md
+      - hooks/useDeleteDocument.md
     - Auth:
-      - hooks/useUser-hook.md
-      - hooks/useSignOut-hook.md
+      - hooks/useUser.md
+      - hooks/useSignOut.md
+      - hooks/useDeleteUser.md
   - Components:
     - Firestore:
       - components/FirestoreDocument.md
