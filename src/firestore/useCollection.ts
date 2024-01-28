@@ -5,8 +5,7 @@
 
 import { FirebaseError } from "firebase/app";
 import { Query, QuerySnapshot, getDocs, onSnapshot } from "firebase/firestore";
-import { useState } from "react";
-import useAsyncEffect from "use-async-effect";
+import { useEffect, useState } from "react";
 
 type UseCollectionParams = {
   query: Query;
@@ -31,39 +30,39 @@ export const useCollection = ({
   const [snapshot, setSnapshot] = useState<QuerySnapshot | undefined>();
   const [error, setError] = useState<FirebaseError | undefined>();
 
-  useAsyncEffect(async () => {
+  useEffect(() => {
     setLoading(true);
 
-    try {
-      if (listen) {
-        const unsub = onSnapshot(
-          query,
-          { includeMetadataChanges: true },
-          (snap) => {
-            setSnapshot(snap);
+    if (listen) {
+      const unsub = onSnapshot(
+        query,
+        { includeMetadataChanges: true },
+        (snap) => {
+          setSnapshot(snap);
+          setLoading(false);
+        },
+        (error) => setError(error),
+        () => setLoading(false),
+      );
+      return unsub;
+    } else {
+      getDocs(query)
+        .then((qSnapshot) => {
+          setSnapshot(qSnapshot);
+          setLoading(false);
+        })
+        .catch((e) => {
+          if (e instanceof FirebaseError) {
+            setError(e);
             setLoading(false);
-          },
-          (error) => setError(error),
-          () => setLoading(false),
-        );
-        return unsub;
-      } else {
-        const qSnapshot = await getDocs(query);
-        setSnapshot(qSnapshot);
-        setLoading(false);
-      }
-    } catch (e) {
-      if (e instanceof FirebaseError) {
-        setError(e);
-        setLoading(false);
-      } else {
-        setLoading(false);
-        throw e;
-      }
-    } finally {
-      setLoading(false);
+          } else {
+            setLoading(false);
+            throw e;
+          }
+        })
+        .finally(() => setLoading(false));
     }
-  }, []);
+  }, [listen, query]);
 
   return { loading, snapshot, error };
 };
