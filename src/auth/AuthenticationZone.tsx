@@ -20,5 +20,9 @@ export const AuthenticationZone = ({
 }: AuthenticationZoneProps) => {
   const user = useUser({ auth });
 
-  return user ? onAuthenticated(user) : onAnonymous();
+  return user
+    ? user.isAnonymous
+      ? onAnonymous()
+      : onAuthenticated(user)
+    : onAnonymous();
 };
