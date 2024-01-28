@@ -133,4 +133,27 @@ describe("Validators.isAnonymous", () => {
     await signOut(auth);
     await deleteUser(credential.user);
   });
+
+  it("should fail if authenticated", async () => {
+    // setup
+    await signOut(auth);
+    const email = generateEmail("failifauthenticated");
+    await createUserWithEmailAndPassword(auth, email, password);
+    const credential = await signInWithEmailAndPassword(auth, email, password);
+
+    // test
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.isAnonymous()}
+        onSuccess={() => <div>anon</div>}
+        onFailure={() => <div>authed</div>}
+      />,
+    );
+    expect(screen.getByText("authed")).not.toBeUndefined();
+
+    // teardown
+    await signOut(auth);
+    await deleteUser(credential.user);
+  });
 });
