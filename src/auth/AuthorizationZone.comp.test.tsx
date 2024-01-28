@@ -8,31 +8,17 @@ import {
   UserCredential,
   createUserWithEmailAndPassword,
   deleteUser,
-  signInAnonymously,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import sleep from "sleep-sleep";
 import { AuthorizationZone } from ".";
 import { auth } from "../firebase";
 
 const generateEmail = (id: string) => `authenticatedzone_${id}@comp.com`;
 const password = "111111" as const;
 
-const component = (excludeFirebaseAnon = false) => (
-  <AuthorizationZone
-    auth={auth}
-    excludeFirebaseAnon={excludeFirebaseAnon}
-    onAuthenticated={(user) => (
-      <>
-        <div>authed</div>
-        <div>{user.email}</div>
-      </>
-    )}
-    onAnonymous={() => <div>anon</div>}
-  />
-);
-
-describe("when authenticated, AuthorizationZone component", () => {
+describe("Validators.isAuthenticated", () => {
   let credential: UserCredential;
   let index: number = 0;
 
@@ -48,41 +34,19 @@ describe("when authenticated, AuthorizationZone component", () => {
     await deleteUser(credential.user);
   });
 
-  it("should render onAuthenticated", async () => {
-    render(component());
+  it("should be default and succeed if authenticated", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        onSuccess={(user) => (
+          <>
+            <div>authed</div>
+            <div>{user?.email ?? "email"}</div>
+          </>
+        )}
+      />,
+    );
+    await sleep(50);
     expect(screen.getByText("authed")).not.toBeUndefined();
-  });
-});
-
-describe("when anon, AuthorizationZone component", () => {
-  it("should render onAnonymous if real anon", async () => {
-    render(component());
-    expect(screen.getByText("anon")).not.toBeUndefined();
-  });
-
-  it("should render onAnonymous if firebase anon", async () => {
-    // setup
-    const credential = await signInAnonymously(auth);
-
-    // test
-    render(component());
-    expect(screen.getByText("anon")).not.toBeUndefined();
-
-    // teardown
-    await signOut(auth);
-    await deleteUser(credential.user);
-  });
-
-  it("should render onAuthenticated if firebase anon and excludeFirebaseAnon", async () => {
-    // setup
-    const credential = await signInAnonymously(auth);
-
-    // test
-    render(component(true));
-    expect(screen.getByText("authed")).not.toBeUndefined();
-
-    // teardown
-    await signOut(auth);
-    await deleteUser(credential.user);
   });
 });

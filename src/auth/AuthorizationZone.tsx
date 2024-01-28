@@ -4,29 +4,44 @@
 // https://opensource.org/licenses/MIT
 
 import { Auth, User } from "firebase/auth";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useUser } from ".";
+
+type AuthorizationZoneValidator = (
+  user: User | null,
+) => Promise<boolean> | boolean;
 
 type AuthorizationZoneProps = {
   auth: Auth;
-  excludeFirebaseAnon?: boolean;
-  onAuthenticated?: (user: User) => ReactNode;
-  onAnonymous?: () => ReactNode;
+  validator?: AuthorizationZoneValidator;
+  onSuccess: (user: User | null) => ReactNode;
+  onFailure?: (user: User | null) => ReactNode;
 };
 
 export const AuthorizationZone = ({
   auth,
-  excludeFirebaseAnon = false,
-  onAuthenticated = () => <></>,
-  onAnonymous = () => <></>,
+  validator = Validators.isAuthenticated,
+  onSuccess,
+  onFailure = () => <></>,
 }: AuthorizationZoneProps) => {
   const user = useUser({ auth });
+  const [success, setSuccess] = useState(false);
 
-  return user
-    ? user.isAnonymous
-      ? excludeFirebaseAnon
-        ? onAuthenticated(user)
-        : onAnonymous()
-      : onAuthenticated(user)
-    : onAnonymous();
+  useEffect(() => {
+    const taskOrVal = validator(user);
+
+    if (taskOrVal instanceof Promise) {
+      taskOrVal.then(setSuccess);
+    } else {
+      setSuccess(taskOrVal);
+    }
+  }, [user, validator]);
+
+  return success ? onSuccess(user) : onFailure(user);
+};
+
+export const Validators = {
+  isAuthenticated: (user: User | null) => {
+    return user ? !user.isAnonymous : false;
+  },
 };
