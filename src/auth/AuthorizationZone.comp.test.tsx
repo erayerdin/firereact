@@ -112,4 +112,25 @@ describe("Validators.isAnonymous", () => {
     );
     expect(screen.getByText("anon")).not.toBeUndefined();
   });
+
+  it("should succeed if firebase anon", async () => {
+    // setup
+    await signOut(auth);
+    const credential = await signInAnonymously(auth);
+
+    // test
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.isAnonymous()}
+        onSuccess={() => <div>anon</div>}
+        onFailure={() => <div>authed</div>}
+      />,
+    );
+    expect(screen.getByText("anon")).not.toBeUndefined();
+
+    // tearmdown
+    await signOut(auth);
+    await deleteUser(credential.user);
+  });
 });
