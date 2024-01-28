@@ -8,6 +8,7 @@ import {
   UserCredential,
   createUserWithEmailAndPassword,
   deleteUser,
+  signInAnonymously,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
@@ -48,5 +49,30 @@ describe("Validators.isAuthenticated", () => {
     );
     await sleep(50);
     expect(screen.getByText("authed")).not.toBeUndefined();
+  });
+
+  it("should be default and fail if firebase anon", async () => {
+    // setup
+    await signOut(auth);
+    const credential = await signInAnonymously(auth);
+
+    render(
+      <AuthorizationZone
+        auth={auth}
+        onSuccess={(user) => (
+          <>
+            <div>authed</div>
+            <div>{user?.email ?? "email"}</div>
+          </>
+        )}
+        onFailure={() => <div>anon</div>}
+      />,
+    );
+    await sleep(50);
+    expect(screen.getByText("anon")).not.toBeUndefined();
+
+    // teardown
+    await signOut(auth);
+    await deleteUser(credential.user);
   });
 });
