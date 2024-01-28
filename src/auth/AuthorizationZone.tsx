@@ -7,19 +7,19 @@ import { Auth, User } from "firebase/auth";
 import { ReactNode } from "react";
 import { useUser } from ".";
 
-type AuthenticationZoneProps = {
+type AuthorizationZoneProps = {
   auth: Auth;
   excludeFirebaseAnon?: boolean;
   onAuthenticated?: (user: User) => ReactNode;
   onAnonymous?: () => ReactNode;
 };
 
-export const AuthenticationZone = ({
+export const AuthorizationZone = ({
   auth,
   excludeFirebaseAnon = false,
   onAuthenticated = () => <></>,
   onAnonymous = () => <></>,
-}: AuthenticationZoneProps) => {
+}: AuthorizationZoneProps) => {
   const user = useUser({ auth });
 
   return user

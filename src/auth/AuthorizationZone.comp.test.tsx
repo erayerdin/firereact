@@ -12,14 +12,14 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { AuthenticationZone } from ".";
+import { AuthorizationZone } from ".";
 import { auth } from "../firebase";
 
 const generateEmail = (id: string) => `authenticatedzone_${id}@comp.com`;
 const password = "111111" as const;
 
 const component = (excludeFirebaseAnon = false) => (
-  <AuthenticationZone
+  <AuthorizationZone
     auth={auth}
     excludeFirebaseAnon={excludeFirebaseAnon}
     onAuthenticated={(user) => (
@@ -32,7 +32,7 @@ const component = (excludeFirebaseAnon = false) => (
   />
 );
 
-describe("when authenticated, AuthenticationZone component", () => {
+describe("when authenticated, AuthorizationZone component", () => {
   let credential: UserCredential;
   let index: number = 0;
 
@@ -54,7 +54,7 @@ describe("when authenticated, AuthenticationZone component", () => {
   });
 });
 
-describe("when anon, AuthenticationZone component", () => {
+describe("when anon, AuthorizationZone component", () => {
   it("should render onAnonymous if real anon", async () => {
     render(component());
     expect(screen.getByText("anon")).not.toBeUndefined();
