@@ -12,18 +12,27 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import sleep from "sleep-sleep";
 import { useSignUp } from ".";
 import { auth } from "../firebase";
 
-const email = "usesignup@hoo.com" as const;
+const generateEmail = (id: string) => `usesignup_${id}@hook.com`;
 const password = "111111" as const;
 
 describe("when authed, useSignUp hook", () => {
   let credential: UserCredential;
 
   beforeEach(async () => {
-    await createUserWithEmailAndPassword(auth, email, password);
-    credential = await signInWithEmailAndPassword(auth, email, password);
+    await createUserWithEmailAndPassword(
+      auth,
+      generateEmail("authed"),
+      password,
+    );
+    credential = await signInWithEmailAndPassword(
+      auth,
+      generateEmail("authed"),
+      password,
+    );
   });
 
   afterEach(async () => {
@@ -45,16 +54,33 @@ describe("when real anon, useSignUp hook", () => {
     expect(state).toBe("ready");
   });
 
+  it("should have loading state while dispatched", async () => {
+    const { result } = renderHook(() => useSignUp({ auth }));
+    const { dispatch } = result.current;
+    dispatch(generateEmail("realanon"), password)
+      .then(async (credential) => {
+        // teardown
+        await signOut(auth);
+        if (credential) {
+          await deleteUser(credential.user);
+        }
+      })
+      .catch(() => {});
+    await sleep(5);
+    const { state } = result.current;
+    expect(state).toBe("loading");
+  });
+
   it("should sign up", async () => {
     const { result } = renderHook(() => useSignUp({ auth }));
     const { dispatch } = result.current;
-    await dispatch(email, password);
+    await dispatch(generateEmail("realanon2"), password);
     const localCredential = await signInWithEmailAndPassword(
       auth,
-      email,
+      generateEmail("realanon2"),
       password,
     );
-    expect(localCredential.user.email).toBe(email);
+    expect(localCredential.user.email).toBe(generateEmail("realanon2"));
 
     // teardown
     await signOut(auth);
@@ -83,13 +109,13 @@ describe("when anon, useSignUp hook", () => {
   it("should sign up", async () => {
     const { result } = renderHook(() => useSignUp({ auth }));
     const { dispatch } = result.current;
-    await dispatch(email, password);
+    await dispatch(generateEmail("anon"), password);
     const localCredential = await signInWithEmailAndPassword(
       auth,
-      email,
+      generateEmail("anon"),
       password,
     );
-    expect(localCredential.user.email).toBe(email);
+    expect(localCredential.user.email).toBe(generateEmail("anon"));
 
     // teardown
     await signOut(auth);
