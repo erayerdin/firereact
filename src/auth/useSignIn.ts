@@ -7,6 +7,7 @@ import {
   Auth,
   FacebookAuthProvider,
   GoogleAuthProvider,
+  OAuthProvider,
   UserCredential,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -33,6 +34,10 @@ type UseSignInDispatcher = (
     | {
         type: "facebook";
         provider: FacebookAuthProvider;
+      }
+    | {
+        type: "apple";
+        provider: OAuthProvider;
       },
 ) => Promise<UserCredential>;
 type UseSignIn = {
@@ -69,6 +74,11 @@ export const useSignIn = ({ auth }: UseSignInParams): UseSignIn => {
         return credential;
       }
       case "facebook": {
+        const { provider } = params;
+        const credential = await signInWithPopup(auth, provider);
+        return credential;
+      }
+      case "apple": {
         const { provider } = params;
         const credential = await signInWithPopup(auth, provider);
         return credential;
