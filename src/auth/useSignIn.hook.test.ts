@@ -33,8 +33,20 @@ describe("when authed, useSignIn hook", () => {
   });
 
   it("should have authenticated state", async () => {
-    const { result } = renderHook(() => useSignIn());
+    const { result } = renderHook(() => useSignIn({ auth }));
     const { state } = result.current;
     expect(state).toBe("authenticated");
+  });
+});
+
+describe("when anon, useSignIn hook", () => {
+  it("should have ready state", async () => {
+    // setup
+    await signOut(auth);
+
+    // test
+    const { result } = renderHook(() => useSignIn({ auth }));
+    const { state } = result.current;
+    expect(state).toBe("ready");
   });
 });
