@@ -12,3 +12,5 @@ export * from "./SignOut";
 export * from "./useSignUp";
 
 export * from "./useDeleteUser";
+
+export * from "./AuthorizationZone";
