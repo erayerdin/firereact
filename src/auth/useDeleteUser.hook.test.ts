@@ -101,4 +101,13 @@ describe("when authed, useDeleteUser hook", () => {
     const { state } = result.current;
     expect(state).toBe("anonymous");
   });
+
+  it("should have loading state while dispatching", async () => {
+    const { result } = renderHook(() => useDeleteUser({ auth }));
+    const { dispatch } = result.current;
+    dispatch();
+    await sleep(1);
+    const { state } = result.current;
+    expect(state).toBe("loading");
+  });
 });
