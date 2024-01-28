@@ -15,7 +15,7 @@ await dispatch(email, password);
 !!! warning
     `useSignUp` is lazy by default and will not do anything until you use `dispatch` function.
 
-You can also get the state[^unauthorized] of sign-out process.
+You can also get the state[^unauthorized] of sign-up process.
 
 ```typescript
 const { state, dispatch } = useSignUp({ auth });
