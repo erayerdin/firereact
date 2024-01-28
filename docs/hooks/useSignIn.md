@@ -102,6 +102,9 @@ await dispatch({
 // state is "loading" until user signs in
 ```
 
+!!! warning
+    You might need to take extra steps to use 3rd-party authentication systems, e.g. for Apple, you need to comply with their anonymized data requirements. Although authentication via Google is mostly okay and require less hassle (as Firebase is a product of Google), you might want to check individual documents of each 3rd-party provider [here][AuthWebDocs]. Choose the provider of your choice from the left menu.
+
 [^unauthorized]: You can consider `"authenticated"` state as logically *unauthorized*. Your website visitors are not authorized to sign in again if they are already authenticated (signed-in).
 
 [AuthRefDoc]: https://firebase.google.com/docs/reference/node/firebase.auth.Auth
@@ -111,3 +114,4 @@ await dispatch({
 [FacebookAuthProviderRefDoc]: https://firebase.google.com/docs/reference/node/firebase.auth.FacebookAuthProvider
 [TwitterAuthProviderRefDoc]: https://firebase.google.com/docs/reference/node/firebase.auth.TwitterAuthProvider
 [GithubAuthProviderRefDoc]: https://firebase.google.com/docs/reference/node/firebase.auth.GithubAuthProvider
+[AuthWebDocs]: https://firebase.google.com/docs/auth/web/start
