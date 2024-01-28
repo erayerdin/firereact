@@ -64,4 +64,20 @@ describe("when anon, useSignIn hook", () => {
     await signOut(auth);
     await deleteUser(credential.user);
   });
+
+  it("should dispatch sign-in with email and password", async () => {
+    // setup
+    const email = generateEmail("dispatchemail");
+    await createUserWithEmailAndPassword(auth, email, password);
+
+    const { result } = renderHook(() => useSignIn({ auth }));
+    const { dispatch } = result.current;
+
+    const credential = await dispatch({ type: "classic", email, password });
+    expect(credential.user.email).toBe(email);
+
+    // teardown
+    await signOut(auth);
+    await deleteUser(credential.user);
+  });
 });
