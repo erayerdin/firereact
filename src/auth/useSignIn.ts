@@ -5,8 +5,10 @@
 
 import {
   Auth,
+  GoogleAuthProvider,
   UserCredential,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "@firebase/auth";
 import { useEffect, useState } from "react";
 import { useUser } from ".";
@@ -16,11 +18,18 @@ type UseSignInParams = {
 };
 
 type UseSignInState = "ready" | "loading" | "authenticated";
-type UseSignInDispatcher = (params: {
-  type: "classic";
-  email: string;
-  password: string;
-}) => Promise<UserCredential>;
+type UseSignInDispatcher = (
+  params:
+    | {
+        type: "classic";
+        email: string;
+        password: string;
+      }
+    | {
+        type: "google";
+        provider: GoogleAuthProvider;
+      },
+) => Promise<UserCredential>;
 type UseSignIn = {
   state: UseSignInState;
   dispatch: UseSignInDispatcher;
@@ -47,6 +56,11 @@ export const useSignIn = ({ auth }: UseSignInParams): UseSignIn => {
           email,
           password,
         );
+        return credential;
+      }
+      case "google": {
+        const { provider } = params;
+        const credential = await signInWithPopup(auth, provider);
         return credential;
       }
     }
