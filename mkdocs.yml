@@ -49,6 +49,7 @@ nav:
     - firestore/deleting-documents.md
   - Auth:
     - auth/get-user.md
+    - auth/sign-up.md
     - auth/sign-out.md
   - Hooks:
     - Firestore:
