@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { Auth } from "firebase/auth";
+import { Auth, deleteUser, signOut } from "firebase/auth";
 import { useUser } from ".";
 
 type UseDeleteUserParams = {
@@ -12,8 +12,10 @@ type UseDeleteUserParams = {
 };
 
 type UseDeleteUserState = "ready" | "anonymous";
+type UseDeleteUserDispatcher = () => Promise<void>;
 type UseDeleteUser = {
   state: UseDeleteUserState;
+  dispatch: UseDeleteUserDispatcher;
 };
 
 export const useDeleteUser = ({
@@ -21,14 +23,23 @@ export const useDeleteUser = ({
   includeFirebaseAnon = false,
 }: UseDeleteUserParams): UseDeleteUser => {
   const user = useUser({ auth });
+  const state: UseDeleteUserState = user
+    ? user.isAnonymous
+      ? includeFirebaseAnon
+        ? "ready"
+        : "anonymous"
+      : "ready"
+    : "anonymous";
+
+  const dispatch: UseDeleteUserDispatcher = async () => {
+    if (user) {
+      await deleteUser(user);
+      await signOut(auth);
+    }
+  };
 
   return {
-    state: user
-      ? user.isAnonymous
-        ? includeFirebaseAnon
-          ? "ready"
-          : "anonymous"
-        : "ready"
-      : "anonymous",
+    state,
+    dispatch: state === "ready" ? dispatch : async () => {},
   };
 };

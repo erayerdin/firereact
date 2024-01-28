@@ -4,6 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { renderHook } from "@testing-library/react";
+import { FirebaseError } from "firebase/app";
 import {
   UserCredential,
   createUserWithEmailAndPassword,
@@ -12,6 +13,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import sleep from "sleep-sleep";
 import { useDeleteUser } from ".";
 import { auth } from "../firebase";
 
@@ -75,12 +77,28 @@ describe("when authed, useDeleteUser hook", () => {
 
   afterEach(async () => {
     await signOut(auth);
-    await deleteUser(credential.user);
+    try {
+      await deleteUser(credential.user);
+    } catch (e) {
+      if (e instanceof FirebaseError && e.code == "auth/user-token-expired") {
+        return;
+      }
+      throw e;
+    }
   });
 
   it("should have ready state", async () => {
     const { result } = renderHook(() => useDeleteUser({ auth }));
     const { state } = result.current;
     expect(state).toBe("ready");
+  });
+
+  it("should delete user", async () => {
+    const { result } = renderHook(() => useDeleteUser({ auth }));
+    const { dispatch } = result.current;
+    await dispatch();
+    await sleep(100);
+    const { state } = result.current;
+    expect(state).toBe("anonymous");
   });
 });
