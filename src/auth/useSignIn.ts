@@ -76,41 +76,51 @@ export const useSignIn = ({ auth }: UseSignInParams): UseSignIn => {
           email,
           password,
         );
+        setState("authenticated");
         return credential;
       }
       case "google": {
         const { provider } = params;
         const credential = await signInWithPopup(auth, provider);
+        setState("authenticated");
+        setState("authenticated");
         return credential;
       }
       case "facebook": {
         const { provider } = params;
         const credential = await signInWithPopup(auth, provider);
+        setState("authenticated");
+        setState("authenticated");
         return credential;
       }
       case "apple": {
         const { provider } = params;
         const credential = await signInWithPopup(auth, provider);
+        setState("authenticated");
         return credential;
       }
       case "twitter": {
         const { provider } = params;
         const credential = await signInWithPopup(auth, provider);
+        setState("authenticated");
         return credential;
       }
       case "github": {
         const { provider } = params;
         const credential = await signInWithPopup(auth, provider);
+        setState("authenticated");
         return credential;
       }
       case "microsoft": {
         const { provider } = params;
         const credential = await signInWithPopup(auth, provider);
+        setState("authenticated");
         return credential;
       }
       case "yahoo": {
         const { provider } = params;
         const credential = await signInWithPopup(auth, provider);
+        setState("authenticated");
         return credential;
       }
     }
