@@ -134,6 +134,27 @@ describe("Validators.isAnonymous", () => {
     await deleteUser(credential.user);
   });
 
+  it("should fail if firebase anon and excludeFirebaseAnon", async () => {
+    // setup
+    await signOut(auth);
+    const credential = await signInAnonymously(auth);
+
+    // test
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.isAnonymous(true)}
+        onSuccess={() => <div>anon</div>}
+        onFailure={() => <div>authed</div>}
+      />,
+    );
+    expect(screen.getByText("authed")).not.toBeUndefined();
+
+    // tearmdown
+    await signOut(auth);
+    await deleteUser(credential.user);
+  });
+
   it("should fail if authenticated", async () => {
     // setup
     await signOut(auth);

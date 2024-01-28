@@ -46,5 +46,8 @@ export const Validators = {
     (user: User | null) => {
       return user ? (includeFirebaseAnon ? true : !user.isAnonymous) : false;
     },
-  isAnonymous: () => (user: User | null) => (user ? user.isAnonymous : true),
+  isAnonymous:
+    (excludeFirebaseAnon = false) =>
+    (user: User | null) =>
+      user ? (excludeFirebaseAnon ? false : user.isAnonymous) : true,
 };
