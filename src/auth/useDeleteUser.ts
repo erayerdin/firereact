@@ -3,11 +3,22 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-type UseDeleteUserState = "anonymous";
+import { Auth } from "firebase/auth";
+import { useUser } from ".";
+
+type UseDeleteUserParams = {
+  auth: Auth;
+};
+
+type UseDeleteUserState = "ready" | "anonymous";
 type UseDeleteUser = {
   state: UseDeleteUserState;
 };
 
-export const useDeleteUser = (): UseDeleteUser => {
-  return { state: "anonymous" };
+export const useDeleteUser = ({ auth }: UseDeleteUserParams): UseDeleteUser => {
+  const user = useUser({ auth });
+
+  return {
+    state: user ? (user.isAnonymous ? "anonymous" : "ready") : "anonymous",
+  };
 };
