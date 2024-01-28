@@ -7,7 +7,7 @@ import { Auth, User } from "firebase/auth";
 import { ReactNode, useEffect, useState } from "react";
 import { useUser } from ".";
 
-type AuthorizationZoneValidator = (
+export type AuthorizationZoneValidator = (
   user: User | null,
 ) => Promise<boolean> | boolean;
 
