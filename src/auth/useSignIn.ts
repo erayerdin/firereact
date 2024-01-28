@@ -4,6 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { Auth } from "@firebase/auth";
+import { useEffect, useState } from "react";
 import { useUser } from ".";
 
 type UseSignInParams = {
@@ -17,8 +18,12 @@ type UseSignIn = {
 
 export const useSignIn = ({ auth }: UseSignInParams): UseSignIn => {
   const user = useUser({ auth });
+  const [state, setState] = useState<UseSignInState>("ready");
 
-  return {
-    state: user ? (user.isAnonymous ? "ready" : "authenticated") : "ready",
-  };
+  useEffect(() => {
+    setState(user ? (user.isAnonymous ? "ready" : "authenticated") : "ready");
+    return () => setState("ready");
+  }, [user]);
+
+  return { state };
 };
