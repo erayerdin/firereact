@@ -3,4 +3,11 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export const useDeleteUser = () => {};
+type UseDeleteUserState = "anonymous";
+type UseDeleteUser = {
+  state: UseDeleteUserState;
+};
+
+export const useDeleteUser = (): UseDeleteUser => {
+  return { state: "anonymous" };
+};
