@@ -48,6 +48,7 @@ nav:
     - firestore/updating-documents.md
     - firestore/deleting-documents.md
   - Auth:
+    - auth/conditionally-render-by-authentication.md
     - auth/get-user.md
     - auth/sign-up.md
     - auth/sign-out.md
@@ -68,6 +69,7 @@ nav:
       - components/FirestoreDocument.md
     - Auth:
       - components/SignOut.md
+      - components/AuthorizationZone.md
 
 plugins:
   - privacy
