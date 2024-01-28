@@ -75,4 +75,27 @@ describe("Validators.isAuthenticated", () => {
     await signOut(auth);
     await deleteUser(credential.user);
   });
+
+  it("should be default and fail if real anon", async () => {
+    // setup
+    await signOut(auth);
+
+    render(
+      <AuthorizationZone
+        auth={auth}
+        onSuccess={(user) => (
+          <>
+            <div>authed</div>
+            <div>{user?.email ?? "email"}</div>
+          </>
+        )}
+        onFailure={() => <div>anon</div>}
+      />,
+    );
+    await sleep(50);
+    expect(screen.getByText("anon")).not.toBeUndefined();
+
+    // teardown
+    await signOut(auth);
+  });
 });
