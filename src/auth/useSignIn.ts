@@ -18,5 +18,7 @@ type UseSignIn = {
 export const useSignIn = ({ auth }: UseSignInParams): UseSignIn => {
   const user = useUser({ auth });
 
-  return { state: user ? "authenticated" : "ready" };
+  return {
+    state: user ? (user.isAnonymous ? "ready" : "authenticated") : "ready",
+  };
 };
