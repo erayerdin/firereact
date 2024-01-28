@@ -39,7 +39,7 @@ await dispatch();
 
 ## On Anonymity
 
-In Firebase, there are two types of anonymity: Firebase-handle anonymous users (which are stored in Firebase and seen as real users) and real anonymous users (which are essentially `null` users).
+In Firebase, there are two types of anonymity: Firebase-handled anonymous users (which are stored in Firebase and seen as real users) and real anonymous users (which are essentially `null` users).
 
 `useSignOut` considers both cases as anonymous and behaves accordingly. So, in a case where user is *Firebase-handled* or *really* anonymous, `useSignOut` will have `"anonymous"` state. If, for a reason, this behavior is not desirable for you, you can use `onlyRealAnon` parameter on `useSignOut` hook. To see both cases, check this code:
 
