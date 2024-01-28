@@ -8,6 +8,7 @@ import { useUser } from ".";
 
 type UseDeleteUserParams = {
   auth: Auth;
+  includeFirebaseAnon?: boolean;
 };
 
 type UseDeleteUserState = "ready" | "anonymous";
@@ -15,10 +16,19 @@ type UseDeleteUser = {
   state: UseDeleteUserState;
 };
 
-export const useDeleteUser = ({ auth }: UseDeleteUserParams): UseDeleteUser => {
+export const useDeleteUser = ({
+  auth,
+  includeFirebaseAnon = false,
+}: UseDeleteUserParams): UseDeleteUser => {
   const user = useUser({ auth });
 
   return {
-    state: user ? (user.isAnonymous ? "anonymous" : "ready") : "anonymous",
+    state: user
+      ? user.isAnonymous
+        ? includeFirebaseAnon
+          ? "ready"
+          : "anonymous"
+        : "ready"
+      : "anonymous",
   };
 };

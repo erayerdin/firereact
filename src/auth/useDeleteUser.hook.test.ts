@@ -47,6 +47,14 @@ describe("when anon, useDeleteUser hook", () => {
     const { state } = result.current;
     expect(state).toBe("anonymous");
   });
+
+  it("should have ready state if includeFirebaseAnon", async () => {
+    const { result } = renderHook(() =>
+      useDeleteUser({ auth, includeFirebaseAnon: true }),
+    );
+    const { state } = result.current;
+    expect(state).toBe("ready");
+  });
 });
 
 describe("when authed, useDeleteUser hook", () => {
