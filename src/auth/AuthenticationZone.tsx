@@ -9,12 +9,14 @@ import { useUser } from ".";
 
 type AuthenticationZoneProps = {
   auth: Auth;
+  excludeFirebaseAnon?: boolean;
   onAuthenticated?: (user: User) => ReactNode;
   onAnonymous?: () => ReactNode;
 };
 
 export const AuthenticationZone = ({
   auth,
+  excludeFirebaseAnon = false,
   onAuthenticated = () => <></>,
   onAnonymous = () => <></>,
 }: AuthenticationZoneProps) => {
@@ -22,7 +24,9 @@ export const AuthenticationZone = ({
 
   return user
     ? user.isAnonymous
-      ? onAnonymous()
+      ? excludeFirebaseAnon
+        ? onAuthenticated(user)
+        : onAnonymous()
       : onAuthenticated(user)
     : onAnonymous();
 };

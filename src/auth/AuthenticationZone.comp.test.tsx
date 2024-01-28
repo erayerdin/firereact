@@ -18,9 +18,10 @@ import { auth } from "../firebase";
 const generateEmail = (id: string) => `authenticatedzone_${id}@comp.com`;
 const password = "111111" as const;
 
-const component = () => (
+const component = (excludeFirebaseAnon = false) => (
   <AuthenticationZone
     auth={auth}
+    excludeFirebaseAnon={excludeFirebaseAnon}
     onAuthenticated={(user) => (
       <>
         <div>authed</div>
@@ -66,6 +67,19 @@ describe("when anon, AuthenticationZone component", () => {
     // test
     render(component());
     expect(screen.getByText("anon")).not.toBeUndefined();
+
+    // teardown
+    await signOut(auth);
+    await deleteUser(credential.user);
+  });
+
+  it("should render onAuthenticated if firebase anon and excludeFirebaseAnon", async () => {
+    // setup
+    const credential = await signInAnonymously(auth);
+
+    // test
+    render(component(true));
+    expect(screen.getByText("authed")).not.toBeUndefined();
 
     // teardown
     await signOut(auth);
