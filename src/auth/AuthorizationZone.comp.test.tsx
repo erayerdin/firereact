@@ -178,3 +178,22 @@ describe("Validators.isAnonymous", () => {
     await deleteUser(credential.user);
   });
 });
+
+describe("Validators.every", () => {
+  it("should return true if all non-async", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.every([
+          () => true,
+          () => true,
+          () => true,
+          () => true,
+        ])}
+        onSuccess={() => <div>passed</div>}
+        onFailure={() => <div>failed</div>}
+      />,
+    );
+    expect(screen.getByText("passed")).not.toBeUndefined();
+  });
+});
