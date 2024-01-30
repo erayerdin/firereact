@@ -16,3 +16,5 @@ export * from "./useDeleteUser";
 export * from "./AuthorizationZone";
 
 export * from "./useSignIn";
+
+export * from "./useSendEmailVerification";
