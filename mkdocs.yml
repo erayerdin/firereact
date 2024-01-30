@@ -55,6 +55,8 @@ nav:
     - auth/sign-in.md
     - auth/sign-out.md
     - auth/delete-user.md
+  - Functions:
+    - functions/calling-a-function.md
   - Hooks:
     - Firestore:
       - hooks/useDocument.md
@@ -69,6 +71,8 @@ nav:
       - hooks/useSignIn.md
       - hooks/useSignOut.md
       - hooks/useDeleteUser.md
+    - Functions:
+      - hooks/useCallFunction.md
   - Components:
     - Firestore:
       - components/FirestoreDocument.md
