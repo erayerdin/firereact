@@ -18,7 +18,9 @@ type UseCallFunctionParams = {
 };
 
 type UseCallFunctionState = "ready" | "loading" | "done";
-type UseCallFunctionInvoker = () => Promise<HttpsCallableResult<unknown>>;
+type UseCallFunctionInvoker = (
+  data?: unknown,
+) => Promise<HttpsCallableResult<unknown>>;
 type UseCallFunction = {
   state: UseCallFunctionState;
   invoke: UseCallFunctionInvoker;
@@ -31,9 +33,9 @@ export const useCallFunction = ({
 }: UseCallFunctionParams): UseCallFunction => {
   const [state, setState] = useState<UseCallFunctionState>("ready");
 
-  const invoke: UseCallFunctionInvoker = async () => {
+  const invoke: UseCallFunctionInvoker = async (data: unknown = {}) => {
     setState("loading");
-    const r = httpsCallable(functions, name, httpsCallableOptions).call({});
+    const r = httpsCallable(functions, name, httpsCallableOptions).call(data);
     setState("done");
     return r;
   };
