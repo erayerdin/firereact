@@ -180,7 +180,7 @@ describe("Validators.isAnonymous", () => {
 });
 
 describe("Validators.every", () => {
-  it("should return true", async () => {
+  it("should return true if all async", async () => {
     render(
       <AuthorizationZone
         auth={auth}
@@ -194,6 +194,24 @@ describe("Validators.every", () => {
         onFailure={() => <div>failed</div>}
       />,
     );
+    await sleep(50);
     expect(screen.getByText("passed")).not.toBeUndefined();
+  });
+
+  it("should return false if all async", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.every([
+          async () => true,
+          async () => true,
+          async () => false,
+          async () => true,
+        ])}
+        onSuccess={() => <div>passed</div>}
+        onFailure={() => <div>failed</div>}
+      />,
+    );
+    expect(screen.getByText("failed")).not.toBeUndefined();
   });
 });
