@@ -17,6 +17,8 @@ jobs:
       - name: "Download Firebase Emulators"
         run: npm run firebase:emulators:download
       - name: "Run Firebase Emulators"
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SECRET_TOKEN }}
         run: npm run firebase:emulators:run &
       - name: "Wait for Firebase Emulators"
         run: sleep 10
