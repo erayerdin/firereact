@@ -93,10 +93,7 @@ const credential = await dispatch({
 });
 ```
 
-If no verification email was sent and the user is not verified, your `credential!.user.emailVerified` will return `false`.
-
-!!! note
-    Sending verification email feature has not been implemented by this library yet. It will be implemented in a future release.
+If no verification email was sent and the user is not verified, your `credential!.user.emailVerified` will return `false`. After you sign in, you can use [`useSendEmailVerification`](useSendEmailVerification.md) hook to send an email verification to the user.
 
 ### Email Link Sign In Method
 
