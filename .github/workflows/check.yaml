@@ -23,7 +23,14 @@ jobs:
       - name: "Run Firebase Emulators"
         env:
           GOOGLE_APPLICATION_CREDENTIALS: $HOME/gloud.json
-        run: npm run firebase:emulators:run &
+        uses: JarvusInnovations/background-action@v1
+        with:
+          run: npm run firebase:emulators:run
+          wait-on: |
+            http://127.0.0.1:5001
+            http://127.0.0.1:8080
+            http://127.0.0.1:9099
+          wait-for: 3m
       - name: "Wait for Firebase Emulators"
         run: sleep 10
       - name: "Test"
