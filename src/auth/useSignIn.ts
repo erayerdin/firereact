@@ -23,7 +23,7 @@ type UseSignInParams = {
   auth: Auth;
 };
 
-type UseSignInState = "ready" | "loading" | "authenticated";
+type UseSignInState = "ready" | "loading" | "authenticated" | "awaiting";
 type UseSignInDispatcher = (
   params:
     | {
@@ -89,6 +89,7 @@ export const useSignIn = ({ auth }: UseSignInParams): UseSignIn => {
       case "link": {
         const { email, actionCodeSetting } = params;
         await sendSignInLinkToEmail(auth, email, actionCodeSetting);
+        setState("awaiting");
         return undefined;
       }
       case "google": {
