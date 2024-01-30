@@ -91,6 +91,7 @@ Input parameters for `FirestoreDocument` component is as follows:
 
  - [`Validators.isAuthenticated`](#isauthenticated-validator)
  - [`Validators.isAnonymous`](#isanonymous-validator)
+ - [`Validators.isVerified`](#isverified-validator)
  - [`Validators.every`](#every-validator)
  - [`Validators.some`](#some-validator)
 
@@ -198,6 +199,23 @@ Only takes positional parameters.
  Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
 | `excludeFirebaseAnon` | `boolean` | Consider Firebase-handled anonymous as *authenticated* rather than *anonymous* | ❌ | `false` |
+
+### `isVerified` Validator
+
+This validator will render the component only if the user email is verified. Since it solely uses Firebase Auth, it does not cost anything. A simple example would be:
+
+```typescript
+<AuthorizationZone
+  auth={auth}
+  validator={Validators.isVerified()}
+  onSuccess={() => (
+    <p>This user is verified.</p>
+  )}
+/>
+```
+
+!!! warning
+    If the user is a real anonymous (`null`), then `isVerified` validator will consider it as non-verified (`false`).
 
 ### `every` Validator
 

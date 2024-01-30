@@ -392,3 +392,32 @@ describe("Validators.some", () => {
     expect(screen.getByText("failed")).not.toBeUndefined();
   });
 });
+
+describe("Validators.isVerified", () => {
+  let credential: UserCredential;
+  const index: number = 0;
+
+  beforeEach(async () => {
+    const email = generateEmail(index.toString());
+    await createUserWithEmailAndPassword(auth, email, password);
+    credential = await signInWithEmailAndPassword(auth, email, password);
+  });
+
+  afterEach(async () => {
+    await signOut(auth);
+    await deleteUser(credential.user);
+  });
+
+  it("should return false", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.isVerified()}
+        onSuccess={() => <div>passed</div>}
+        onFailure={() => <div>failed</div>}
+      />,
+    );
+    await sleep(50);
+    expect(screen.getByText("failed")).not.toBeUndefined();
+  });
+});
