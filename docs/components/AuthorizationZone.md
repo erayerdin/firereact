@@ -87,7 +87,14 @@ Input parameters for `FirestoreDocument` component is as follows:
 
 `AuthorizationZone` component has `validator` property, which requires a type that is `(user: User | null) => Promise<boolean> | boolean`. This means it's a function that automatically is provided with an instance of [`User`][UserRefDoc] and might or might not be an async function (can return either `Promise<boolean>` or `boolean`).
 
-You can write your own custom validator or use one of ready-made validators provided by `firereact`.
+`firereact` already provides premade useful validators. Here is an exhaustive list of them:
+
+ - [`Validators.isAuthenticated`](#isauthenticated-validator)
+ - [`Validators.isAnonymous`](#isanonymous-validator)
+ - [`Validators.every`](#every-validator)
+ - [`Validators.some`](#some-validator)
+
+You can also write your own custom validator.
 
 ### Custom Validator
 
