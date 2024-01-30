@@ -11,9 +11,11 @@ import {
   OAuthProvider,
   TwitterAuthProvider,
   UserCredential,
+  sendSignInLinkToEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "@firebase/auth";
+import { ActionCodeSettings } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useUser } from ".";
 
@@ -21,13 +23,18 @@ type UseSignInParams = {
   auth: Auth;
 };
 
-type UseSignInState = "ready" | "loading" | "authenticated";
+type UseSignInState = "ready" | "loading" | "authenticated" | "awaiting";
 type UseSignInDispatcher = (
   params:
     | {
         type: "classic";
         email: string;
         password: string;
+      }
+    | {
+        type: "link";
+        email: string;
+        actionCodeSetting: ActionCodeSettings;
       }
     | {
         type: "google";
@@ -49,7 +56,7 @@ type UseSignInDispatcher = (
         type: "github";
         provider: GithubAuthProvider;
       },
-) => Promise<UserCredential>;
+) => Promise<UserCredential | undefined>;
 type UseSignIn = {
   state: UseSignInState;
   dispatch: UseSignInDispatcher;
@@ -78,6 +85,12 @@ export const useSignIn = ({ auth }: UseSignInParams): UseSignIn => {
         );
         setState("authenticated");
         return credential;
+      }
+      case "link": {
+        const { email, actionCodeSetting } = params;
+        await sendSignInLinkToEmail(auth, email, actionCodeSetting);
+        setState("awaiting");
+        return undefined;
       }
       case "google": {
         const { provider } = params;
