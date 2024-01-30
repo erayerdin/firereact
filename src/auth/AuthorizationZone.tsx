@@ -50,6 +50,8 @@ export const Validators = {
     (excludeFirebaseAnon = false) =>
     (user: User | null) =>
       user ? (excludeFirebaseAnon ? false : user.isAnonymous) : true,
-  every: (validators: AuthorizationZoneValidator[]) => (user: User | null) =>
-    validators.every(async (v) => await v(user)),
+  every:
+    (validators: ((user: User | null) => Promise<boolean>)[]) =>
+    (user: User | null): boolean =>
+      validators.every(async (v) => await v(user)),
 };
