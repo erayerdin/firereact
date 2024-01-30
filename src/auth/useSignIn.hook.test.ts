@@ -74,10 +74,12 @@ describe("when anon, useSignIn hook", () => {
     const { dispatch } = result.current;
 
     const credential = await dispatch({ type: "classic", email, password });
-    expect(credential.user.email).toBe(email);
+    expect(credential?.user.email).toBe(email);
 
     // teardown
     await signOut(auth);
-    await deleteUser(credential.user);
+    if (credential) {
+      await deleteUser(credential.user);
+    }
   });
 });
