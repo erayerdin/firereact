@@ -199,6 +199,23 @@ Only takes positional parameters.
 |---|---|---|---|---|
 | `excludeFirebaseAnon` | `boolean` | Consider Firebase-handled anonymous as *authenticated* rather than *anonymous* | ❌ | `false` |
 
+### `isVerified` Validator
+
+This validator will render the component only if the user email is verified. Since it solely uses Firebase Auth, it does not cost anything. A simple example would be:
+
+```typescript
+<AuthorizationZone
+  auth={auth}
+  validator={Validators.isVerified()}
+  onSuccess={() => (
+    <p>This user is verified.</p>
+  )}
+/>
+```
+
+!!! warning
+    If the user is a real anonymous (`null`), then `isVerified` validator will consider it as non-verified (`false`).
+
 ### `every` Validator
 
 This validator is a kind of validator composer and will render the component only if all the subvalidators return `true`.
