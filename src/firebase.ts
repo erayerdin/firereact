@@ -7,6 +7,7 @@
 import { initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
+import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -26,8 +27,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
 export const auth = getAuth(app);
+export const functions = getFunctions(app);
 
 connectFirestoreEmulator(firestore, "127.0.0.1", 8080);
 connectAuthEmulator(auth, "http://127.0.0.1:9099");
+connectFunctionsEmulator(functions, "127.0.0.1", 5001);
 
 export default app;
