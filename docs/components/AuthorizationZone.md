@@ -192,6 +192,64 @@ Only takes positional parameters.
 |---|---|---|---|---|
 | `excludeFirebaseAnon` | `boolean` | Consider Firebase-handled anonymous as *authenticated* rather than *anonymous* | ❌ | `false` |
 
+### `every` Validator
+
+This validator is a kind of validator composer and will render the component only if all the subvalidators return `true`.
+
+This example will render `onSuccess`:
+
+```typescript
+<AuthorizationZone
+  auth={auth}
+  validator={Validators.every([
+    // your own validators or premade validators
+    // can be async as well
+    () => true,
+    () => true,
+  ])}
+  onSuccess={() => (
+    <p>successful</p>
+  )}
+/>
+```
+
+#### Input Parameters
+
+Only takes positional parameters.
+
+ Name | Type | Description | Required | Default Value |
+|---|---|---|---|---|
+| `validators` | An array of `(user: User | null) => Promise<boolean> | boolean` | Returns `true` if all validations pass. | ✅ | - |
+
+### `some` Validator
+
+This validator is a kind of validator composer and will render the component if any of subvalidators return `true`.
+
+This example will render `onSuccess`:
+
+```typescript
+<AuthorizationZone
+  auth={auth}
+  validator={Validators.some([
+    // your own validators or premade validators
+    // can be async as well
+    () => false,
+    () => true,
+  ])}
+  onSuccess={() => (
+    <p>successful</p>
+  )}
+/>
+```
+
+#### Input Parameters
+
+Only takes positional parameters.
+
+ Name | Type | Description | Required | Default Value |
+|---|---|---|---|---|
+| `validators` | An array of `(user: User | null) => Promise<boolean> | boolean` | Returns `true` if any of validations pass. | ✅ | - |
+
 [AuthRefDoc]: https://firebase.google.com/docs/reference/node/firebase.auth.Auth
 [UserRefDoc]: https://firebase.google.com/docs/reference/node/firebase.User
 [onCreateTriggerDoc]: https://firebase.google.com/docs/functions/auth-events#trigger_a_function_on_user_creation
