@@ -14,7 +14,7 @@
     "/dist"
   ],
   "scripts": {
-    "firebase:emulators:run": "firebase emulators:start --only firestore,auth",
+    "firebase:emulators:run": "firebase emulators:start --only firestore,auth,functions",
     "firebase:emulators:download": "concurrently \"firebase setup:emulators:firestore\" \"firebase setup:emulators:storage\" \"firebase setup:emulators:ui\"",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
