@@ -91,6 +91,7 @@ Input parameters for `FirestoreDocument` component is as follows:
 
  - [`Validators.isAuthenticated`](#isauthenticated-validator)
  - [`Validators.isAnonymous`](#isanonymous-validator)
+ - [`Validators.isVerified`](#isverified-validator)
  - [`Validators.every`](#every-validator)
  - [`Validators.some`](#some-validator)
 
