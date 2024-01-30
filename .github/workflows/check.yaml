@@ -31,6 +31,7 @@ jobs:
             http://127.0.0.1:9099
           wait-for: 3m
           log-output-resume: true
+          log-output-if: true
           run: npm run firebase:emulators:run
       - name: "Wait for Firebase Emulators"
         run: sleep 10
