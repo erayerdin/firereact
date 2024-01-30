@@ -59,4 +59,13 @@ export const Validators = {
       const resolved = await Promise.all(tasks);
       return [...vals, ...resolved].every((v) => v);
     },
+  some:
+    (validators: AuthorizationZoneValidator[]) =>
+    async (user: User | null): Promise<boolean> => {
+      const results = validators.map((v) => v(user));
+      const vals = results.filter((v) => typeof v === "boolean");
+      const tasks = results.filter((v) => v instanceof Promise);
+      const resolved = await Promise.all(tasks);
+      return [...vals, ...resolved].some((v) => v);
+    },
 };

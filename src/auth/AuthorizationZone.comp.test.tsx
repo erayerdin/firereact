@@ -285,3 +285,110 @@ describe("Validators.every", () => {
     expect(screen.getByText("failed")).not.toBeUndefined();
   });
 });
+
+describe("Validators.some", () => {
+  it("should return true if all async", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.some([
+          async () => false,
+          async () => false,
+          async () => false,
+          async () => true,
+        ])}
+        onSuccess={() => <div>passed</div>}
+        onFailure={() => <div>failed</div>}
+      />,
+    );
+    await sleep(50);
+    expect(screen.getByText("passed")).not.toBeUndefined();
+  });
+
+  it("should return false if all async", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.some([
+          async () => false,
+          async () => false,
+          async () => false,
+          async () => false,
+        ])}
+        onSuccess={() => <div>passed</div>}
+        onFailure={() => <div>failed</div>}
+      />,
+    );
+    expect(screen.getByText("failed")).not.toBeUndefined();
+  });
+
+  it("should return true if all non-async", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.some([
+          () => false,
+          () => false,
+          () => true,
+          () => true,
+        ])}
+        onSuccess={() => <div>passed</div>}
+        onFailure={() => <div>failed</div>}
+      />,
+    );
+    await sleep(50);
+    expect(screen.getByText("passed")).not.toBeUndefined();
+  });
+
+  it("should return false if all non-async", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.some([
+          () => false,
+          () => false,
+          () => false,
+          () => false,
+        ])}
+        onSuccess={() => <div>passed</div>}
+        onFailure={() => <div>failed</div>}
+      />,
+    );
+    expect(screen.getByText("failed")).not.toBeUndefined();
+  });
+
+  it("should return true if async and non-async", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.some([
+          async () => false,
+          () => true,
+          async () => false,
+          () => false,
+        ])}
+        onSuccess={() => <div>passed</div>}
+        onFailure={() => <div>failed</div>}
+      />,
+    );
+    await sleep(50);
+    expect(screen.getByText("passed")).not.toBeUndefined();
+  });
+
+  it("should return false if async and non-async", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.some([
+          async () => false,
+          () => false,
+          async () => false,
+          () => false,
+        ])}
+        onSuccess={() => <div>passed</div>}
+        onFailure={() => <div>failed</div>}
+      />,
+    );
+    expect(screen.getByText("failed")).not.toBeUndefined();
+  });
+});
