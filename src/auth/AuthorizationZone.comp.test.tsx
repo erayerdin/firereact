@@ -214,4 +214,39 @@ describe("Validators.every", () => {
     );
     expect(screen.getByText("failed")).not.toBeUndefined();
   });
+
+  it("should return true if all non-async", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.every([
+          () => true,
+          () => true,
+          () => true,
+          () => true,
+        ])}
+        onSuccess={() => <div>passed</div>}
+        onFailure={() => <div>failed</div>}
+      />,
+    );
+    await sleep(50);
+    expect(screen.getByText("passed")).not.toBeUndefined();
+  });
+
+  it("should return false if all non-async", async () => {
+    render(
+      <AuthorizationZone
+        auth={auth}
+        validator={Validators.every([
+          () => true,
+          () => true,
+          () => false,
+          () => true,
+        ])}
+        onSuccess={() => <div>passed</div>}
+        onFailure={() => <div>failed</div>}
+      />,
+    );
+    expect(screen.getByText("failed")).not.toBeUndefined();
+  });
 });
