@@ -87,7 +87,15 @@ Input parameters for `FirestoreDocument` component is as follows:
 
 `AuthorizationZone` component has `validator` property, which requires a type that is `(user: User | null) => Promise<boolean> | boolean`. This means it's a function that automatically is provided with an instance of [`User`][UserRefDoc] and might or might not be an async function (can return either `Promise<boolean>` or `boolean`).
 
-You can write your own custom validator or use one of ready-made validators provided by `firereact`.
+`firereact` already provides premade useful validators. Here is an exhaustive list of them:
+
+ - [`Validators.isAuthenticated`](#isauthenticated-validator)
+ - [`Validators.isAnonymous`](#isanonymous-validator)
+ - [`Validators.isVerified`](#isverified-validator)
+ - [`Validators.every`](#every-validator)
+ - [`Validators.some`](#some-validator)
+
+You can also write your own custom validator.
 
 ### Custom Validator
 
@@ -191,6 +199,81 @@ Only takes positional parameters.
  Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
 | `excludeFirebaseAnon` | `boolean` | Consider Firebase-handled anonymous as *authenticated* rather than *anonymous* | ❌ | `false` |
+
+### `isVerified` Validator
+
+This validator will render the component only if the user email is verified. Since it solely uses Firebase Auth, it does not cost anything. A simple example would be:
+
+```typescript
+<AuthorizationZone
+  auth={auth}
+  validator={Validators.isVerified()}
+  onSuccess={() => (
+    <p>This user is verified.</p>
+  )}
+/>
+```
+
+!!! warning
+    If the user is a real anonymous (`null`), then `isVerified` validator will consider it as non-verified (`false`).
+
+### `every` Validator
+
+This validator is a kind of validator composer and will render the component only if all the subvalidators return `true`.
+
+This example will render `onSuccess`:
+
+```typescript
+<AuthorizationZone
+  auth={auth}
+  validator={Validators.every([
+    // your own validators or premade validators
+    // can be async as well
+    () => true,
+    () => true,
+  ])}
+  onSuccess={() => (
+    <p>successful</p>
+  )}
+/>
+```
+
+#### Input Parameters
+
+Only takes positional parameters.
+
+ Name | Type | Description | Required | Default Value |
+|---|---|---|---|---|
+| `validators` | An array of `(user: User | null) => Promise<boolean> | boolean` | Returns `true` if all validations pass. | ✅ | - |
+
+### `some` Validator
+
+This validator is a kind of validator composer and will render the component if any of subvalidators return `true`.
+
+This example will render `onSuccess`:
+
+```typescript
+<AuthorizationZone
+  auth={auth}
+  validator={Validators.some([
+    // your own validators or premade validators
+    // can be async as well
+    () => false,
+    () => true,
+  ])}
+  onSuccess={() => (
+    <p>successful</p>
+  )}
+/>
+```
+
+#### Input Parameters
+
+Only takes positional parameters.
+
+ Name | Type | Description | Required | Default Value |
+|---|---|---|---|---|
+| `validators` | An array of `(user: User | null) => Promise<boolean> | boolean` | Returns `true` if any of validations pass. | ✅ | - |
 
 [AuthRefDoc]: https://firebase.google.com/docs/reference/node/firebase.auth.Auth
 [UserRefDoc]: https://firebase.google.com/docs/reference/node/firebase.User
