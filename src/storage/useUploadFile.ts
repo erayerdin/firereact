@@ -3,4 +3,10 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export const useUploadFile = () => {};
+type UseUploadFile = {
+  state: "ready";
+};
+
+export const useUploadFile = (): UseUploadFile => {
+  return { state: "ready" };
+};
