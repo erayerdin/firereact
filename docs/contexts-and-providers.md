@@ -71,14 +71,14 @@ const firestore = useContext(FirestoreContext);
 
 ### Setting Up for Firebase Auth
 
-Head to your entry point and wrap your app with `FirebaseAuth`:
+Head to your entry point and wrap your app with `FirebaseAuthProvider`:
 
 ```typescript
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <FirebaseAuth auth={auth}>
+    <FirebaseAuthProvider auth={auth}>
       {/** the rest of your app */}
-    </FirebaseAuth>
+    </FirebaseAuthProvider>
   </React.StrictMode>
 )
 ```
