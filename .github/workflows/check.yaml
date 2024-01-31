@@ -23,9 +23,9 @@ jobs:
       - name: "Run Firebase Emulators"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_SECRET_TOKEN }}
-        run: npm run firebase:emulators:run &
-      - name: "Wait for Firebase Emulators"
-        run: sleep 20
+        run: |
+          npm run firebase:emulators:run &
+          sleep 20
       - name: "Test"
         uses: nick-fields/retry@v2
         with:
