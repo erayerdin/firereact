@@ -132,6 +132,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       app={app} {/** optional */}
       firestore={firestore} {/** optional */}
       auth={auth} {/** optional */}
+      functions={functions} {/** optional */}
     >
       {/** the rest of your app */}
     </FirebaseSuiteProvider>
@@ -147,6 +148,7 @@ Now, you can get the instance of any service anywhere in the component tree by s
 const app = useContext(FirebaseAppContext);
 const firestore = useContext(FirestoreContext);
 const auth = useContext(FirebaseAuthContext);
+const functions = useContext(FirebaseFunctionsContext);
 ```
 
 !!! warning
