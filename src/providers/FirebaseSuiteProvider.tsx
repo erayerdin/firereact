@@ -6,7 +6,13 @@
 import { FirebaseApp } from "firebase/app";
 import { Auth } from "firebase/auth";
 import { Firestore } from "firebase/firestore";
-import { FirebaseAuthProvider, FirebaseProvider, FirestoreProvider } from ".";
+import { Functions } from "firebase/functions";
+import {
+  FirebaseAuthProvider,
+  FirebaseFunctionsProvider,
+  FirebaseProvider,
+  FirestoreProvider,
+} from ".";
 import { NodeComponent } from "../types";
 
 type ConditionalWrapProps = {
@@ -24,12 +30,14 @@ type FirebaseSuiteProviderProps = {
   app?: FirebaseApp;
   firestore?: Firestore;
   auth?: Auth;
+  functions?: Functions;
 } & NodeComponent;
 
 export const FirebaseSuiteProvider = ({
   app,
   firestore,
   auth,
+  functions,
   children,
 }: FirebaseSuiteProviderProps) => {
   return (
@@ -49,7 +57,16 @@ export const FirebaseSuiteProvider = ({
             <FirebaseAuthProvider auth={auth!}>{c}</FirebaseAuthProvider>
           )}
         >
-          {children}
+          <ConditionalWrap
+            condition={functions !== undefined}
+            wrap={(c) => (
+              <FirebaseFunctionsProvider functions={functions!}>
+                {c}
+              </FirebaseFunctionsProvider>
+            )}
+          >
+            {children}
+          </ConditionalWrap>
         </ConditionalWrap>
       </ConditionalWrap>
     </ConditionalWrap>
