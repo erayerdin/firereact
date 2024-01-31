@@ -17,7 +17,9 @@ jobs:
           FIREACT_GCLOUD_KEY: ${{ secrets.FIREACT_GCLOUD_SECRET_KEY_CONTENT }}
         run: echo $FIREACT_GCLOUD_KEY > $HOME/gcloud.json
       - name: "Install dependencies"
-        run: npm i
+        run: |
+          npm i
+          cd functions && npm i && cd ..
       - name: "Download Firebase Emulators"
         run: npm run firebase:emulators:download
       - name: "Run Firebase Emulators"
