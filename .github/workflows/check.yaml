@@ -22,7 +22,7 @@ jobs:
         run: npm run firebase:emulators:download
       - name: "Run Firebase Emulators"
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gloud.json
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcloud.json
         uses: JarvusInnovations/background-action@v1
         with:
           wait-on: |
