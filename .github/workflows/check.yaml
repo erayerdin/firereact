@@ -12,14 +12,22 @@ jobs:
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v4
+      - name: "Create Gcloud Auth Key"
+        env:
+          FIREACT_GCLOUD_KEY: ${{ secrets.FIREACT_GCLOUD_SECRET_KEY_CONTENT }}
+        run: echo $FIREACT_GCLOUD_KEY > $HOME/gcloud.json
       - name: "Install dependencies"
-        run: npm i
+        run: |
+          npm i
+          cd functions && npm i && cd ..
       - name: "Download Firebase Emulators"
         run: npm run firebase:emulators:download
       - name: "Run Firebase Emulators"
-        run: npm run firebase:emulators:run &
-      - name: "Wait for Firebase Emulators"
-        run: sleep 10
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SECRET_TOKEN }}
+        run: |
+          npm run firebase:emulators:run &
+          sleep 20
       - name: "Test"
         uses: nick-fields/retry@v2
         with:
