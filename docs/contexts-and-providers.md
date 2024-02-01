@@ -158,6 +158,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       firestore={firestore} {/** optional */}
       auth={auth} {/** optional */}
       functions={functions} {/** optional */}
+      storage={storage} {/** optional */}
     >
       {/** the rest of your app */}
     </FirebaseSuiteProvider>
@@ -174,6 +175,7 @@ const app = useContext(FirebaseAppContext);
 const firestore = useContext(FirestoreContext);
 const auth = useContext(FirebaseAuthContext);
 const functions = useContext(FirebaseFunctionsContext);
+const storage = useContext(FirebaseStorageContext);
 ```
 
 !!! warning
