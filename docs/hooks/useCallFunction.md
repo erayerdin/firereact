@@ -18,6 +18,8 @@ const data = result.data; // response data
 !!! warning
     `useCallFunction` is lazy by default and will not do anything until you use `invoke` function.
 
+You can also check the state of the invocation as such:
+
 ```typescript
 const { state } = useCallFunction({ functions });
 await invoke();

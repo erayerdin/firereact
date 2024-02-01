@@ -1,6 +1,6 @@
 {
   "name": "firereact",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "React hooks, components and utils for Firebase",
   "type": "module",
   "main": "dist/index.cjs.js",
@@ -14,13 +14,10 @@
     "/dist"
   ],
   "scripts": {
-    "firebase:emulators:run": "firebase emulators:start --only functions,firestore,auth",
+    "firebase:emulators:run": "firebase emulators:start --only functions,storage,firestore,auth",
     "firebase:emulators:download": "concurrently \"firebase setup:emulators:firestore\" \"firebase setup:emulators:storage\" \"firebase setup:emulators:ui\"",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:only:hooks": "vitest run hook.test.ts",
-    "test:only:comps": "vitest run comp.test.ts",
-    "test:only:provs": "vitest run prov.test.ts",
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
     "lint:check": "eslint . --ext .ts,.tsx --ignore-path .gitignore",

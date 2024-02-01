@@ -9,8 +9,9 @@ import {
   FirebaseAppContext,
   FirebaseAuthContext,
   FirebaseFunctionsContext,
+  FirebaseStorageContext,
 } from ".";
-import app, { auth, firestore, functions } from "../firebase";
+import app, { auth, firestore, functions, storage } from "../firebase";
 import { FirebaseSuiteProvider } from "./FirebaseSuiteProvider";
 import { FirestoreContext } from "./FirestoreProvider";
 
@@ -19,6 +20,7 @@ const SampleComponent = () => {
   const firestore = useContext(FirestoreContext);
   const auth = useContext(FirebaseAuthContext);
   const functions = useContext(FirebaseFunctionsContext);
+  const storage = useContext(FirebaseStorageContext);
 
   return (
     <>
@@ -26,6 +28,7 @@ const SampleComponent = () => {
       <div>Firestore app name: {firestore?.app.name}</div>
       <div>Auth app name: {auth?.app.name}</div>
       <div>Functions app name: {functions?.app.name}</div>
+      <div>Storage app name: {storage?.app.name}</div>
     </>
   );
 };
@@ -37,6 +40,7 @@ it("suite app instance should be accessible", async () => {
       firestore={firestore}
       auth={auth}
       functions={functions}
+      storage={storage}
     >
       <SampleComponent />
     </FirebaseSuiteProvider>,
@@ -53,5 +57,8 @@ it("suite app instance should be accessible", async () => {
   );
   expect(screen.getByText("Functions app name: [DEFAULT]").innerHTML).toBe(
     "Functions app name: [DEFAULT]",
+  );
+  expect(screen.getByText("Storage app name: [DEFAULT]").innerHTML).toBe(
+    "Storage app name: [DEFAULT]",
   );
 });
