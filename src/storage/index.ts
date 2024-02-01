@@ -6,3 +6,5 @@
 export * from "./useUploadFile";
 
 export * from "./useUploadFileResumable";
+
+export * from "./useDownloadLink";
