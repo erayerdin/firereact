@@ -3,4 +3,19 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export const useUploadFileResumable = () => {};
+import { StorageReference } from "firebase/storage";
+
+type UseUploadFileResumableParams = {
+  reference: StorageReference;
+};
+
+type UseUploadFileResumableState = "ready";
+type UseUploadFileResumable = {
+  state: UseUploadFileResumableState;
+};
+
+export const useUploadFileResumable = ({
+  reference,
+}: UseUploadFileResumableParams): UseUploadFileResumable => {
+  return { state: "ready" };
+};
