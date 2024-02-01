@@ -119,6 +119,31 @@ const functions = useContext(FirebaseFunctionsContext);
 !!! tip
     The type you get from `useContext` is `Functions | undefined`. You can simply use `functions!` (non-null assertion operator) as you guarantee it to be defined when you use `FirebaseFunctionsProvider`.
 
+### Setting Up for Firebase Storage
+
+Head to your entry point and wrap your app with `FirebaseStorageProvider`:
+
+```typescript
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <FirebaseStorageProvider storage={storage}>
+      {/** the rest of your app */}
+    </FirebaseStorageProvider>
+  </React.StrictMode>
+)
+```
+
+`FirebaseStorageProvider` only requires one parameter with signature `storage: FirebaseStorage`.
+
+Now, you can get the instance of your `FirebaseStorage` anywhere in the component tree by simply doing:
+
+```typescript
+const storage = useContext(FirebaseStorageContext);
+```
+
+!!! tip
+    The type you get from `useContext` is `FirebaseStorage | undefined`. You can simply use `functions!` (non-null assertion operator) as you guarantee it to be defined when you use `FirebaseStorageProvider`.
+
 ### Setting Up for Multiple Instances
 
 Sometimes, wrapping your entry point with multiple providers might look ugly. In that case, you can use `FirebaseSuiteProvider`, which lets you selectively choose what types of Firebase services should be injected into your global app context.
@@ -133,6 +158,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       firestore={firestore} {/** optional */}
       auth={auth} {/** optional */}
       functions={functions} {/** optional */}
+      storage={storage} {/** optional */}
     >
       {/** the rest of your app */}
     </FirebaseSuiteProvider>
@@ -149,6 +175,7 @@ const app = useContext(FirebaseAppContext);
 const firestore = useContext(FirestoreContext);
 const auth = useContext(FirebaseAuthContext);
 const functions = useContext(FirebaseFunctionsContext);
+const storage = useContext(FirebaseStorageContext);
 ```
 
 !!! warning

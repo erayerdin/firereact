@@ -7,10 +7,12 @@ import { FirebaseApp } from "firebase/app";
 import { Auth } from "firebase/auth";
 import { Firestore } from "firebase/firestore";
 import { Functions } from "firebase/functions";
+import { FirebaseStorage } from "firebase/storage";
 import {
   FirebaseAuthProvider,
   FirebaseFunctionsProvider,
   FirebaseProvider,
+  FirebaseStorageProvider,
   FirestoreProvider,
 } from ".";
 import { NodeComponent } from "../types";
@@ -31,6 +33,7 @@ type FirebaseSuiteProviderProps = {
   firestore?: Firestore;
   auth?: Auth;
   functions?: Functions;
+  storage?: FirebaseStorage;
 } & NodeComponent;
 
 export const FirebaseSuiteProvider = ({
@@ -38,6 +41,7 @@ export const FirebaseSuiteProvider = ({
   firestore,
   auth,
   functions,
+  storage,
   children,
 }: FirebaseSuiteProviderProps) => {
   return (
@@ -65,7 +69,16 @@ export const FirebaseSuiteProvider = ({
               </FirebaseFunctionsProvider>
             )}
           >
-            {children}
+            <ConditionalWrap
+              condition={storage !== undefined}
+              wrap={(c) => (
+                <FirebaseStorageProvider storage={storage!}>
+                  {c}
+                </FirebaseStorageProvider>
+              )}
+            >
+              {children}
+            </ConditionalWrap>
           </ConditionalWrap>
         </ConditionalWrap>
       </ConditionalWrap>
