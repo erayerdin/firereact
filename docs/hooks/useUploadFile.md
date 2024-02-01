@@ -39,7 +39,7 @@ Input parameters for `useUploadFile` hook is as follows:
 | Name | Type | Description |
 |---|---|---|
 | `state` | `"ready" | "loading" | "done"` | The state of the upload process. |
-| `dispatch` | `(file: File | Blob | Buffer) => Promise<UploadResult>` | A callback to start upload process. |
+| `dispatch` | `(file: File | Blob | Buffer, metadata?: UploadMetadata) => Promise<UploadResult>` | A callback to start upload process. |
 
 [StorageReferenceRefDoc]: https://firebase.google.com/docs/reference/js/storage.storagereference
 [UploadResultRefDoc]: https://firebase.google.com/docs/reference/js/storage.uploadresult
