@@ -13,16 +13,26 @@ const { dispatch } = useUploadFile({ reference });
 const result = await dispatch(file);
 ```
 
+`dispatch` method will return an instance of [`UploadResult`][UploadResultRefDoc].
+
 !!! warning
     `useUploadFile` is lazy by default and will not do anything until you use `dispatch` function.
 
 ```typescript
 const { state } = useUploadFile({ reference });
 await dispatch();
-// `state` is "ready" | "loading" | "done"
+// `state` is "ready" | [number, number] | "done"
 ```
 
-`dispatch` method will return an instance of [`UploadResult`][UploadResultRefDoc].
+Unlike other hooks, `useUploadFile` does not have a `"loading"` state. Instead, it will have `[number, number]` state. The first element represents the transferred bytes while the last one represents the total bytes, so you can use these to reflect it on a kind of progressbar.
+
+If you do not want to use a progressbar but use a spinner-like interface to keep it simple, you can get `"loading"` state as such:
+
+```typescript
+const isUploading = typeof state === "array";
+// will be true if uploading
+// will be false if not
+```
 
 ## Input Parameters
 
