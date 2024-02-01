@@ -15,7 +15,7 @@ type UseUploadFileProps = {
   reference: StorageReference;
 };
 
-type UseUploadFileState = "ready" | "loading" | "done";
+type UseUploadFileState = "ready" | [number, number] | "done";
 type UseUploadFileDispatcher = (
   file: Buffer | File | Blob,
   metadata?: UploadMetadata,
@@ -31,7 +31,6 @@ export const useUploadFile = ({
   const [state, setState] = useState<UseUploadFileState>("ready");
 
   const dispatch: UseUploadFileDispatcher = async (file, metadata) => {
-    setState("loading");
     const result = await uploadBytes(reference, file, metadata);
     setState("done");
     return result;
