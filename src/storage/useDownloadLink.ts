@@ -13,6 +13,7 @@ type UseDownloadLinkParams = {
 type UseDownloadLinkState = "ready" | "loading" | "done";
 type UseDownloadLinkDispatcher = () => Promise<string>;
 type UseDownloadLink = {
+  link: string | undefined;
   state: UseDownloadLinkState;
   dispatch: UseDownloadLinkDispatcher;
 };
@@ -21,13 +22,15 @@ export const useDownloadLink = ({
   reference,
 }: UseDownloadLinkParams): UseDownloadLink => {
   const [state, setState] = useState<UseDownloadLinkState>("ready");
+  const [link, setLink] = useState<string | undefined>(undefined);
 
   const dispatch: UseDownloadLinkDispatcher = async () => {
     setState("loading");
     const url = await getDownloadURL(reference);
     setState("done");
+    setLink(link);
     return url;
   };
 
-  return { state, dispatch };
+  return { state, dispatch, link };
 };
