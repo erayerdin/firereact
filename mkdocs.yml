@@ -57,6 +57,8 @@ nav:
     - auth/delete-user.md
   - Functions:
     - functions/calling-a-function.md
+  - Storage:
+    - storage/uploading-a-file.md
   - Hooks:
     - Firestore:
       - hooks/useDocument.md
@@ -73,6 +75,8 @@ nav:
       - hooks/useDeleteUser.md
     - Functions:
       - hooks/useCallFunction.md
+    - Storage:
+      - hooks/useUploadFile.md
   - Components:
     - Firestore:
       - components/FirestoreDocument.md
