@@ -3,16 +3,18 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { StorageReference } from "firebase/storage";
+import { StorageReference, getDownloadURL } from "firebase/storage";
 import { useState } from "react";
 
 type UseDownloadLinkParams = {
   reference: StorageReference;
 };
 
-type UseDownloadLinkState = "ready";
+type UseDownloadLinkState = "ready" | "loading" | "done";
+type UseDownloadLinkDispatcher = () => Promise<string>;
 type UseDownloadLink = {
   state: UseDownloadLinkState;
+  dispatch: UseDownloadLinkDispatcher;
 };
 
 export const useDownloadLink = ({
@@ -20,5 +22,12 @@ export const useDownloadLink = ({
 }: UseDownloadLinkParams): UseDownloadLink => {
   const [state, setState] = useState<UseDownloadLinkState>("ready");
 
-  return { state };
+  const dispatch: UseDownloadLinkDispatcher = async () => {
+    setState("loading");
+    const url = await getDownloadURL(reference);
+    setState("done");
+    return url;
+  };
+
+  return { state, dispatch };
 };
