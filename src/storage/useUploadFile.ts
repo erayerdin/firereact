@@ -7,7 +7,7 @@ import {
   StorageReference,
   UploadMetadata,
   UploadResult,
-  uploadBytes,
+  uploadBytesResumable,
 } from "firebase/storage";
 import { useState } from "react";
 
@@ -31,7 +31,11 @@ export const useUploadFile = ({
   const [state, setState] = useState<UseUploadFileState>("ready");
 
   const dispatch: UseUploadFileDispatcher = async (file, metadata) => {
-    const result = await uploadBytes(reference, file, metadata);
+    const task = uploadBytesResumable(reference, file, metadata);
+    task.on("state_changed", (snapshot) => {
+      setState([snapshot.bytesTransferred, snapshot.totalBytes]);
+    });
+    const result = await task;
     setState("done");
     return result;
   };
