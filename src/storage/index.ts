@@ -4,3 +4,5 @@
 // https://opensource.org/licenses/MIT
 
 export * from "./useUploadFile";
+
+export * from "./useUploadFileResumable";
