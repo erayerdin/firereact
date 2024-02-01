@@ -4,6 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { StorageReference } from "firebase/storage";
+import { useState } from "react";
 
 type UseDownloadLinkParams = {
   reference: StorageReference;
@@ -17,5 +18,7 @@ type UseDownloadLink = {
 export const useDownloadLink = ({
   reference,
 }: UseDownloadLinkParams): UseDownloadLink => {
-  return { state: "ready" };
+  const [state, setState] = useState<UseDownloadLinkState>("ready");
+
+  return { state };
 };
