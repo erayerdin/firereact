@@ -86,6 +86,8 @@ nav:
     - Auth:
       - components/SignOut.md
       - components/AuthorizationZone.md
+    - Storage:
+      - components/StorageDownloadLink.md
 
 plugins:
   - privacy
