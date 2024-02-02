@@ -3,14 +3,14 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { StorageReference } from "firebase/storage";
+import { StorageReference, getBytes } from "firebase/storage";
 import { useState } from "react";
 
 type UseDownloadBytesParams = {
   reference: StorageReference;
 };
 
-type UseDownloadBytesState = "ready";
+type UseDownloadBytesState = "ready" | "loading" | "done";
 type UseDownloadBytesDispatcher = (
   maxDownloadSizeBytes?: number,
 ) => Promise<ArrayBuffer>;
@@ -25,7 +25,10 @@ export const useDownloadBytes = ({
   const [state, setState] = useState<UseDownloadBytesState>("ready");
 
   const dispatch: UseDownloadBytesDispatcher = async (maxDownloadSizeBytes) => {
-    throw "tbi";
+    setState("loading");
+    const bytes = await getBytes(reference, maxDownloadSizeBytes);
+    setState("done");
+    return bytes;
   };
 
   return { state, dispatch };
