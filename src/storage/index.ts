@@ -10,3 +10,5 @@ export * from "./useUploadFileResumable";
 export * from "./useDownloadLink";
 
 export * from "./StorageDownloadLink";
+
+export * from "./useDownloadBlob";
