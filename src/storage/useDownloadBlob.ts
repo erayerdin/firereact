@@ -4,6 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { StorageReference } from "firebase/storage";
+import { useState } from "react";
 
 type UseDownloadBlobParams = {
   reference: StorageReference;
@@ -19,8 +20,10 @@ type UseDownloadBlob = {
 export const useDownloadBlob = ({
   reference,
 }: UseDownloadBlobParams): UseDownloadBlob => {
+  const [state, setState] = useState<UseDownloadBlobState>("ready");
+
   return {
-    state: "ready",
+    state,
     dispatch: async () => {
       throw "tbi";
     },
