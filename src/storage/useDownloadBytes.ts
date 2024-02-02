@@ -11,8 +11,12 @@ type UseDownloadBytesParams = {
 };
 
 type UseDownloadBytesState = "ready";
+type UseDownloadBytesDispatcher = (
+  maxDownloadSizeBytes?: number,
+) => Promise<ArrayBuffer>;
 type UseDownloadBytes = {
   state: UseDownloadBytesState;
+  dispatch: UseDownloadBytesDispatcher;
 };
 
 export const useDownloadBytes = ({
@@ -20,5 +24,9 @@ export const useDownloadBytes = ({
 }: UseDownloadBytesParams): UseDownloadBytes => {
   const [state, setState] = useState<UseDownloadBytesState>("ready");
 
-  return { state };
+  const dispatch: UseDownloadBytesDispatcher = async (maxDownloadSizeBytes) => {
+    throw "tbi";
+  };
+
+  return { state, dispatch };
 };
