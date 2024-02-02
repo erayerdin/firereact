@@ -2,3 +2,16 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
+
+import { renderHook } from "@testing-library/react";
+import { ref } from "firebase/storage";
+import { useDownloadBytes } from ".";
+import { storage } from "../firebase";
+
+const reference = ref(storage, "files/README.md");
+
+it("initially, useDownloadBytes hook should have ready state", async () => {
+  const { result } = renderHook(() => useDownloadBytes({ reference }));
+  const { state } = result.current;
+  expect(state).toBe("ready");
+});
