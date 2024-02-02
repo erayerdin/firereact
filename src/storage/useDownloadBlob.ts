@@ -23,10 +23,9 @@ export const useDownloadBlob = ({
   const [state, setState] = useState<UseDownloadBlobState>("ready");
   const [blob, setBlob] = useState<Blob | undefined>(undefined);
 
-  return {
-    state,
-    dispatch: async () => {
-      throw "tbi";
-    },
+  const dispatch: UseDownloadBlobDispatcher = async () => {
+    throw "tbi";
   };
+
+  return { state, dispatch };
 };
