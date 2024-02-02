@@ -21,6 +21,7 @@ export const useDownloadBlob = ({
   reference,
 }: UseDownloadBlobParams): UseDownloadBlob => {
   const [state, setState] = useState<UseDownloadBlobState>("ready");
+  const [blob, setBlob] = useState<Blob | undefined>(undefined);
 
   return {
     state,
