@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { StorageReference } from "firebase/storage";
+import { StorageReference, getBlob } from "firebase/storage";
 import { useState } from "react";
 
 type UseDownloadBlobParams = {
@@ -24,7 +24,11 @@ export const useDownloadBlob = ({
   const [blob, setBlob] = useState<Blob | undefined>(undefined);
 
   const dispatch: UseDownloadBlobDispatcher = async () => {
-    throw "tbi";
+    setState("loading");
+    const blob = await getBlob(reference);
+    setState("done");
+    setBlob(blob);
+    return blob;
   };
 
   return { state, dispatch };
