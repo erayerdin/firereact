@@ -13,6 +13,7 @@ type UseDownloadBlobParams = {
 type UseDownloadBlobState = "ready" | "loading" | "done";
 type UseDownloadBlobDispatcher = () => Promise<Blob>;
 type UseDownloadBlob = {
+  blob: Blob | undefined;
   state: UseDownloadBlobState;
   dispatch: UseDownloadBlobDispatcher;
 };
@@ -31,5 +32,5 @@ export const useDownloadBlob = ({
     return blob;
   };
 
-  return { state, dispatch };
+  return { blob, state, dispatch };
 };
