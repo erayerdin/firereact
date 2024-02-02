@@ -11,7 +11,9 @@ type UseDownloadBlobParams = {
 };
 
 type UseDownloadBlobState = "ready" | "loading" | "done";
-type UseDownloadBlobDispatcher = () => Promise<Blob>;
+type UseDownloadBlobDispatcher = (
+  maxDownloadSizeBytes?: number,
+) => Promise<Blob>;
 type UseDownloadBlob = {
   blob: Blob | undefined;
   state: UseDownloadBlobState;
@@ -24,9 +26,9 @@ export const useDownloadBlob = ({
   const [state, setState] = useState<UseDownloadBlobState>("ready");
   const [blob, setBlob] = useState<Blob | undefined>(undefined);
 
-  const dispatch: UseDownloadBlobDispatcher = async () => {
+  const dispatch: UseDownloadBlobDispatcher = async (maxDownloadSizeBytes) => {
     setState("loading");
-    const blob = await getBlob(reference);
+    const blob = await getBlob(reference, maxDownloadSizeBytes);
     setState("done");
     setBlob(blob);
     return blob;
