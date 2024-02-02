@@ -3,6 +3,19 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export const StorageDownloadLink = () => {
+import { StorageReference } from "firebase/storage";
+import { ReactNode } from "react";
+
+type StorageDownloadLinkProps = {
+  reference: StorageReference;
+  onLoading?: () => ReactNode;
+  onDone: (link: string) => ReactNode;
+};
+
+export const StorageDownloadLink = ({
+  reference,
+  onLoading = () => <></>,
+  onDone,
+}: StorageDownloadLinkProps) => {
   return <div>StorageDownloadLink</div>;
 };
