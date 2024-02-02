@@ -4,7 +4,8 @@
 // https://opensource.org/licenses/MIT
 
 import { StorageReference } from "firebase/storage";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
+import { useDownloadLink } from ".";
 
 type StorageDownloadLinkProps = {
   reference: StorageReference;
@@ -17,5 +18,11 @@ export const StorageDownloadLink = ({
   onLoading = () => <></>,
   onDone,
 }: StorageDownloadLinkProps) => {
-  return <div>StorageDownloadLink</div>;
+  const { link, state, dispatch } = useDownloadLink({ reference });
+
+  useEffect(() => {
+    dispatch();
+  }, [dispatch]);
+
+  return state === "done" ? onDone(link!) : onLoading();
 };
