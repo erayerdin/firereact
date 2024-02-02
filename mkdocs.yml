@@ -80,6 +80,7 @@ nav:
       - hooks/useUploadFile.md
       - hooks/useUploadFileResumable.md
       - hooks/useDownloadLink.md
+      - hooks/useDownloadBlob.md
   - Components:
     - Firestore:
       - components/FirestoreDocument.md
