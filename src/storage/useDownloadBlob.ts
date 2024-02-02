@@ -10,7 +10,7 @@ type UseDownloadBlobParams = {
   reference: StorageReference;
 };
 
-type UseDownloadBlobState = "ready";
+type UseDownloadBlobState = "ready" | "loading" | "done";
 type UseDownloadBlobDispatcher = () => Promise<Blob>;
 type UseDownloadBlob = {
   state: UseDownloadBlobState;
