@@ -5,7 +5,7 @@ tags:
 
 # `useUploadFile` Hook
 
-`useUploadFile` hook is used to upload a file to Firebase Storage. A very simple example would be:
+`useUploadFile` hook is used to upload a file to Firebase Storage. It does not listen to the progress, thus, it is good for spinner-like indicators and quite performant. A very simple example would be:
 
 ```typescript
 const reference = ref(storage, "path/to/remote/file.png");

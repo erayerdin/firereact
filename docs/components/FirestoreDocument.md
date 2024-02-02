@@ -79,7 +79,7 @@ Input parameters for `FirestoreDocument` component is as follows:
 | Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
 | `reference` | [`firebase/firestore/DocumentReference`][DocumentReferenceRefDoc] | Reference to a document in Firestore. | ✅ | - |
-| `done` | `(snapshot: DocumentSnapshot) => ReactNode`[^1] | The component to render the process is done. | ✅ | - |
+| `done` | `(snapshot: DocumentSnapshot) => ReactNode`[^1] | The component to render when the process is done. | ✅ | - |
 | `listen` | `boolean` | Whether to listen to realtime changes of the document or not. | ❌ | `false` |
 | `loading` | `() => ReactNode` | The component to render while it's loading. | ❌ | An empty component |
 | `error` | `(error: FirebaseError) => ReactNode`[^2] | The component to render when a Firebase error occurs. | ❌ | An empty component |

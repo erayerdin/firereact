@@ -59,6 +59,7 @@ nav:
     - functions/calling-a-function.md
   - Storage:
     - storage/uploading-a-file.md
+    - storage/downloading-a-file.md
   - Hooks:
     - Firestore:
       - hooks/useDocument.md
@@ -77,12 +78,16 @@ nav:
       - hooks/useCallFunction.md
     - Storage:
       - hooks/useUploadFile.md
+      - hooks/useUploadFileResumable.md
+      - hooks/useDownloadLink.md
   - Components:
     - Firestore:
       - components/FirestoreDocument.md
     - Auth:
       - components/SignOut.md
       - components/AuthorizationZone.md
+    - Storage:
+      - components/StorageDownloadLink.md
 
 plugins:
   - privacy
