@@ -14,3 +14,5 @@ export * from "./StorageDownloadLink";
 export * from "./useDownloadBlob";
 
 export * from "./useDownloadBytes";
+
+export * from "./useDeleteFile";
