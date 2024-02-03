@@ -4,7 +4,8 @@
 // https://opensource.org/licenses/MIT
 
 import { FullMetadata, StorageReference } from "firebase/storage";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
+import { useFileMetadata } from ".";
 
 type StorageMetadataProps = {
   reference: StorageReference;
@@ -17,5 +18,11 @@ export const StorageMetadata = ({
   onLoading = () => <></>,
   onDone,
 }: StorageMetadataProps) => {
-  return <div>StorageMetadata</div>;
+  const { metadata, state, dispatch } = useFileMetadata({ reference });
+
+  useEffect(() => {
+    dispatch();
+  }, [dispatch]);
+
+  return state === "done" ? onDone(metadata!) : onLoading();
 };
