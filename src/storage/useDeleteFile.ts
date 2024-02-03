@@ -10,7 +10,7 @@ type UseDeleteFileParams = {
   reference: StorageReference;
 };
 
-type UseDeleteFileState = "ready";
+type UseDeleteFileState = "ready" | "loading" | "done";
 type UseDeleteFileDispatcher = () => Promise<void>;
 type UseDeleteFile = {
   state: UseDeleteFileState;
