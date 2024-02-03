@@ -10,7 +10,7 @@ tags:
 ```typescript
 const reference = ref(storage, "path/to/remote/file.png");
 const { dispatch } = useDownloadLink({ reference });
-const link = await dispatch(file);
+const link = await dispatch();
 ```
 
 !!! warning
