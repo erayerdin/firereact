@@ -16,3 +16,5 @@ export * from "./useDownloadBlob";
 export * from "./useDownloadBytes";
 
 export * from "./useDeleteFile";
+
+export * from "./useFileMetadata";
