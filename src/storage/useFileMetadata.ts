@@ -10,7 +10,7 @@ type UseFileMetadataParams = {
   reference: StorageReference;
 };
 
-type UseFileMetadataState = "ready";
+type UseFileMetadataState = "ready" | "loading" | "done";
 type UseFileMetadataDispatcher = () => Promise<FullMetadata>;
 type UseFileMetadata = {
   metadata: FullMetadata | undefined;
