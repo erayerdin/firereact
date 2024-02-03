@@ -1,6 +1,6 @@
 {
   "name": "firereact",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "React hooks, components and utils for Firebase",
   "type": "module",
   "main": "dist/index.cjs.js",
@@ -59,6 +59,7 @@
     "happy-dom": "^13.2.0",
     "jsdom": "^23.2.0",
     "prettier": "^3.2.4",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "sleep-sleep": "^1.1.6",
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
