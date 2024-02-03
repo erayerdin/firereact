@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { FullMetadata, StorageReference } from "firebase/storage";
+import { FullMetadata, StorageReference, getMetadata } from "firebase/storage";
 import { useState } from "react";
 
 type UseFileMetadataParams = {
@@ -25,7 +25,11 @@ export const useFileMetadata = ({
   const [metadata, setMetadata] = useState<FullMetadata | undefined>(undefined);
 
   const dispatch: UseFileMetadataDispatcher = async () => {
-    throw "tbi";
+    setState("loading");
+    const metadata = await getMetadata(reference);
+    setState("done");
+    setMetadata(metadata);
+    return metadata;
   };
 
   return { metadata, state, dispatch };
