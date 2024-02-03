@@ -11,8 +11,10 @@ type UseDeleteFileParams = {
 };
 
 type UseDeleteFileState = "ready";
+type UseDeleteFileDispatcher = () => Promise<void>;
 type UseDeleteFile = {
   state: UseDeleteFileState;
+  dispatch: UseDeleteFileDispatcher;
 };
 
 export const useDeleteFile = ({
@@ -20,5 +22,9 @@ export const useDeleteFile = ({
 }: UseDeleteFileParams): UseDeleteFile => {
   const [state, setState] = useState<UseDeleteFileState>("ready");
 
-  return { state };
+  const dispatch: UseDeleteFileDispatcher = async () => {
+    throw "tbi";
+  };
+
+  return { state, dispatch };
 };
