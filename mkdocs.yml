@@ -61,6 +61,7 @@ nav:
     - storage/uploading-a-file.md
     - storage/downloading-a-file.md
     - storage/deleting-a-file.md
+    - storage/getting-metadata-of-a-file.md
   - Hooks:
     - Firestore:
       - hooks/useDocument.md
@@ -84,6 +85,7 @@ nav:
       - hooks/useDownloadBlob.md
       - hooks/useDownloadBytes.md
       - hooks/useDeleteFile.md
+      - hooks/useFileMetadata.md
   - Components:
     - Firestore:
       - components/FirestoreDocument.md
