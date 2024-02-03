@@ -13,6 +13,7 @@ type UseFileMetadataParams = {
 type UseFileMetadataState = "ready";
 type UseFileMetadataDispatcher = () => Promise<FullMetadata>;
 type UseFileMetadata = {
+  metadata: FullMetadata | undefined;
   state: UseFileMetadataState;
   dispatch: UseFileMetadataDispatcher;
 };
@@ -21,10 +22,11 @@ export const useFileMetadata = ({
   reference,
 }: UseFileMetadataParams): UseFileMetadata => {
   const [state, setState] = useState<UseFileMetadataState>("ready");
+  const [metadata, setMetadata] = useState<FullMetadata | undefined>(undefined);
 
   const dispatch: UseFileMetadataDispatcher = async () => {
     throw "tbi";
   };
 
-  return { state, dispatch };
+  return { metadata, state, dispatch };
 };
