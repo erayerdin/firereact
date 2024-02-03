@@ -18,3 +18,5 @@ export * from "./useDownloadBytes";
 export * from "./useDeleteFile";
 
 export * from "./useFileMetadata";
+
+export * from "./StorageMetadata";
