@@ -14,7 +14,7 @@ const fileRef = ref(storage, "path/to/remote/file.png");
 
 <StorageDownloadLink
   reference={fileRef}
-  done={(link) => (
+  onDone={(link) => (
     <a href={link} target="_blank">A Picture of a Cat</a>
   )}
 />
