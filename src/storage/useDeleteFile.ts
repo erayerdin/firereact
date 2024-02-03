@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { StorageReference } from "firebase/storage";
+import { StorageReference, deleteObject } from "firebase/storage";
 import { useState } from "react";
 
 type UseDeleteFileParams = {
@@ -23,7 +23,9 @@ export const useDeleteFile = ({
   const [state, setState] = useState<UseDeleteFileState>("ready");
 
   const dispatch: UseDeleteFileDispatcher = async () => {
-    throw "tbi";
+    setState("loading");
+    await deleteObject(reference);
+    setState("done");
   };
 
   return { state, dispatch };
