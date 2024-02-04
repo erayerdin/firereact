@@ -12,7 +12,19 @@ export default defineConfig({
       formats: ["cjs", "es"], // Specifies the output formats (CommonJS and ES modules).
     },
     rollupOptions: {
-      external: [...Object.keys(peerDependencies)], // Defines external dependencies for Rollup bundling.
+      external: [
+        "@firebase/firestore",
+        "@firebase/auth",
+        "@firebase/util",
+        "@firebase/storage",
+        "@firebase/app",
+        "@firebase/functions",
+        "@firebase/component",
+        "@firebase/logger",
+        "react",
+        "react/jsx-runtime",
+        ...Object.keys(peerDependencies),
+      ], // Defines external dependencies for Rollup bundling.
     },
     sourcemap: true, // Generates source maps for debugging.
     emptyOutDir: true, // Clears the output directory before building.
