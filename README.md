@@ -31,6 +31,16 @@
 
 <p align="center">Firereact is hooks, component and utilities library for Firebase and React.</p>
 
+## Features
+
+ - Very lightweight, ![unpacked size](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.npmjs.org%2Ffirereact%2Flatest&query=%24.dist.unpackedSize&suffix=%20bytes&style=flat-square&label=%20)
+ when unpacked, ![npm min bundle size](https://img.shields.io/bundlephobia/min/firereact?style=flat-square&label=%20) when minified, ![npm minzip bundle size](https://img.shields.io/bundlephobia/minzip/firereact?style=flat-square&label=%20) when minified+gzipped
+ - Supports Auth, Firestore, Functions, Providers and Storage.
+ - Provides hooks such as `useUser` for Auth or `useDocument` for Firestore, which can listen to realtime changes as well
+ - Provides custom components such as `<FirestoreDocument />` or `<StorageDownloadLink />` to keep the logic simple and/or avoid unnecessary rerendering
+ - Provides `Provider`s such as `FirebaseSuiteProvider`, `FirebaseAuthProvider` or `FirestoreProvider` to access Firebase service instances anywhere in the component tree without relying on global variables or prop-drilling
+ - Comprehensive documentation
+
 ## Documentation
 
 To use this library, check out the documentation [here](https://firereact.erayerdin.com/).
