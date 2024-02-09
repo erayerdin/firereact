@@ -10,18 +10,18 @@ import { useDocument } from ".";
 
 type FirestoreDocumentProps = {
   reference: DocumentReference;
-  loading?: () => ReactNode;
-  error?: (error: FirebaseError) => ReactNode;
-  done: (snapshot: DocumentSnapshot) => ReactNode;
+  onLoading?: () => ReactNode;
+  onError?: (error: FirebaseError) => ReactNode;
+  onDone: (snapshot: DocumentSnapshot) => ReactNode;
   listen?: boolean;
 };
 
 export const FirestoreDocument = ({
   reference,
-  loading = () => <></>,
+  onLoading = () => <></>,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  error = (_err) => <></>,
-  done,
+  onError = (_err) => <></>,
+  onDone,
   listen = false,
 }: FirestoreDocumentProps) => {
   const {
@@ -30,5 +30,5 @@ export const FirestoreDocument = ({
     error: err,
   } = useDocument({ reference, options: { listen } });
 
-  return processing ? loading() : err ? error(err) : done(snapshot!);
+  return processing ? onLoading() : err ? onError(err) : onDone(snapshot!);
 };
