@@ -72,7 +72,7 @@ describe("later useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("have a snapshot", async () => {
+  it("should have a snapshot", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
@@ -87,7 +87,7 @@ describe("later useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("have data", async () => {
+  it("should have data", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
@@ -115,7 +115,7 @@ describe("later useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("have no error", async () => {
+  it("should have no error", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
@@ -149,7 +149,7 @@ describe.skip("later listen useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("have no snapshot", async () => {
+  it("should have no snapshot", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
