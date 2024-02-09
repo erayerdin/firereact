@@ -9,13 +9,18 @@ tags:
 
 ```typescript
 const docRef = doc(firestore, "collectionName", "documentId");
-const { loading, snapshot, error } = useDocument(docRef);
+const { loading, snapshot, error } = useDocument({
+  reference: docRef,
+});
 ```
 
 By default, `useDocument` retrieves a document only once. If you need realtime updates, you can set `options.listen` to `true` as below:
 
 ```typescript
-const { loading, snapshot, error } = useDocument(docRef, { listen: true });
+const { loading, snapshot, error } = useDocument({
+  reference: docRef,
+  options: { listen: true },
+});
 ```
 
 ## Input Parameters
