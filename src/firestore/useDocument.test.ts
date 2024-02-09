@@ -87,6 +87,34 @@ describe("later useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
+  it("have data", async () => {
+    // setup
+    await deleteDoc(docRef);
+    await setDoc(docRef, docData);
+    type DocType = {
+      id: string;
+      displayName: string;
+    };
+
+    // test
+    const { result } = renderHook(() =>
+      useDocument({
+        reference: docRef,
+        converter: (snapshot): DocType => ({
+          id: snapshot.id,
+          displayName: snapshot.data()?.displayName,
+        }),
+      }),
+    );
+    await sleep(250);
+    const { data } = result.current;
+    expect(data?.id).not.toBeUndefined();
+    expect(data?.displayName).toBe("Use Document");
+
+    // teardown
+    await deleteDoc(docRef);
+  });
+
   it("have no error", async () => {
     // setup
     await deleteDoc(docRef);
