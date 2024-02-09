@@ -14,7 +14,7 @@ const docRef = doc(firestore, "yourCollection", "docId");
 
 <FirestoreDocument
   reference={docRef}
-  done={(snapshot) => {
+  onDone={(snapshot) => {
     const id = snapshot.id;
     const data = snapshot.data();
 
@@ -32,14 +32,14 @@ You can also define how your loading and error states will look like as such:
 ```typescript
 <FirestoreDocument
   reference={docRef}
-  loading={() => {
+  onLoading={() => {
     return <div>Loading...</div>
   }}
-  error={(error) => {
+  onError={(error) => {
     // error: FirebaseError
     return <div>{error.code}</div>
   }}
-  done={(snapshot) => {
+  onDone={(snapshot) => {
     // return a component when it's done
   }}
 />
@@ -50,9 +50,9 @@ Or, in a shorter syntax:
 ```typescript
 <FirestoreDocument
   reference={docRef}
-  loading={() => (<div>Loading...</div>)}
-  error={(error) => (<div>{error.code}</div>)}
-  done={(snapshot) => {
+  onLoading={() => (<div>Loading...</div>)}
+  onError={(error) => (<div>{error.code}</div>)}
+  onDone={(snapshot) => {
     // return a component when it's done
   }}
 />
@@ -64,9 +64,9 @@ You can also listen to real-time changes in Firestore using `listen`:
 <FirestoreDocument
   reference={docRef}
   listen
-  loading={() => (<div>Loading...</div>)}
-  error={(error) => (<div>{error.code}</div>)}
-  done={(snapshot) => {
+  onLoading={() => (<div>Loading...</div>)}
+  onError={(error) => (<div>{error.code}</div>)}
+  onDone={(snapshot) => {
     // return a component when it's done
   }}
 />
@@ -79,10 +79,10 @@ Input parameters for `FirestoreDocument` component is as follows:
 | Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
 | `reference` | [`firebase/firestore/DocumentReference`][DocumentReferenceRefDoc] | Reference to a document in Firestore. | ✅ | - |
-| `done` | `(snapshot: DocumentSnapshot) => ReactNode`[^1] | The component to render when the process is done. | ✅ | - |
+| `onDone` | `(snapshot: DocumentSnapshot) => ReactNode`[^1] | The component to render when the process is done. | ✅ | - |
 | `listen` | `boolean` | Whether to listen to realtime changes of the document or not. | ❌ | `false` |
-| `loading` | `() => ReactNode` | The component to render while it's loading. | ❌ | An empty component |
-| `error` | `(error: FirebaseError) => ReactNode`[^2] | The component to render when a Firebase error occurs. | ❌ | An empty component |
+| `onLoading` | `() => ReactNode` | The component to render while it's loading. | ❌ | An empty component |
+| `onError` | `(error: FirebaseError) => ReactNode`[^2] | The component to render when a Firebase error occurs. | ❌ | An empty component |
 
 !!! note
     `listen` is `false` by default to prevent unnecessary READ queries from Firestore.
