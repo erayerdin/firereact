@@ -27,12 +27,10 @@ Input parameters for `useDocument` hook is as follows:
 | `reference` | [`firebase/firestore/DocumentReference`][DocumentReferenceRefDoc] | Reference to a document in Firestore. | ✅ | - |
 | `options` | Object | Options for the hook. | ❌ | See the following parameters. |
 | `options.listen` | `boolean` | Whether to listen to realtime changes of the document or not. | ❌ | `false` |
+| `options.listenToMetadataChanges` | `boolean` | Whether to listen to realtime changes of the document as well its metadata. See [here][EventsForMetadataChangesDoc] | ❌ | `false` |
 
 !!! note
     `options.listen` is `false` by default to prevent unnecessary READ queries from Firestore.
-
-!!! warning
-    When `options.listen` is `true`, the change is reflected including the metadata changes on the document. See [this page](https://firebase.google.com/docs/firestore/query-data/listen#events-metadata-changes) to understand `includeMetadataChanges` option in Firestore.
 
 ## Return Type
 
@@ -50,3 +48,4 @@ Input parameters for `useDocument` hook is as follows:
 [DocumentReferenceRefDoc]: https://firebase.google.com/docs/reference/node/firebase.firestore.DocumentReference
 [DocumentSnapshotRefDoc]: https://firebase.google.com/docs/reference/node/firebase.firestore.DocumentSnapshot
 [FirebaseErrorRefDoc]: https://firebase.google.com/docs/reference/node/firebase.FirebaseError
+[EventsForMetadataChangesDoc]: https://firebase.google.com/docs/firestore/query-data/listen#events-metadata-changes

@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 
 type UseDocumentOptions = {
   listen?: boolean;
+  listenToMetadataChanges?: boolean;
 };
 
 type UseDocument = {
@@ -24,8 +25,9 @@ type UseDocument = {
 
 export const useDocument = (
   reference: DocumentReference,
-  { listen }: UseDocumentOptions = {
+  { listen, listenToMetadataChanges }: UseDocumentOptions = {
     listen: true,
+    listenToMetadataChanges: false,
   },
 ): UseDocument => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -37,7 +39,7 @@ export const useDocument = (
     if (listen) {
       const unsub = onSnapshot(
         reference,
-        { includeMetadataChanges: true },
+        { includeMetadataChanges: listenToMetadataChanges },
         (snap) => {
           setSnapshot(snap);
           setLoading(false);
@@ -63,7 +65,7 @@ export const useDocument = (
         })
         .finally(() => setLoading(false));
     }
-  }, [listen, reference]);
+  }, [reference, listen, listenToMetadataChanges]);
 
   return { loading, snapshot, error };
 };
