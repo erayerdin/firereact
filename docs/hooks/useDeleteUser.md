@@ -13,6 +13,9 @@ await dispatch();
 ```
 
 !!! warning
+    `useDeleteUser`, as mentioned, can only delete the currently signed-in user from the client side. Due to security reasons, you cannot delete any other user. If you want to delete another user, use Firebase Auth from Firebase Console or Firebase Functions.
+
+!!! warning
     `useDeleteUser` is lazy by default and will not do anything until you use `dispatch` function.
 
 You can also get the state[^unauthorized] of deletion process.
