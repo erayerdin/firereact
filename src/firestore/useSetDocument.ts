@@ -12,10 +12,6 @@ import {
 } from "firebase/firestore";
 import { useState } from "react";
 
-type UseSetDocumentParams = {
-  reference: DocumentReference;
-};
-
 type UseSetDocumentState = "ready" | "loading" | "done";
 type UseSetDocumentDispatcher = (
   data: DocumentData,
@@ -28,9 +24,9 @@ type UseSetDocument = {
   error?: FirebaseError;
 };
 
-export const useSetDocument = ({
-  reference,
-}: UseSetDocumentParams): UseSetDocument => {
+export const useSetDocument = (
+  reference: DocumentReference,
+): UseSetDocument => {
   const [state, setState] = useState<UseSetDocumentState>("ready");
   const [error, setError] = useState<FirebaseError | undefined>();
 
