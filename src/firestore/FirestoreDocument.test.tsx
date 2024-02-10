@@ -21,8 +21,8 @@ describe("initially FirestoreDocument component", () => {
     render(
       <FirestoreDocument
         reference={docRef}
-        loading={() => <div>Loading...</div>}
-        done={() => <></>}
+        onLoading={() => <div>Loading...</div>}
+        onDone={() => <></>}
       />,
     );
     expect(screen.getByText("Loading...").innerHTML).toBe("Loading...");
@@ -39,8 +39,8 @@ describe("later FirestoreDocument component", () => {
     render(
       <FirestoreDocument
         reference={docRef}
-        loading={() => <div>Loading...</div>}
-        done={(snapshot) => <div>{snapshot.data()?.displayName}</div>}
+        onLoading={() => <div>Loading...</div>}
+        onDone={(snapshot) => <div>{snapshot.data()?.displayName}</div>}
       />,
     );
     await sleep(250);

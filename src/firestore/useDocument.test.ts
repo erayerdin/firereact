@@ -19,7 +19,7 @@ describe("initially useDocument hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useDocument({ reference: docRef }));
+    const { result } = renderHook(() => useDocument(docRef));
     const { loading } = result.current;
     expect(loading).toBe(true);
 
@@ -33,7 +33,7 @@ describe("initially useDocument hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useDocument({ reference: docRef }));
+    const { result } = renderHook(() => useDocument(docRef));
     const { snapshot } = result.current;
     expect(snapshot).toBeUndefined();
 
@@ -47,7 +47,7 @@ describe("initially useDocument hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useDocument({ reference: docRef }));
+    const { result } = renderHook(() => useDocument(docRef));
     const { error } = result.current;
     expect(error).toBeUndefined();
 
@@ -63,7 +63,7 @@ describe("later useDocument hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useDocument({ reference: docRef }));
+    const { result } = renderHook(() => useDocument(docRef));
     await sleep(250);
     const { loading } = result.current;
     expect(loading).toBe(false);
@@ -78,7 +78,7 @@ describe("later useDocument hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useDocument({ reference: docRef }));
+    const { result } = renderHook(() => useDocument(docRef));
     await sleep(250);
     const { snapshot } = result.current;
     expect(snapshot?.data()).toStrictEqual(docData);
@@ -93,7 +93,7 @@ describe("later useDocument hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useDocument({ reference: docRef }));
+    const { result } = renderHook(() => useDocument(docRef));
     await sleep(250);
     const { error } = result.current;
     expect(error).toBeUndefined();
@@ -110,9 +110,7 @@ describe.skip("later listen useDocument hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() =>
-      useDocument({ reference: docRef, options: { listen: true } }),
-    );
+    const { result } = renderHook(() => useDocument(docRef, { listen: true }));
     await sleep(250);
     const { loading } = result.current;
     expect(loading).toBe(false);
@@ -127,9 +125,7 @@ describe.skip("later listen useDocument hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() =>
-      useDocument({ reference: docRef, options: { listen: true } }),
-    );
+    const { result } = renderHook(() => useDocument(docRef, { listen: true }));
     await sleep(250);
     const { snapshot } = result.current;
     expect(snapshot?.data()).toStrictEqual(docData);

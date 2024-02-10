@@ -12,10 +12,6 @@ import {
 } from "firebase/firestore";
 import { useState } from "react";
 
-type UseAddDocumentParams = {
-  reference: CollectionReference;
-};
-
 type UseAddDocumentState = "ready" | "loading" | "done";
 type UseAddDocumentDispatcher = (
   data: DocumentData,
@@ -28,9 +24,9 @@ type UseAddDocument = {
   error?: FirebaseError;
 };
 
-export const useAddDocument = ({
-  reference,
-}: UseAddDocumentParams): UseAddDocument => {
+export const useAddDocument = (
+  reference: CollectionReference,
+): UseAddDocument => {
   const [state, setState] = useState<UseAddDocumentState>("ready");
   const [refer, setRefer] = useState<DocumentReference | undefined>();
   const [error, setError] = useState<FirebaseError | undefined>();

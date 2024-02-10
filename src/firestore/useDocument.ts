@@ -12,11 +12,9 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-type UseDocumentParams = {
-  reference: DocumentReference;
-  options?: {
-    listen: boolean;
-  };
+type UseDocumentOptions = {
+  listen?: boolean;
+  listenToMetadataChanges?: boolean;
 };
 
 type UseDocument = {
@@ -25,12 +23,13 @@ type UseDocument = {
   error?: FirebaseError;
 };
 
-export const useDocument = ({
-  reference,
-  options = { listen: false },
-}: UseDocumentParams): UseDocument => {
-  const { listen } = options;
-
+export const useDocument = (
+  reference: DocumentReference,
+  { listen, listenToMetadataChanges }: UseDocumentOptions = {
+    listen: true,
+    listenToMetadataChanges: false,
+  },
+): UseDocument => {
   const [loading, setLoading] = useState<boolean>(true);
   const [snapshot, setSnapshot] = useState<DocumentSnapshot | undefined>();
   const [error, setError] = useState<FirebaseError | undefined>();
@@ -40,7 +39,7 @@ export const useDocument = ({
     if (listen) {
       const unsub = onSnapshot(
         reference,
-        { includeMetadataChanges: true },
+        { includeMetadataChanges: listenToMetadataChanges },
         (snap) => {
           setSnapshot(snap);
           setLoading(false);
@@ -66,7 +65,7 @@ export const useDocument = ({
         })
         .finally(() => setLoading(false));
     }
-  }, [listen, reference]);
+  }, [reference, listen, listenToMetadataChanges]);
 
   return { loading, snapshot, error };
 };
