@@ -7,10 +7,6 @@ import { ActionCodeSettings, Auth, sendEmailVerification } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useUser } from ".";
 
-type UseSendEmailVerificationParams = {
-  auth: Auth;
-};
-
 type UseSendEmailVerificationState = "ready" | "loading" | "done" | "anonymous";
 type UseSendEmailVerificationDispatcher = (
   actionCodeSettings?: ActionCodeSettings,
@@ -20,9 +16,9 @@ type UseSendEmailVerification = {
   dispatch: UseSendEmailVerificationDispatcher;
 };
 
-export const useSendEmailVerification = ({
-  auth,
-}: UseSendEmailVerificationParams): UseSendEmailVerification => {
+export const useSendEmailVerification = (
+  auth: Auth,
+): UseSendEmailVerification => {
   const user = useUser({ auth });
   const [state, setState] = useState<UseSendEmailVerificationState>("ready");
 
