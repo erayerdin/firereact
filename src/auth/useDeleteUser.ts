@@ -7,8 +7,7 @@ import { Auth, deleteUser, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useUser } from ".";
 
-type UseDeleteUserParams = {
-  auth: Auth;
+type UseDeleteUserOptions = {
   includeFirebaseAnon?: boolean;
 };
 
@@ -19,10 +18,12 @@ type UseDeleteUser = {
   dispatch: UseDeleteUserDispatcher;
 };
 
-export const useDeleteUser = ({
-  auth,
-  includeFirebaseAnon = false,
-}: UseDeleteUserParams): UseDeleteUser => {
+export const useDeleteUser = (
+  auth: Auth,
+  { includeFirebaseAnon }: UseDeleteUserOptions = {
+    includeFirebaseAnon: false,
+  },
+): UseDeleteUser => {
   const user = useUser({ auth });
   const [state, setState] = useState<UseDeleteUserState>("ready");
 
