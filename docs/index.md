@@ -49,6 +49,7 @@
 ## Features
 
  - Very lightweight, ![unpacked size](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.npmjs.org%2Ffirereact%2Flatest&query=%24.dist.unpackedSize&suffix=%20bytes&style=flat-square&label=%20)
+ - Supports ![Javascript](https://img.shields.io/badge/__-javascript-f7df1e?style=flat-square&logo=javascript&logoColor=white) and ![Typescript](https://img.shields.io/badge/__-typescript-3178c6?style=flat-square&logo=javascript&logoColor=white)
  when unpacked, ![npm min bundle size](https://img.shields.io/bundlephobia/min/firereact?style=flat-square&label=%20) when minified, ![npm minzip bundle size](https://img.shields.io/bundlephobia/minzip/firereact?style=flat-square&label=%20) when minified+gzipped
  - Supports Auth, Firestore, Functions, Providers and Storage.
  - Provides hooks such as `useUser` for Auth or `useDocument` for Firestore, which can listen to realtime changes as well
