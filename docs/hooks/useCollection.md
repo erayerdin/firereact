@@ -33,7 +33,7 @@ Input parameters for `useCollection` hook is as follows:
 | Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
 | `reference` | [`firebase/firestore/CollectionRefference`][CollectionReferenceRefDoc] or [`firebase/firestore/Query`][QueryRefDoc] | Reference to a collection in Firestore or a query. | ✅ | - |
-| `options` | Object | Options for the hook. | ❌ | `{ listen: false }` |
+| `options` | Object | Options for the hook. | ❌ | See below. |
 | `options.listen` | `boolean` | Whether to listen to realtime changes of the document or not. | ❌ | `false` |
 
 !!! note

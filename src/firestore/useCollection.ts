@@ -7,11 +7,8 @@ import { FirebaseError } from "firebase/app";
 import { Query, QuerySnapshot, getDocs, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-type UseCollectionParams = {
-  query: Query;
-  options?: {
-    listen: boolean;
-  };
+type UseCollectionOptions = {
+  listen?: boolean;
 };
 
 type UseCollection = {
@@ -20,12 +17,12 @@ type UseCollection = {
   error?: FirebaseError;
 };
 
-export const useCollection = ({
-  query,
-  options = { listen: false },
-}: UseCollectionParams): UseCollection => {
-  const { listen } = options;
-
+export const useCollection = (
+  query: Query,
+  { listen }: UseCollectionOptions = {
+    listen: false,
+  },
+): UseCollection => {
   const [loading, setLoading] = useState<boolean>(true);
   const [snapshot, setSnapshot] = useState<QuerySnapshot | undefined>();
   const [error, setError] = useState<FirebaseError | undefined>();

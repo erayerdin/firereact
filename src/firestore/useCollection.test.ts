@@ -20,7 +20,7 @@ describe("initially useCollection hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useCollection({ query: colRef }));
+    const { result } = renderHook(() => useCollection(colRef));
     const { loading } = result.current;
     expect(loading).toBe(true);
 
@@ -34,7 +34,7 @@ describe("initially useCollection hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useCollection({ query: colRef }));
+    const { result } = renderHook(() => useCollection(colRef));
     const { snapshot } = result.current;
     expect(snapshot).toBeUndefined();
 
@@ -48,7 +48,7 @@ describe("initially useCollection hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useCollection({ query: colRef }));
+    const { result } = renderHook(() => useCollection(colRef));
     const { error } = result.current;
     expect(error).toBeUndefined();
 
@@ -64,7 +64,7 @@ describe("later useCollection hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useCollection({ query: colRef }));
+    const { result } = renderHook(() => useCollection(colRef));
     await sleep(250);
     const { loading } = result.current;
     expect(loading).toBe(false);
@@ -79,7 +79,7 @@ describe("later useCollection hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useCollection({ query: colRef }));
+    const { result } = renderHook(() => useCollection(colRef));
     await sleep(250);
     const { snapshot } = result.current;
     expect(snapshot?.size).toBeGreaterThan(0);
@@ -94,7 +94,7 @@ describe("later useCollection hook", () => {
     await setDoc(docRef, docData);
 
     // test
-    const { result } = renderHook(() => useCollection({ query: colRef }));
+    const { result } = renderHook(() => useCollection(colRef));
     await sleep(250);
     const { error } = result.current;
     expect(error).toBeUndefined();
