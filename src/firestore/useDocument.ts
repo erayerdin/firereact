@@ -12,39 +12,28 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-type UseDocumentParams<O> = {
+type UseDocumentParams = {
   reference: DocumentReference;
-  converter?: (snapshot: DocumentSnapshot) => O | undefined;
   options?: {
     listen: boolean;
   };
 };
 
-type UseDocument<O> = {
+type UseDocument = {
   loading: boolean;
   snapshot?: DocumentSnapshot;
-  data?: O;
   error?: FirebaseError;
 };
 
-export const useDocument = <O>({
+export const useDocument = ({
   reference,
-  converter = () => undefined,
   options = { listen: false },
-}: UseDocumentParams<O>): UseDocument<O> => {
+}: UseDocumentParams): UseDocument => {
   const { listen } = options;
 
   const [loading, setLoading] = useState<boolean>(true);
   const [snapshot, setSnapshot] = useState<DocumentSnapshot | undefined>();
-  const [data, setData] = useState<O | undefined>();
   const [error, setError] = useState<FirebaseError | undefined>();
-
-  useEffect(() => {
-    if (snapshot) {
-      const d = converter(snapshot);
-      setData(d);
-    }
-  }, [snapshot, converter]);
 
   useEffect(() => {
     setLoading(true);
@@ -79,5 +68,5 @@ export const useDocument = <O>({
     }
   }, [listen, reference]);
 
-  return { loading, snapshot, data, error };
+  return { loading, snapshot, error };
 };

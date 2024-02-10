@@ -72,7 +72,7 @@ describe("later useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("should have a snapshot", async () => {
+  it("have a snapshot", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
@@ -87,35 +87,7 @@ describe("later useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("should have data", async () => {
-    // setup
-    await deleteDoc(docRef);
-    await setDoc(docRef, docData);
-    type DocType = {
-      id: string;
-      displayName: string;
-    };
-
-    // test
-    const { result } = renderHook(() =>
-      useDocument({
-        reference: docRef,
-        converter: (snapshot): DocType => ({
-          id: snapshot.id,
-          displayName: snapshot.data()?.displayName,
-        }),
-      }),
-    );
-    await sleep(250);
-    const { data } = result.current;
-    expect(data?.id).not.toBeUndefined();
-    expect(data?.displayName).toBe("Use Document");
-
-    // teardown
-    await deleteDoc(docRef);
-  });
-
-  it("should have no error", async () => {
+  it("have no error", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
@@ -149,7 +121,7 @@ describe.skip("later listen useDocument hook", () => {
     await deleteDoc(docRef);
   });
 
-  it("should have no snapshot", async () => {
+  it("have no snapshot", async () => {
     // setup
     await deleteDoc(docRef);
     await setDoc(docRef, docData);
