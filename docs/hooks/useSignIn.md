@@ -8,7 +8,7 @@ tags:
 `useSignIn` hook is used to sign in a user. A very simple example would be:
 
 ```typescript
-const { dispatch } = useSignIn({ auth });
+const { dispatch } = useSignIn(auth);
 await dispatch({
   type: "classic",
   email,
@@ -22,7 +22,7 @@ await dispatch({
 You can also get the state[^unauthorized] of sign-in process.
 
 ```typescript
-const { state, dispatch } = useSignIn({ auth });
+const { state, dispatch } = useSignIn(auth);
 await dispatch({
   type: "classic",
   email,
@@ -37,7 +37,7 @@ await dispatch({
 `dispatch` function will return an instance of [`UserCredential` | `undefined`][UserCredentialDocRef].
 
 ```typescript
-const { state, dispatch } = useSignIn({ auth });
+const { state, dispatch } = useSignIn(auth);
 const credential = await dispatch({
   type: "classic",
   email,
@@ -116,7 +116,7 @@ You will need `actionCodeSettings`. You can see [this section in Firebase Auth d
 If `type` is something else, you need to provide an implementation of `AuthProvider`. An example for Google sign-in looks as such:
 
 ```typescript
-const { state, dispatch } = useSignIn({ auth });
+const { state, dispatch } = useSignIn(auth);
 const provider = new GoogleAuthProvider();
 await dispatch({
   type: "google",
