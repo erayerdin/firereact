@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 
 type UseCollectionOptions = {
   listen?: boolean;
+  listenToMetadataChanges?: boolean;
 };
 
 type UseCollection = {
@@ -19,8 +20,9 @@ type UseCollection = {
 
 export const useCollection = (
   query: Query,
-  { listen }: UseCollectionOptions = {
+  { listen, listenToMetadataChanges }: UseCollectionOptions = {
     listen: false,
+    listenToMetadataChanges: false,
   },
 ): UseCollection => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -33,7 +35,7 @@ export const useCollection = (
     if (listen) {
       const unsub = onSnapshot(
         query,
-        { includeMetadataChanges: true },
+        { includeMetadataChanges: listenToMetadataChanges },
         (snap) => {
           setSnapshot(snap);
           setLoading(false);
@@ -59,7 +61,7 @@ export const useCollection = (
         })
         .finally(() => setLoading(false));
     }
-  }, [listen, query]);
+  }, [query, listen, listenToMetadataChanges]);
 
   return { loading, snapshot, error };
 };

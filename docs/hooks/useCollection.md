@@ -35,12 +35,10 @@ Input parameters for `useCollection` hook is as follows:
 | `reference` | [`firebase/firestore/CollectionRefference`][CollectionReferenceRefDoc] or [`firebase/firestore/Query`][QueryRefDoc] | Reference to a collection in Firestore or a query. | ✅ | - |
 | `options` | Object | Options for the hook. | ❌ | See below. |
 | `options.listen` | `boolean` | Whether to listen to realtime changes of the document or not. | ❌ | `false` |
+| `options.listenToMetadataChanges` | `boolean` | Whether to listen to realtime changes of the document or not as well as its metadata. See [this][EventsForMetadataChangesDoc]. | ❌ | `false` |
 
 !!! note
     `options.listen` is `false` by default to prevent unnecessary READ queries from Firestore.
-
-!!! warning
-    When `options.listen` is `true`, the change is reflected including the metadata changes on the document. See [this page](https://firebase.google.com/docs/firestore/query-data/listen#events-metadata-changes) to understand `includeMetadataChanges` option in Firestore.
 
 ## Return Type
 
@@ -59,3 +57,4 @@ Input parameters for `useCollection` hook is as follows:
 [QueryRefDoc]: https://firebase.google.com/docs/reference/node/firebase.database.Query
 [QuerySnapshotRefDoc]: https://firebase.google.com/docs/reference/node/firebase.firestore.QuerySnapshot
 [FirebaseErrorRefDoc]: https://firebase.google.com/docs/reference/node/firebase.FirebaseError
+[EventsForMetadataChangesDoc]: https://firebase.google.com/docs/firestore/query-data/listen#events-metadata-changes
