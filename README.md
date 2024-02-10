@@ -31,6 +31,14 @@
 
 <p align="center">Firereact is hooks, component and utilities library for Firebase and React.</p>
 
+## Installation
+
+You can install the package via NPM:
+
+```bash
+npm i firereact
+```
+
 ## Features
 
  - Very lightweight, ![unpacked size](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.npmjs.org%2Ffirereact%2Flatest&query=%24.dist.unpackedSize&suffix=%20bytes&style=flat-square&label=%20)
