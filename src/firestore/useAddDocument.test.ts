@@ -19,7 +19,7 @@ describe("initially useAddDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { result } = renderHook(() => useAddDocument(colRef));
     const { state } = result.current;
     expect(state).toBe("ready");
 
@@ -32,7 +32,7 @@ describe("initially useAddDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { result } = renderHook(() => useAddDocument(colRef));
     const { reference } = result.current;
     expect(reference).toBeUndefined();
 
@@ -45,7 +45,7 @@ describe("initially useAddDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { result } = renderHook(() => useAddDocument(colRef));
     const { error } = result.current;
     expect(error).toBeUndefined();
 
@@ -61,7 +61,7 @@ describe("as soon as dispatched, useAddDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { result } = renderHook(() => useAddDocument(colRef));
     const { dispatch } = result.current;
     dispatch(docData);
     await sleep(30);
@@ -80,7 +80,7 @@ describe("after dispatched, useAddDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { result } = renderHook(() => useAddDocument(colRef));
     const { dispatch } = result.current;
     await dispatch(docData);
     await sleep(250);
@@ -97,7 +97,7 @@ describe("after dispatched, useAddDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { result } = renderHook(() => useAddDocument(colRef));
     const { dispatch } = result.current;
     await dispatch(docData);
     await sleep(250);
@@ -114,7 +114,7 @@ describe("after dispatched, useAddDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() => useAddDocument({ reference: colRef }));
+    const { result } = renderHook(() => useAddDocument(colRef));
     const { dispatch } = result.current;
     await dispatch(docData);
     await sleep(250);
