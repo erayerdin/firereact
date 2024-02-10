@@ -28,7 +28,7 @@ export const FirestoreDocument = ({
     loading: processing,
     snapshot,
     error: err,
-  } = useDocument({ reference, options: { listen } });
+  } = useDocument(reference, { listen });
 
   return processing ? onLoading() : err ? onError(err) : onDone(snapshot!);
 };
