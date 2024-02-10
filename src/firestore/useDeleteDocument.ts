@@ -7,10 +7,6 @@ import { FirebaseError } from "firebase/app";
 import { DocumentReference, deleteDoc } from "firebase/firestore";
 import { useState } from "react";
 
-type UseSetDocumentParams = {
-  reference: DocumentReference;
-};
-
 type UseSetDocumentState = "ready" | "loading" | "done";
 type UseSetDocumentDispatcher = () => Promise<void>;
 
@@ -20,9 +16,9 @@ type UseSetDocument = {
   error?: FirebaseError;
 };
 
-export const useDeleteDocument = ({
-  reference,
-}: UseSetDocumentParams): UseSetDocument => {
+export const useDeleteDocument = (
+  reference: DocumentReference,
+): UseSetDocument => {
   const [state, setState] = useState<UseSetDocumentState>("ready");
   const [error, setError] = useState<FirebaseError | undefined>();
 

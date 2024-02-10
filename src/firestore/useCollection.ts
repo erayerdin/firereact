@@ -7,11 +7,9 @@ import { FirebaseError } from "firebase/app";
 import { Query, QuerySnapshot, getDocs, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-type UseCollectionParams = {
-  query: Query;
-  options?: {
-    listen: boolean;
-  };
+type UseCollectionOptions = {
+  listen?: boolean;
+  listenToMetadataChanges?: boolean;
 };
 
 type UseCollection = {
@@ -20,12 +18,13 @@ type UseCollection = {
   error?: FirebaseError;
 };
 
-export const useCollection = ({
-  query,
-  options = { listen: false },
-}: UseCollectionParams): UseCollection => {
-  const { listen } = options;
-
+export const useCollection = (
+  query: Query,
+  { listen, listenToMetadataChanges }: UseCollectionOptions = {
+    listen: false,
+    listenToMetadataChanges: false,
+  },
+): UseCollection => {
   const [loading, setLoading] = useState<boolean>(true);
   const [snapshot, setSnapshot] = useState<QuerySnapshot | undefined>();
   const [error, setError] = useState<FirebaseError | undefined>();
@@ -36,7 +35,7 @@ export const useCollection = ({
     if (listen) {
       const unsub = onSnapshot(
         query,
-        { includeMetadataChanges: true },
+        { includeMetadataChanges: listenToMetadataChanges },
         (snap) => {
           setSnapshot(snap);
           setLoading(false);
@@ -62,7 +61,7 @@ export const useCollection = ({
         })
         .finally(() => setLoading(false));
     }
-  }, [listen, query]);
+  }, [query, listen, listenToMetadataChanges]);
 
   return { loading, snapshot, error };
 };

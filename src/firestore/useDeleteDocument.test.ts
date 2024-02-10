@@ -17,9 +17,7 @@ describe("initially useDeleteDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() =>
-      useDeleteDocument({ reference: docRef }),
-    );
+    const { result } = renderHook(() => useDeleteDocument(docRef));
     const { state } = result.current;
     expect(state).toBe("ready");
 
@@ -32,9 +30,7 @@ describe("initially useDeleteDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() =>
-      useDeleteDocument({ reference: docRef }),
-    );
+    const { result } = renderHook(() => useDeleteDocument(docRef));
     const { error } = result.current;
     expect(error).toBeUndefined();
 
@@ -50,9 +46,7 @@ describe("as soon as dispatched, useDeleteDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() =>
-      useDeleteDocument({ reference: docRef }),
-    );
+    const { result } = renderHook(() => useDeleteDocument(docRef));
     const { dispatch } = result.current;
     dispatch();
     await sleep(30);
@@ -71,9 +65,7 @@ describe("after dispatched, useDeleteDocument hook", () => {
     await deleteDoc(docRef);
 
     // test
-    const { result } = renderHook(() =>
-      useDeleteDocument({ reference: docRef }),
-    );
+    const { result } = renderHook(() => useDeleteDocument(docRef));
     const { dispatch } = result.current;
     await dispatch();
     await sleep(250);
@@ -90,9 +82,7 @@ describe("after dispatched, useDeleteDocument hook", () => {
     await setDoc(docRef, { displayName: "Use Delete Document" });
 
     // test
-    const { result } = renderHook(() =>
-      useDeleteDocument({ reference: docRef }),
-    );
+    const { result } = renderHook(() => useDeleteDocument(docRef));
     const { dispatch } = result.current;
     await dispatch();
     await sleep(250);
