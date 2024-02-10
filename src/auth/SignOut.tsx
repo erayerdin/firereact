@@ -22,7 +22,7 @@ export const SignOut = ({
   onLoading,
   onAnonymous,
 }: SignOutProps) => {
-  const { state, dispatch } = useSignOut({ auth, onlyRealAnon });
+  const { state, dispatch } = useSignOut(auth, { onlyRealAnon });
 
   switch (state) {
     case "ready":

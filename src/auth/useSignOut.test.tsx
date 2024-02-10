@@ -37,13 +37,15 @@ describe("when authed, useSignOut hook", () => {
   });
 
   it("should have ready state", () => {
-    const { result } = renderHook(() => useSignOut({ auth }));
+    const { result } = renderHook(() => useSignOut(auth));
     expect(result.current.state).toBe("ready");
   });
-
+  {
+    auth;
+  }
   it("should sign out", async () => {
     render(<SampleComponent />);
-    const { result } = renderHook(() => useSignOut({ auth }));
+    const { result } = renderHook(() => useSignOut(auth));
     const { dispatch } = result.current;
     await dispatch();
     await sleep(100);
@@ -52,7 +54,7 @@ describe("when authed, useSignOut hook", () => {
 
   it("should have anonymous state after dispatched", async () => {
     render(<SampleComponent />);
-    const { result } = renderHook(() => useSignOut({ auth }));
+    const { result } = renderHook(() => useSignOut(auth));
     const { dispatch } = result.current;
     await dispatch();
     await sleep(100);
@@ -63,7 +65,7 @@ describe("when authed, useSignOut hook", () => {
 
 describe("when real anon, useSignOut hook", () => {
   it("should have anonymous state", () => {
-    const { result } = renderHook(() => useSignOut({ auth }));
+    const { result } = renderHook(() => useSignOut(auth));
     expect(result.current.state).toBe("anonymous");
   });
 });
@@ -74,13 +76,13 @@ describe("when anon, useSignOut hook", () => {
   });
 
   it("should have anonymous state", () => {
-    const { result } = renderHook(() => useSignOut({ auth }));
+    const { result } = renderHook(() => useSignOut(auth));
     expect(result.current.state).toBe("anonymous");
   });
 
   it("should have ready state if onlyRealAnon", () => {
     const { result } = renderHook(() =>
-      useSignOut({ auth, onlyRealAnon: true }),
+      useSignOut(auth, { onlyRealAnon: true }),
     );
     expect(result.current.state).toBe("ready");
   });

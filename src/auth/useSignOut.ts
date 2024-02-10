@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { useUser } from ".";
 
 type UseSignOutParams = {
-  auth: Auth;
   onError?: (error: Error) => void;
   onlyRealAnon?: boolean;
 };
@@ -21,11 +20,13 @@ type UseSignOut = {
   dispatch: UseSignOutDispatcher;
 };
 
-export const useSignOut = ({
-  auth,
-  onError,
-  onlyRealAnon = false,
-}: UseSignOutParams): UseSignOut => {
+export const useSignOut = (
+  auth: Auth,
+  { onError, onlyRealAnon }: UseSignOutParams = {
+    onError: () => {},
+    onlyRealAnon: false,
+  },
+): UseSignOut => {
   const [state, setState] = useState<UseSignOutState>("ready");
   const user = useUser({ auth, onError });
 
