@@ -8,6 +8,7 @@
   "scripts": {
     "start": "remotion studio",
     "build": "remotion render LogoComp out/logo.mp4",
+    "build:gif": "remotion render LogoComp out/logo.gif --codec=gif",
     "upgrade": "remotion upgrade",
     "test": "eslint src --ext ts,tsx,js,jsx && tsc"
   },
