@@ -24,7 +24,8 @@
     "formatter:run": "prettier --no-error-on-unmatched-pattern --write src/**/*.ts src/**/*.tsx *.ts *.tsx",
     "formatter:check": "prettier --no-error-on-unmatched-pattern --check src/**/*.ts src/**/*.tsx *.ts *.tsx",
     "build": "tsc --project tsconfig.build.json && vite build",
-    "remotion:logo:start": "cd remotion/logo && npm start"
+    "remotion:logo:start": "cd remotion/logo && npm start",
+    "remotion:logo:build": "cd remotion/logo && npm run build:gif"
   },
   "repository": {
     "type": "git",
