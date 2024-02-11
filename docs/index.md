@@ -1,7 +1,7 @@
 # Introduction
 
 <center>
-<img src="assets/brand/logo.svg" width="256" alt="firereact logo" />
+<img src="assets/brand/logo.gif" width="256" alt="firereact logo" />
 </center>
 
 <h1 align="center">Firereact</h1>
