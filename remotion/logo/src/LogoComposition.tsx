@@ -1,4 +1,4 @@
-import { AbsoluteFill, Img, interpolate, interpolateColors, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, Easing, Img, interpolate, interpolateColors, useCurrentFrame } from 'remotion';
 import { z } from 'zod';
 import logoCore from '../assets/core-firebase.svg';
 import LogoFrame from './parts/LogoFrame';
@@ -7,7 +7,14 @@ export const logoCompSchema = z.object({});
 
 export const LogoComposition: React.FC<z.infer<typeof logoCompSchema>> = ({}) => {
 	const frame = useCurrentFrame();
-	const degrees = interpolate(frame, [0, 30], [0, 60]);
+	const degrees = interpolate(
+		frame,
+		[0, 30],
+		[0, 60],
+		{
+			easing: Easing.elastic(1),
+		},
+	);
 
 	const colors = {
 		dark: '#f57c00ff',
