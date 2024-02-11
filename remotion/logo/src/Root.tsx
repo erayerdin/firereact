@@ -9,7 +9,7 @@ export const RemotionRoot: React.FC = () => {
 				id="LogoComp"
 				component={LogoComposition}
 				durationInFrames={60*12}
-				fps={60}
+				fps={30}
 				width={512}
 				height={512}
 				schema={logoCompSchema}
