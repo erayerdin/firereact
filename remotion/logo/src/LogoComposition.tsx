@@ -7,7 +7,7 @@ export const logoCompSchema = z.object({});
 
 export const LogoComposition: React.FC<z.infer<typeof logoCompSchema>> = ({}) => {
 	const frame = useCurrentFrame();
-	const degrees = interpolate(frame, [0, 120], [0, 30]);
+	const degrees = interpolate(frame, [0, 30], [0, 60]);
 
 	return (
 		<AbsoluteFill className="bg-transparent items-center justify-center">
