@@ -61,6 +61,7 @@
     "happy-dom": "^13.2.0",
     "jsdom": "^23.2.0",
     "prettier": "^3.2.4",
+    "pretty-quick": "^4.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "sleep-sleep": "^1.1.6",
     "typescript": "^5.3.3",
