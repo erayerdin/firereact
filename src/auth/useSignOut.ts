@@ -28,7 +28,7 @@ export const useSignOut = (
   },
 ): UseSignOut => {
   const [state, setState] = useState<UseSignOutState>("ready");
-  const user = useUser({ auth, onError });
+  const user = useUser(auth, { onError });
 
   useEffect(() => {
     // if (!user || user.isAnonymous) {
