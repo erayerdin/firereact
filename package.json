@@ -73,5 +73,8 @@
   "peerDependencies": {
     "firebase": "^10.7.2",
     "react": "^18.2.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx pretty-quick --staged"
   }
 }
