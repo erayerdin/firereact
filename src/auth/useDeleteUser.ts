@@ -24,7 +24,7 @@ export const useDeleteUser = (
     includeFirebaseAnon: false,
   },
 ): UseDeleteUser => {
-  const user = useUser({ auth });
+  const user = useUser(auth);
   const [state, setState] = useState<UseDeleteUserState>("ready");
 
   useEffect(() => {

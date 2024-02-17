@@ -19,7 +19,7 @@ type UseSendEmailVerification = {
 export const useSendEmailVerification = (
   auth: Auth,
 ): UseSendEmailVerification => {
-  const user = useUser({ auth });
+  const user = useUser(auth);
   const [state, setState] = useState<UseSendEmailVerificationState>("ready");
 
   useEffect(() => {

@@ -4,16 +4,16 @@
 // https://opensource.org/licenses/MIT
 
 import {
-  Auth,
-  FacebookAuthProvider,
-  GithubAuthProvider,
-  GoogleAuthProvider,
-  OAuthProvider,
-  TwitterAuthProvider,
-  UserCredential,
-  sendSignInLinkToEmail,
-  signInWithEmailAndPassword,
-  signInWithPopup,
+    Auth,
+    FacebookAuthProvider,
+    GithubAuthProvider,
+    GoogleAuthProvider,
+    OAuthProvider,
+    TwitterAuthProvider,
+    UserCredential,
+    sendSignInLinkToEmail,
+    signInWithEmailAndPassword,
+    signInWithPopup,
 } from "@firebase/auth";
 import { ActionCodeSettings } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -59,7 +59,7 @@ type UseSignIn = {
 };
 
 export const useSignIn = (auth: Auth): UseSignIn => {
-  const user = useUser({ auth });
+  const user = useUser(auth);
   const [state, setState] = useState<UseSignInState>("ready");
 
   useEffect(() => {

@@ -5,11 +5,11 @@
 
 import { render, renderHook, screen } from "@testing-library/react";
 import {
-  UserCredential,
-  createUserWithEmailAndPassword,
-  deleteUser,
-  signInAnonymously,
-  signInWithEmailAndPassword,
+    UserCredential,
+    createUserWithEmailAndPassword,
+    deleteUser,
+    signInAnonymously,
+    signInWithEmailAndPassword,
 } from "firebase/auth";
 import sleep from "sleep-sleep";
 import { useSignOut, useUser } from ".";
@@ -19,7 +19,7 @@ const email = "usesignout@hook.com" as const;
 const password = "111111";
 
 const SampleComponent = () => {
-  const user = useUser({ auth });
+  const user = useUser(auth);
 
   return <div>{user ? "authed" : "real anon"}</div>;
 };

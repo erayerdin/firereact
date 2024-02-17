@@ -22,7 +22,7 @@ type UseSignUp = {
 };
 
 export const useSignUp = (auth: Auth): UseSignUp => {
-  const user = useUser({ auth });
+  const user = useUser(auth);
   const [state, setState] = useState<UseSignUpState>("ready");
 
   useEffect(() => {
