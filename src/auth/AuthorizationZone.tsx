@@ -24,7 +24,7 @@ export const AuthorizationZone = ({
   onSuccess,
   onFailure = () => <></>,
 }: AuthorizationZoneProps) => {
-  const user = useUser({ auth });
+  const user = useUser(auth);
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {

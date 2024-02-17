@@ -19,10 +19,6 @@ import { ActionCodeSettings } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useUser } from ".";
 
-type UseSignInParams = {
-  auth: Auth;
-};
-
 type UseSignInState = "ready" | "loading" | "authenticated" | "awaiting";
 type UseSignInDispatcher = (
   params:
@@ -62,8 +58,8 @@ type UseSignIn = {
   dispatch: UseSignInDispatcher;
 };
 
-export const useSignIn = ({ auth }: UseSignInParams): UseSignIn => {
-  const user = useUser({ auth });
+export const useSignIn = (auth: Auth): UseSignIn => {
+  const user = useUser(auth);
   const [state, setState] = useState<UseSignInState>("ready");
 
   useEffect(() => {

@@ -8,7 +8,7 @@ tags:
 `useSignOut` hook is used to sign out currently signed-in user. A very simple example would be:
 
 ```typescript
-const { dispatch } = useSignOut({ auth });
+const { dispatch } = useSignOut(auth);
 await dispatch();
 ```
 
@@ -18,7 +18,7 @@ await dispatch();
 You can also get the state[^done] of sign-out process.
 
 ```typescript
-const { state, dispatch } = useSignOut({ auth });
+const { state, dispatch } = useSignOut(auth);
 await dispatch();
 // `state` is "ready" | "loading" | "anonymous"
 ```
@@ -33,7 +33,7 @@ const onError = (error: Error) => {
   // do something with error
 }
 
-const { dispatch } = useSignOut({ auth, onError });
+const { dispatch } = useSignOut(auth, { onError });
 await dispatch();
 ```
 
@@ -47,12 +47,12 @@ In Firebase, there are two types of anonymity: Firebase-handled anonymous users 
 const onlyRealAnon = true;
 
 // User is really anonymous
-const { state } = useSignOut({ auth }); // state: "anonymous"
-const { state } = useSignOut({ auth, onlyRealAnon }); // state: "anonymous"
+const { state } = useSignOut(auth); // state: "anonymous"
+const { state } = useSignOut(auth, { onlyRealAnon }); // state: "anonymous"
 
 // User is anonymous in Firebase Auth records
-const { state } = useSignOut({ auth }); // state: "anonymous"
-const { state } = useSignOut({ auth, onlyRealAnon }); // state: "ready"
+const { state } = useSignOut(auth); // state: "anonymous"
+const { state } = useSignOut(auth, { onlyRealAnon }); // state: "ready"
 ```
 
 ## Input Parameters
@@ -62,8 +62,9 @@ Input parameters for `useSignOut` hook is as follows:
 | Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
 | `auth` | [`firebase/auth/Auth`][AuthRefDoc] | Reference to the Firebase Auth service instance. | ✅ | - |
-| `onError` | `(error: Error) => void` | A function to handle errors. | ❌ | Throws error. |
-| `onlyRealAnon` | `boolean` | Consider the user anonymous only if they are `null`. | ❌ | `false` (which also considers Firebase-handled anonymous users) |
+| `options` | `Object` | Options for the process. | ❌ | See below. |
+| `options.onError` | `(error: Error) => void` | A function to handle errors. | ❌ | Throws error. |
+| `options.onlyRealAnon` | `boolean` | Consider the user anonymous only if they are `null`. | ❌ | `false` (which also considers Firebase-handled anonymous users) |
 
 ## Return Type
 

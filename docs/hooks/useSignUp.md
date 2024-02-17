@@ -8,7 +8,7 @@ tags:
 `useSignUp` hook is used to create a user with email and password. A very simple example would be:
 
 ```typescript
-const { dispatch } = useSignUp({ auth });
+const { dispatch } = useSignUp(auth);
 await dispatch(email, password);
 ```
 
@@ -18,7 +18,7 @@ await dispatch(email, password);
 You can also get the state[^unauthorized] of sign-up process.
 
 ```typescript
-const { state, dispatch } = useSignUp({ auth });
+const { state, dispatch } = useSignUp(auth);
 await dispatch();
 // `state` is "ready" | "loading" | "authenticated"
 ```

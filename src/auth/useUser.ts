@@ -12,17 +12,18 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 
-type UseAuthStateParams = {
-  auth: Auth;
+type UseAuthStateOptions = {
   onError?: ErrorFn;
   onChange?: CompleteFn;
 };
 
-export const useUser = ({
-  auth,
-  onError,
-  onChange,
-}: UseAuthStateParams): User | null => {
+export const useUser = (
+  auth: Auth,
+  { onError, onChange }: UseAuthStateOptions = {
+    onError: () => {},
+    onChange: () => {},
+  },
+): User | null => {
   const [user, setUser] = useState<User | null>(auth.currentUser);
 
   useEffect(() => {

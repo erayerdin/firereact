@@ -8,7 +8,7 @@ tags:
 `useSendEmailVerification` hook is used to send email verification to a user. A very simple example would be:
 
 ```typescript
-const { dispatch } = useSendEmailVerification({ auth });
+const { dispatch } = useSendEmailVerification(auth);
 await dispatch();
 ```
 
@@ -18,7 +18,7 @@ await dispatch();
 You can also get the state of the process.
 
 ```typescript
-const { state, dispatch } = useSendEmailVerification({ auth });
+const { state, dispatch } = useSendEmailVerification(auth);
 await dispatch();
 // `state` is "ready" | "loading" | "done" | "anonymous"
 ```
