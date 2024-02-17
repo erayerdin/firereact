@@ -4,16 +4,16 @@
 // https://opensource.org/licenses/MIT
 
 import {
-    Auth,
-    FacebookAuthProvider,
-    GithubAuthProvider,
-    GoogleAuthProvider,
-    OAuthProvider,
-    TwitterAuthProvider,
-    UserCredential,
-    sendSignInLinkToEmail,
-    signInWithEmailAndPassword,
-    signInWithPopup,
+  Auth,
+  FacebookAuthProvider,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  OAuthProvider,
+  TwitterAuthProvider,
+  UserCredential,
+  sendSignInLinkToEmail,
+  signInWithEmailAndPassword,
+  signInWithPopup,
 } from "@firebase/auth";
 import { ActionCodeSettings } from "firebase/auth";
 import { useEffect, useState } from "react";
