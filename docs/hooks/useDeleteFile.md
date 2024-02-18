@@ -9,7 +9,7 @@ tags:
 
 ```typescript
 const reference = ref(storage, "path/to/remote/file.png");
-const { dispatch } = useDeleteFile({ reference });
+const { dispatch } = useDeleteFile(reference);
 await dispatch();
 ```
 
@@ -19,7 +19,7 @@ await dispatch();
 You can also listen to the state:
 
 ```typescript
-const { state } = useDeleteFile({ reference });
+const { state } = useDeleteFile(reference);
 await dispatch();
 // `state` is "ready" | "loading" | "done"
 ```
