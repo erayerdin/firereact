@@ -18,7 +18,7 @@ export const StorageMetadata = ({
   onLoading = () => <></>,
   onDone,
 }: StorageMetadataProps) => {
-  const { metadata, state, dispatch } = useFileMetadata({ reference });
+  const { metadata, state, dispatch } = useFileMetadata(reference);
 
   useEffect(() => {
     dispatch();

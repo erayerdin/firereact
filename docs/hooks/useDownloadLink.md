@@ -9,7 +9,7 @@ tags:
 
 ```typescript
 const reference = ref(storage, "path/to/remote/file.png");
-const { dispatch } = useDownloadLink({ reference });
+const { dispatch } = useDownloadLink(reference);
 const link = await dispatch();
 ```
 
@@ -19,7 +19,7 @@ const link = await dispatch();
 You can get the state of the progress with this example.
 
 ```typescript
-const { state } = useDownloadLink({ reference });
+const { state } = useDownloadLink(reference);
 const link = await dispatch();
 // `state` is "ready" | "loading" | "done"
 ```
@@ -27,7 +27,7 @@ const link = await dispatch();
 `dispatch` method will return an instance of `string`, but additionally, you can also listen to `link` from `useDownloadLink` hook as well:
 
 ```typescript
-const { link } = useDownloadLink({ reference });
+const { link } = useDownloadLink(reference);
 // link updates and rerenders when the state is `"done"`
 // until then, it is `undefined`
 await dispatch();

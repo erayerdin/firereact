@@ -18,7 +18,7 @@ export const StorageDownloadLink = ({
   onLoading = () => <></>,
   onDone,
 }: StorageDownloadLinkProps) => {
-  const { link, state, dispatch } = useDownloadLink({ reference });
+  const { link, state, dispatch } = useDownloadLink(reference);
 
   useEffect(() => {
     dispatch();

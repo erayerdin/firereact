@@ -9,7 +9,7 @@ tags:
 
 ```typescript
 const reference = ref(storage, "path/to/remote/file.png");
-const { dispatch } = useFileMetadata({ reference });
+const { dispatch } = useFileMetadata(reference);
 const metadata = await dispatch();
 ```
 
@@ -19,7 +19,7 @@ const metadata = await dispatch();
 You can get the state of the progress with this example.
 
 ```typescript
-const { state } = useFileMetadata({ reference });
+const { state } = useFileMetadata(reference);
 const metadata = await dispatch();
 // `state` is "ready" | "loading" | "done"
 ```
@@ -27,7 +27,7 @@ const metadata = await dispatch();
 `dispatch` method will return an instance of [`FullMetadata`][FullMetadataRefDoc], but additionally, you can also listen to `metadata` from `useFileMetadata` hook as well:
 
 ```typescript
-const { metadata } = useFileMetadata({ reference });
+const { metadata } = useFileMetadata(reference);
 // metadata updates and rerenders when the state is `"done"`
 // until then, it is `undefined`
 await dispatch();

@@ -9,7 +9,7 @@ tags:
 
 ```typescript
 const reference = ref(storage, "path/to/remote/file.png");
-const { dispatch } = useUploadFileResumable({ reference });
+const { dispatch } = useUploadFileResumable(reference);
 const result = await dispatch(file);
 ```
 
@@ -19,7 +19,7 @@ const result = await dispatch(file);
 You can listen to its state shown in example below:
 
 ```typescript
-const { state } = useUploadFileResumable({ reference });
+const { state } = useUploadFileResumable(reference);
 await dispatch();
 // `state` is "ready" | [number, number] | "done"
 

@@ -9,7 +9,7 @@ tags:
 
 ```typescript
 const reference = ref(storage, "path/to/remote/file.png");
-const { dispatch } = useUploadFile({ reference });
+const { dispatch } = useUploadFile(reference);
 const result = await dispatch(file);
 ```
 
@@ -17,7 +17,7 @@ const result = await dispatch(file);
     `useUploadFile` is lazy by default and will not do anything until you use `dispatch` function.
 
 ```typescript
-const { state } = useUploadFile({ reference });
+const { state } = useUploadFile(reference);
 await dispatch();
 // `state` is "ready" | "loading" | "done"
 ```

@@ -1,9 +1,13 @@
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
+import { configDefaults } from "vitest/config";
 import { peerDependencies } from "./package.json";
 
 export default defineConfig({
+  test: {
+    exclude: [...configDefaults.exclude, "functions", "remotion", "dist"],
+  },
   build: {
     lib: {
       entry: "./src/index.ts", // Specifies the entry point for building the library.

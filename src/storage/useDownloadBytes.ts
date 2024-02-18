@@ -6,10 +6,6 @@
 import { StorageReference, getBytes } from "firebase/storage";
 import { useState } from "react";
 
-type UseDownloadBytesParams = {
-  reference: StorageReference;
-};
-
 type UseDownloadBytesState = "ready" | "loading" | "done";
 type UseDownloadBytesDispatcher = (
   maxDownloadSizeBytes?: number,
@@ -20,9 +16,9 @@ type UseDownloadBytes = {
   dispatch: UseDownloadBytesDispatcher;
 };
 
-export const useDownloadBytes = ({
-  reference,
-}: UseDownloadBytesParams): UseDownloadBytes => {
+export const useDownloadBytes = (
+  reference: StorageReference,
+): UseDownloadBytes => {
   const [state, setState] = useState<UseDownloadBytesState>("ready");
   const [bytes, setBytes] = useState<ArrayBuffer | undefined>(undefined);
 
