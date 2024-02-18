@@ -11,10 +11,6 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 
-type UseUploadFileProps = {
-  reference: StorageReference;
-};
-
 type UseUploadFileState = "ready" | "loading" | "done";
 type UseUploadFileDispatcher = (
   file: Buffer | File | Blob,
@@ -25,9 +21,7 @@ type UseUploadFile = {
   dispatch: UseUploadFileDispatcher;
 };
 
-export const useUploadFile = ({
-  reference,
-}: UseUploadFileProps): UseUploadFile => {
+export const useUploadFile = (reference: StorageReference): UseUploadFile => {
   const [state, setState] = useState<UseUploadFileState>("ready");
 
   const dispatch: UseUploadFileDispatcher = async (file, metadata) => {
