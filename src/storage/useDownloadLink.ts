@@ -6,10 +6,6 @@
 import { StorageReference, getDownloadURL } from "firebase/storage";
 import { useState } from "react";
 
-type UseDownloadLinkParams = {
-  reference: StorageReference;
-};
-
 type UseDownloadLinkState = "ready" | "loading" | "done";
 type UseDownloadLinkDispatcher = () => Promise<string>;
 type UseDownloadLink = {
@@ -18,9 +14,9 @@ type UseDownloadLink = {
   dispatch: UseDownloadLinkDispatcher;
 };
 
-export const useDownloadLink = ({
-  reference,
-}: UseDownloadLinkParams): UseDownloadLink => {
+export const useDownloadLink = (
+  reference: StorageReference,
+): UseDownloadLink => {
   const [state, setState] = useState<UseDownloadLinkState>("ready");
   const [link, setLink] = useState<string | undefined>(undefined);
 
