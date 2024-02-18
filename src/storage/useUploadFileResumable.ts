@@ -11,10 +11,6 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 
-type UseUploadFileResumableParams = {
-  reference: StorageReference;
-};
-
 type UseUploadFileResumableState = "ready" | [number, number] | "done";
 type UseUploadFileResumableDispatcher = (
   file: Buffer | File | Blob,
@@ -25,9 +21,9 @@ type UseUploadFileResumable = {
   dispatch: UseUploadFileResumableDispatcher;
 };
 
-export const useUploadFileResumable = ({
-  reference,
-}: UseUploadFileResumableParams): UseUploadFileResumable => {
+export const useUploadFileResumable = (
+  reference: StorageReference,
+): UseUploadFileResumable => {
   const [state, setState] = useState<UseUploadFileResumableState>("ready");
 
   const dispatch: UseUploadFileResumableDispatcher = async (file, metadata) => {
