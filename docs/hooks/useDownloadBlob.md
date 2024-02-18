@@ -11,7 +11,7 @@ A very simple example would be:
 
 ```typescript
 const reference = ref(storage, "path/to/remote/file.png");
-const { dispatch } = useDownloadBlob({ reference });
+const { dispatch } = useDownloadBlob(reference);
 const blob = await dispatch(file);
 ```
 
@@ -21,7 +21,7 @@ const blob = await dispatch(file);
 You can get the state of the progress with this example.
 
 ```typescript
-const { state } = useDownloadBlob({ reference });
+const { state } = useDownloadBlob(reference);
 const blob = await dispatch();
 // `state` is "ready" | "loading" | "done"
 ```
@@ -29,7 +29,7 @@ const blob = await dispatch();
 `dispatch` method will return an instance of [`Blob`][BlobDoc], but additionally, you can also listen to [`Blob`][BlobDoc] from `useDownloadBlob` hook as well:
 
 ```typescript
-const { blob } = useDownloadBlob({ reference });
+const { blob } = useDownloadBlob(reference);
 // blob updates and rerenders when the state is `"done"`
 // until then, it is `undefined`
 await dispatch();
