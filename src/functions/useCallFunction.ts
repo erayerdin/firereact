@@ -11,8 +11,7 @@ import {
 } from "firebase/functions";
 import { useState } from "react";
 
-type UseCallFunctionParams = {
-  functions: Functions;
+type UseCallFunctionOptions = {
   name: string;
   httpsCallableOptions?: HttpsCallableOptions;
 };
@@ -26,11 +25,10 @@ type UseCallFunction = {
   invoke: UseCallFunctionInvoker;
 };
 
-export const useCallFunction = ({
-  functions,
-  name,
-  httpsCallableOptions,
-}: UseCallFunctionParams): UseCallFunction => {
+export const useCallFunction = (
+  functions: Functions,
+  { name, httpsCallableOptions }: UseCallFunctionOptions,
+): UseCallFunction => {
   const [state, setState] = useState<UseCallFunctionState>("ready");
 
   const invoke: UseCallFunctionInvoker = async (data: unknown = {}) => {
