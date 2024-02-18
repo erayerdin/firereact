@@ -6,10 +6,6 @@
 import { StorageReference, deleteObject } from "firebase/storage";
 import { useState } from "react";
 
-type UseDeleteFileParams = {
-  reference: StorageReference;
-};
-
 type UseDeleteFileState = "ready" | "loading" | "done";
 type UseDeleteFileDispatcher = () => Promise<void>;
 type UseDeleteFile = {
@@ -17,9 +13,7 @@ type UseDeleteFile = {
   dispatch: UseDeleteFileDispatcher;
 };
 
-export const useDeleteFile = ({
-  reference,
-}: UseDeleteFileParams): UseDeleteFile => {
+export const useDeleteFile = (reference: StorageReference): UseDeleteFile => {
   const [state, setState] = useState<UseDeleteFileState>("ready");
 
   const dispatch: UseDeleteFileDispatcher = async () => {
