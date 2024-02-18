@@ -6,10 +6,6 @@
 import { FullMetadata, StorageReference, getMetadata } from "firebase/storage";
 import { useState } from "react";
 
-type UseFileMetadataParams = {
-  reference: StorageReference;
-};
-
 type UseFileMetadataState = "ready" | "loading" | "done";
 type UseFileMetadataDispatcher = () => Promise<FullMetadata>;
 type UseFileMetadata = {
@@ -18,9 +14,9 @@ type UseFileMetadata = {
   dispatch: UseFileMetadataDispatcher;
 };
 
-export const useFileMetadata = ({
-  reference,
-}: UseFileMetadataParams): UseFileMetadata => {
+export const useFileMetadata = (
+  reference: StorageReference,
+): UseFileMetadata => {
   const [state, setState] = useState<UseFileMetadataState>("ready");
   const [metadata, setMetadata] = useState<FullMetadata | undefined>(undefined);
 
