@@ -8,7 +8,7 @@ tags:
 `useCallFunction` hook is used to invoke a function in Firebase Functions. A very simple example would be:
 
 ```typescript
-const { invoke } = useCallFunction({ functions, name: "yourFunctionName" });
+const { invoke } = useCallFunction(functions, { name: "yourFunctionName" });
 const result = await invoke({
   // ... request data to send ...
 });
@@ -35,8 +35,9 @@ Input parameters for `useCallFunction` hook is as follows:
 | Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
 | `functions` | [`firebase/functions/Functions`][FunctionsRefDoc] | Reference to the Firebase Functions service instance. | ✅ | - |
-| `name` | `string` | The name of the function to be called. | ✅ | - |
-| `httpsCallableOptions` | [`firebase/functions/HttpsCallableOptions`][HttpsCallableOptionsRefDoc] | The options for callable. | ❌ | `undefined` |
+| `options` | `Object` | Options for the process. | ✅ | See below. |
+| `options.name` | `string` | The name of the function to be called. | ✅ | - |
+| `options.httpsCallableOptions` | [`firebase/functions/HttpsCallableOptions`][HttpsCallableOptionsRefDoc] | The options for callable. | ❌ | `undefined` |
 
 ## Return Type
 
