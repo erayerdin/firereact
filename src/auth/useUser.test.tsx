@@ -18,7 +18,7 @@ import { useUser } from "./useUser";
 
 describe("when real anon, useUser hook", () => {
   const RealAnonUserComponent = () => {
-    const user = useUser({ auth });
+    const user = useUser(auth);
     return <div>{user ? "not real anon detected" : "real anon detected"}</div>;
   };
 
@@ -34,7 +34,7 @@ describe("when real anon, useUser hook", () => {
 
 describe("when anon, useUser", () => {
   const AnonUserComponent = () => {
-    const user = useUser({ auth });
+    const user = useUser(auth);
     return (
       <div>{user?.isAnonymous ? "anon detected" : "non anon detected"}</div>
     );
@@ -60,7 +60,7 @@ describe("when anon, useUser", () => {
 
 describe("when authed, useUser", () => {
   const AuthedUserComponent = () => {
-    const user = useUser({ auth });
+    const user = useUser(auth);
     return <div>{user?.email}</div>;
   };
 

@@ -8,7 +8,7 @@ tags:
 `useUser` hook is used to get the currently signed-in user. A very simple example would be:
 
 ```typescript
-const user = useUser({ auth });
+const user = useUser(auth);
 ```
 
 !!! warning
@@ -35,8 +35,9 @@ Input parameters for `useUser` hook is as follows:
 | Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
 | `auth` | [`firebase/auth/Auth`][AuthRefDoc] | Reference to the Firebase Auth service instance. | ✅ | - |
-| `onError` | `(error: Error) => void` or `undefined` | A function to handle errors. | ❌ | `undefined` |
-| `onChange` | `() => void` or `undefined` | A function to run after state changes. | ❌ | `undefined` |
+| `options` | `Object` | Options for the process. | ❌ | See below. |
+| `options.onError` | `(error: Error) => void` or `undefined` | A function to handle errors. | ❌ | `undefined` |
+| `options.onChange` | `() => void` or `undefined` | A function to run after state changes. | ❌ | `undefined` |
 
 ## Return Type
 

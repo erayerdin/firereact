@@ -41,7 +41,7 @@ describe("when authed, useSignUp hook", () => {
   });
 
   it("should have authenticated state", async () => {
-    const { result } = renderHook(() => useSignUp({ auth }));
+    const { result } = renderHook(() => useSignUp(auth));
     const { state } = result.current;
     expect(state).toBe("authenticated");
   });
@@ -49,13 +49,13 @@ describe("when authed, useSignUp hook", () => {
 
 describe("when real anon, useSignUp hook", () => {
   it("should have ready state", async () => {
-    const { result } = renderHook(() => useSignUp({ auth }));
+    const { result } = renderHook(() => useSignUp(auth));
     const { state } = result.current;
     expect(state).toBe("ready");
   });
 
   it("should have loading state while dispatched", async () => {
-    const { result } = renderHook(() => useSignUp({ auth }));
+    const { result } = renderHook(() => useSignUp(auth));
     const { dispatch } = result.current;
     dispatch(generateEmail("realanon"), password)
       .then(async (credential) => {
@@ -72,7 +72,7 @@ describe("when real anon, useSignUp hook", () => {
   });
 
   it("should sign up", async () => {
-    const { result } = renderHook(() => useSignUp({ auth }));
+    const { result } = renderHook(() => useSignUp(auth));
     const { dispatch } = result.current;
     await dispatch(generateEmail("realanon2"), password);
     const localCredential = await signInWithEmailAndPassword(
@@ -101,13 +101,13 @@ describe("when anon, useSignUp hook", () => {
   });
 
   it("should have ready state", () => {
-    const { result } = renderHook(() => useSignUp({ auth }));
+    const { result } = renderHook(() => useSignUp(auth));
     const { state } = result.current;
     expect(state).toBe("ready");
   });
 
   it("should sign up", async () => {
-    const { result } = renderHook(() => useSignUp({ auth }));
+    const { result } = renderHook(() => useSignUp(auth));
     const { dispatch } = result.current;
     await dispatch(generateEmail("anon"), password);
     const localCredential = await signInWithEmailAndPassword(

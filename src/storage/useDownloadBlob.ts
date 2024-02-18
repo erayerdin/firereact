@@ -6,10 +6,6 @@
 import { StorageReference, getBlob } from "firebase/storage";
 import { useState } from "react";
 
-type UseDownloadBlobParams = {
-  reference: StorageReference;
-};
-
 type UseDownloadBlobState = "ready" | "loading" | "done";
 type UseDownloadBlobDispatcher = (
   maxDownloadSizeBytes?: number,
@@ -20,9 +16,9 @@ type UseDownloadBlob = {
   dispatch: UseDownloadBlobDispatcher;
 };
 
-export const useDownloadBlob = ({
-  reference,
-}: UseDownloadBlobParams): UseDownloadBlob => {
+export const useDownloadBlob = (
+  reference: StorageReference,
+): UseDownloadBlob => {
   const [state, setState] = useState<UseDownloadBlobState>("ready");
   const [blob, setBlob] = useState<Blob | undefined>(undefined);
 

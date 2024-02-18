@@ -8,9 +8,12 @@ tags:
 `useDeleteUser` hook is used to delete the currently signed-in user. A very simple example would be:
 
 ```typescript
-const { dispatch } = useDeleteUser({ auth });
+const { dispatch } = useDeleteUser(auth);
 await dispatch();
 ```
+
+!!! warning
+    `useDeleteUser`, as mentioned, can only delete the currently signed-in user from the client side. Due to security reasons, you cannot delete any other user. If you want to delete another user, use Firebase Auth from Firebase Console or Firebase Functions.
 
 !!! warning
     `useDeleteUser` is lazy by default and will not do anything until you use `dispatch` function.
@@ -18,7 +21,7 @@ await dispatch();
 You can also get the state[^unauthorized] of deletion process.
 
 ```typescript
-const { state, dispatch } = useDeleteUser({ auth });
+const { state, dispatch } = useDeleteUser(auth);
 await dispatch();
 // `state` is "ready" | "loading" | "anonymous"
 ```
@@ -30,7 +33,7 @@ By default, `"anonymous"` state includes both real anonymous and Firebase-handle
 
 ```typescript
 // assuming user is Firebase-handled anon
-const { dispatch } = useDeleteUser({ auth, includeFirebaseAnon: true });
+const { dispatch } = useDeleteUser(auth, { includeFirebaseAnon: true });
 await dispatch(); // this will delete anonymous user
 ```
 
@@ -41,7 +44,8 @@ Input parameters for `useDeleteUser` hook is as follows:
 | Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
 | `auth` | [`firebase/auth/Auth`][AuthRefDoc] | Reference to the Firebase Auth service instance. | ✅ | - |
-| `includeFirebaseAnon` | `boolean` | Enable deleting Firebase-handled anonymous users. | ❌ | `false` |
+| `options` | `Object` | Options for the operation. | ❌ | See below. |
+| `options.includeFirebaseAnon` | `boolean` | Enable deleting Firebase-handled anonymous users. | ❌ | `false` |
 
 ## Return Type
 

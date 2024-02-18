@@ -11,10 +11,6 @@ import {
 import { useEffect, useState } from "react";
 import { useUser } from ".";
 
-type UseSignUpParams = {
-  auth: Auth;
-};
-
 type UseSignUpState = "ready" | "loading" | "authenticated";
 type UseSignUpDispatcher = (
   email: string,
@@ -25,8 +21,8 @@ type UseSignUp = {
   dispatch: UseSignUpDispatcher;
 };
 
-export const useSignUp = ({ auth }: UseSignUpParams): UseSignUp => {
-  const user = useUser({ auth });
+export const useSignUp = (auth: Auth): UseSignUp => {
+  const user = useUser(auth);
   const [state, setState] = useState<UseSignUpState>("ready");
 
   useEffect(() => {

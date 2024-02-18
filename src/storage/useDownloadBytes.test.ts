@@ -11,7 +11,7 @@ import { storage } from "../firebase";
 const reference = ref(storage, "files/README.md");
 
 it("initially, useDownloadBytes hook should have ready state", async () => {
-  const { result } = renderHook(() => useDownloadBytes({ reference }));
+  const { result } = renderHook(() => useDownloadBytes(reference));
   const { state } = result.current;
   expect(state).toBe("ready");
 });

@@ -34,7 +34,7 @@ describe("when authed, useSignIn hook", () => {
   });
 
   it("should have authenticated state", async () => {
-    const { result } = renderHook(() => useSignIn({ auth }));
+    const { result } = renderHook(() => useSignIn(auth));
     const { state } = result.current;
     expect(state).toBe("authenticated");
   });
@@ -46,7 +46,7 @@ describe("when anon, useSignIn hook", () => {
     await signOut(auth);
 
     // test
-    const { result } = renderHook(() => useSignIn({ auth }));
+    const { result } = renderHook(() => useSignIn(auth));
     const { state } = result.current;
     expect(state).toBe("ready");
   });
@@ -56,7 +56,7 @@ describe("when anon, useSignIn hook", () => {
     const credential = await signInAnonymously(auth);
 
     // test
-    const { result } = renderHook(() => useSignIn({ auth }));
+    const { result } = renderHook(() => useSignIn(auth));
     const { state } = result.current;
     expect(state).toBe("ready");
 
@@ -70,7 +70,7 @@ describe("when anon, useSignIn hook", () => {
     const email = generateEmail("dispatchemail");
     await createUserWithEmailAndPassword(auth, email, password);
 
-    const { result } = renderHook(() => useSignIn({ auth }));
+    const { result } = renderHook(() => useSignIn(auth));
     const { dispatch } = result.current;
 
     const credential = await dispatch({ type: "classic", email, password });

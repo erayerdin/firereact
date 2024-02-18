@@ -11,7 +11,7 @@ import { storage } from "../firebase";
 const reference = ref(storage, "files/README.md");
 
 it("initially, useFileMetadata hook should have ready state", async () => {
-  const { result } = renderHook(() => useFileMetadata({ reference }));
+  const { result } = renderHook(() => useFileMetadata(reference));
   const { state } = result.current;
   expect(state).toBe("ready");
 });

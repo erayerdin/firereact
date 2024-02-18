@@ -13,7 +13,7 @@ const reference = ref(storage, "files/README.md");
 
 describe("initially, useUploadFile hook", () => {
   it("should have ready state", async () => {
-    const { result } = renderHook(() => useUploadFile({ reference }));
+    const { result } = renderHook(() => useUploadFile(reference));
     const { state } = result.current;
     expect(state).toBe("ready");
   });
@@ -21,7 +21,7 @@ describe("initially, useUploadFile hook", () => {
 
 describe("useUploadFile hook", () => {
   it.skip("should upload file", async () => {
-    const { result } = renderHook(() => useUploadFile({ reference }));
+    const { result } = renderHook(() => useUploadFile(reference));
     const { dispatch } = result.current;
     const file = fs.readFileSync("README.md");
     await dispatch(file);

@@ -13,13 +13,13 @@ const returnVal = "sample function call responded" as const;
 
 describe("the state of useCallFunction", () => {
   it("should be ready initially", async () => {
-    const { result } = renderHook(() => useCallFunction({ functions, name }));
+    const { result } = renderHook(() => useCallFunction(functions, { name }));
     const { state } = result.current;
     expect(state).toBe("ready");
   });
 
   it("should be done when finished", async () => {
-    const { result } = renderHook(() => useCallFunction({ functions, name }));
+    const { result } = renderHook(() => useCallFunction(functions, { name }));
     const { invoke } = result.current;
     await invoke();
     const { state } = result.current;
@@ -29,7 +29,7 @@ describe("the state of useCallFunction", () => {
 
 describe("the return of invoke", () => {
   it("should return the value", async () => {
-    const { result } = renderHook(() => useCallFunction({ functions, name }));
+    const { result } = renderHook(() => useCallFunction(functions, { name }));
     const { invoke } = result.current;
     const callResult = await invoke();
     expect(callResult.data).toBe(returnVal);

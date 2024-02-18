@@ -26,7 +26,7 @@ describe("when real anon, useDeleteUser hook", () => {
   });
 
   it("should have anonymous state", async () => {
-    const { result } = renderHook(() => useDeleteUser({ auth }));
+    const { result } = renderHook(() => useDeleteUser(auth));
     const { state } = result.current;
     expect(state).toBe("anonymous");
   });
@@ -45,14 +45,14 @@ describe("when anon, useDeleteUser hook", () => {
   });
 
   it("should have anonymous state", async () => {
-    const { result } = renderHook(() => useDeleteUser({ auth }));
+    const { result } = renderHook(() => useDeleteUser(auth));
     const { state } = result.current;
     expect(state).toBe("anonymous");
   });
 
   it("should have ready state if includeFirebaseAnon", async () => {
     const { result } = renderHook(() =>
-      useDeleteUser({ auth, includeFirebaseAnon: true }),
+      useDeleteUser(auth, { includeFirebaseAnon: true }),
     );
     const { state } = result.current;
     expect(state).toBe("ready");
@@ -88,13 +88,13 @@ describe("when authed, useDeleteUser hook", () => {
   });
 
   it("should have ready state", async () => {
-    const { result } = renderHook(() => useDeleteUser({ auth }));
+    const { result } = renderHook(() => useDeleteUser(auth));
     const { state } = result.current;
     expect(state).toBe("ready");
   });
 
   it("should delete user", async () => {
-    const { result } = renderHook(() => useDeleteUser({ auth }));
+    const { result } = renderHook(() => useDeleteUser(auth));
     const { dispatch } = result.current;
     await dispatch();
     await sleep(100);
@@ -103,7 +103,7 @@ describe("when authed, useDeleteUser hook", () => {
   });
 
   it("should have loading state while dispatching", async () => {
-    const { result } = renderHook(() => useDeleteUser({ auth }));
+    const { result } = renderHook(() => useDeleteUser(auth));
     const { dispatch } = result.current;
     dispatch();
     await sleep(1);
