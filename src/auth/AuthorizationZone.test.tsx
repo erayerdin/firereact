@@ -12,9 +12,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import sleep from "sleep-sleep";
 import { AuthorizationZone, Validators } from ".";
 import { auth } from "../firebase";
+import { sleep } from "../test.utils";
 
 const generateEmail = (id: string) => `authenticatedzone_${id}@comp.com`;
 const password = "111111" as const;

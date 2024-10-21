@@ -13,9 +13,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import sleep from "sleep-sleep";
 import { useDeleteUser } from ".";
 import { auth } from "../firebase";
+import { sleep } from "../test.utils";
 
 const generateEmail = (id: string) => `usedeleteuser_${id}@hook.com`;
 const password = "111111" as const;

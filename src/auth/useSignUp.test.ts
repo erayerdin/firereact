@@ -12,9 +12,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import sleep from "sleep-sleep";
 import { useSignUp } from ".";
 import { auth } from "../firebase";
+import { sleep } from "../test.utils";
 
 const generateEmail = (id: string) => `usesignup_${id}@hook.com`;
 const password = "111111" as const;
