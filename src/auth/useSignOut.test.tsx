@@ -11,9 +11,9 @@ import {
   signInAnonymously,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import sleep from "sleep-sleep";
 import { useSignOut, useUser } from ".";
 import { auth } from "../firebase";
+import { sleep } from "../test.utils";
 
 const email = "usesignout@hook.com" as const;
 const password = "111111";

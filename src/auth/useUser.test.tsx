@@ -12,8 +12,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import sleep from "sleep-sleep";
 import { auth } from "../firebase";
+import { sleep } from "../test.utils";
 import { useUser } from "./useUser";
 
 describe("when real anon, useUser hook", () => {
