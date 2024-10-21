@@ -44,6 +44,7 @@ npm i firereact
 - Very lightweight, ![unpacked size](https://img.shields.io/npm/unpacked-size/firereact?label=%20&style=flat-square)
   when unpacked, ![npm min bundle size](https://img.shields.io/bundlephobia/min/firereact?style=flat-square&label=%20) when minified, ![npm minzip bundle size](https://img.shields.io/bundlephobia/minzip/firereact?style=flat-square&label=%20) when minified+gzipped
 - Supports ![Javascript](https://img.shields.io/badge/-javascript-f7df1e?style=flat-square&logo=javascript&logoColor=black) and ![Typescript](https://img.shields.io/badge/-typescript-3178c6?style=flat-square&logo=javascript&logoColor=white)
+- Supports at least **Firebase 11**
 - Supports Auth, Firestore, Functions, Providers and Storage.
 - Provides hooks such as `useUser` for Auth or `useDocument` for Firestore, which can listen to realtime changes as well
 - Provides custom components such as `<FirestoreDocument />` or `<StorageDownloadLink />` to keep the logic simple and/or avoid unnecessary rerendering
