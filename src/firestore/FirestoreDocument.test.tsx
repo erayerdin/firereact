@@ -5,8 +5,8 @@
 
 import { render, screen } from "@testing-library/react";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
-import sleep from "sleep-sleep";
 import { firestore } from "../firebase";
+import { sleep } from "../test.utils";
 import { FirestoreDocument } from "./FirestoreDocument";
 
 const docRef = doc(firestore, "FirestoreDocument", "doc1");
