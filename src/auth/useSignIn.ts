@@ -74,63 +74,107 @@ export const useSignIn = (auth: Auth): UseSignIn => {
     switch (type) {
       case "classic": {
         const { email, password } = params;
-        const credential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password,
-        );
-        setState("authenticated");
-        return credential;
+        try {
+          const credential = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password,
+          );
+          setState("authenticated");
+          return credential;
+        } catch (e) {
+          setState("ready");
+          throw e;
+        }
       }
       case "link": {
         const { email, actionCodeSetting } = params;
-        await sendSignInLinkToEmail(auth, email, actionCodeSetting);
-        setState("awaiting");
-        return undefined;
+        try {
+          await sendSignInLinkToEmail(auth, email, actionCodeSetting);
+          setState("awaiting");
+          return undefined;
+        } catch (e) {
+          setState("ready");
+          throw e;
+        }
       }
       case "google": {
         const { provider } = params;
-        const credential = await signInWithPopup(auth, provider);
-        setState("authenticated");
-        setState("authenticated");
-        return credential;
+        try {
+          const credential = await signInWithPopup(auth, provider);
+          setState("authenticated");
+          return credential;
+        } catch (e) {
+          setState("ready");
+          throw e;
+        }
       }
       case "facebook": {
         const { provider } = params;
-        const credential = await signInWithPopup(auth, provider);
-        setState("authenticated");
-        setState("authenticated");
-        return credential;
+        try {
+          const credential = await signInWithPopup(auth, provider);
+          setState("authenticated");
+          return credential;
+        } catch (e) {
+          setState("ready");
+          throw e;
+        }
       }
       case "apple": {
         const { provider } = params;
-        const credential = await signInWithPopup(auth, provider);
-        setState("authenticated");
-        return credential;
+        try {
+          const credential = await signInWithPopup(auth, provider);
+          setState("authenticated");
+          return credential;
+        } catch (e) {
+          const credential = await signInWithPopup(auth, provider);
+          setState("authenticated");
+          return credential;
+        }
       }
       case "twitter": {
         const { provider } = params;
-        const credential = await signInWithPopup(auth, provider);
-        setState("authenticated");
-        return credential;
+        try {
+          const credential = await signInWithPopup(auth, provider);
+          setState("authenticated");
+          return credential;
+        } catch (e) {
+          setState("ready");
+          throw e;
+        }
       }
       case "github": {
         const { provider } = params;
-        const credential = await signInWithPopup(auth, provider);
-        setState("authenticated");
-        return credential;
+        try {
+          const credential = await signInWithPopup(auth, provider);
+          setState("authenticated");
+          return credential;
+        } catch (e) {
+          setState("ready");
+          throw e;
+        }
       }
       case "microsoft": {
         const { provider } = params;
-        const credential = await signInWithPopup(auth, provider);
-        setState("authenticated");
-        return credential;
+        try {
+          const credential = await signInWithPopup(auth, provider);
+          setState("authenticated");
+          return credential;
+        } catch (e) {
+          setState("ready");
+          throw e;
+        }
       }
       case "yahoo": {
         const { provider } = params;
-        const credential = await signInWithPopup(auth, provider);
-        setState("authenticated");
-        return credential;
+        try {
+          const credential = await signInWithPopup(auth, provider);
+          setState("authenticated");
+          return credential;
+        } catch (e) {
+          setState("ready");
+          throw e;
+        }
       }
     }
   };
