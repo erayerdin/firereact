@@ -3,7 +3,6 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { FirebaseError } from "firebase/app";
 import { Auth, deleteUser, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useUser } from ".";
@@ -48,10 +47,8 @@ export const useDeleteUser = (
         await signOut(auth);
         setState("anonymous");
       } catch (e) {
-        if (e instanceof FirebaseError) {
-          setState("ready");
-          throw e;
-        }
+        setState("ready");
+        throw e;
       }
     }
   };
