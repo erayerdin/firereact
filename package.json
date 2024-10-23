@@ -1,6 +1,6 @@
 {
   "name": "firereact",
-  "version": "0.9.3",
+  "version": "0.9.6",
   "description": "React hooks, components and utils for Firebase",
   "type": "module",
   "main": "dist/index.cjs.js",
@@ -61,7 +61,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.15",
-    "firebase-tools": "^13.0.3",
+    "firebase-tools": "^13.22.1",
     "happy-dom": "^13.2.0",
     "jsdom": "^23.2.0",
     "prettier": "^3.2.4",

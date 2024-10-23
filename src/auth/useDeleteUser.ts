@@ -42,9 +42,14 @@ export const useDeleteUser = (
   const dispatch: UseDeleteUserDispatcher = async () => {
     if (user) {
       setState("loading");
-      await deleteUser(user);
-      await signOut(auth);
-      setState("anonymous");
+      try {
+        await deleteUser(user);
+        await signOut(auth);
+        setState("anonymous");
+      } catch (e) {
+        setState("ready");
+        throw e;
+      }
     }
   };
 

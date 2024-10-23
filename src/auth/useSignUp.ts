@@ -31,13 +31,18 @@ export const useSignUp = (auth: Auth): UseSignUp => {
 
   const dispatch: UseSignUpDispatcher = async (email, password) => {
     setState("loading");
-    const credential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
-    setState("authenticated");
-    return credential;
+    try {
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      setState("authenticated");
+      return credential;
+    } catch (e) {
+      setState("ready");
+      throw e;
+    }
   };
 
   return {

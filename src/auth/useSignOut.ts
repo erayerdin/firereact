@@ -47,8 +47,13 @@ export const useSignOut = (
 
   const dispatch: UseSignOutDispatcher = async () => {
     setState("loading");
-    await auth.signOut();
-    setState("anonymous");
+    try {
+      await auth.signOut();
+      setState("anonymous");
+    } catch (e) {
+      setState("ready");
+      throw e;
+    }
   };
 
   return { state, dispatch: state === "ready" ? dispatch : async () => {} };
