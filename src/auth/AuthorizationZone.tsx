@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { Auth, User } from "firebase/auth";
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useUser } from ".";
 
 export type AuthorizationZoneValidator = (
@@ -27,17 +27,15 @@ export const AuthorizationZone = ({
   const user = useUser(auth);
   const [success, setSuccess] = useState(false);
 
-  const _validator = useCallback(validator, [validator]);
-
   useEffect(() => {
-    const taskOrVal = _validator(user);
+    const taskOrVal = validator(user);
 
     if (taskOrVal instanceof Promise) {
       taskOrVal.then(setSuccess);
     } else {
       setSuccess(taskOrVal);
     }
-  }, [user, _validator]);
+  }, [user]);
 
   return success ? onSuccess(user) : onFailure(user);
 };
