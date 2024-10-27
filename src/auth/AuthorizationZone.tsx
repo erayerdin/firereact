@@ -35,7 +35,7 @@ export const AuthorizationZone = ({
     } else {
       setSuccess(taskOrVal);
     }
-  }, [user, validator]);
+  }, [user]);
 
   return success ? onSuccess(user) : onFailure(user);
 };

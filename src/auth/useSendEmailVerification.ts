@@ -33,11 +33,16 @@ export const useSendEmailVerification = (
     actionCodeSetting,
   ) => {
     setState("loading");
-    await sendEmailVerification(
-      user!, // guaranteed user not null on ready
-      actionCodeSetting,
-    );
-    setState("done");
+    try {
+      await sendEmailVerification(
+        user!, // guaranteed user not null on ready
+        actionCodeSetting,
+      );
+      setState("done");
+    } catch (e) {
+      setState("ready");
+      throw e;
+    }
   };
 
   return { state, dispatch: state === "ready" ? dispatch : async () => {} };
