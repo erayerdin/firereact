@@ -30,10 +30,11 @@ export const useCallFunction = (
   { name, httpsCallableOptions }: UseCallFunctionOptions,
 ): UseCallFunction => {
   const [state, setState] = useState<UseCallFunctionState>("ready");
+  const callable = httpsCallable(functions, name, httpsCallableOptions);
 
   const invoke: UseCallFunctionInvoker = async (data: unknown = {}) => {
     setState("loading");
-    const r = httpsCallable(functions, name, httpsCallableOptions).call(data);
+    const r = callable.call(data);
     setState("done");
     return r;
   };
