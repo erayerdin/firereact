@@ -34,7 +34,7 @@ export const useCallFunction = (
 
   const invoke: UseCallFunctionInvoker = async (data: unknown = {}) => {
     setState("loading");
-    const r = callable.call(data);
+    const r = callable(data);
     setState("done");
     return r;
   };
