@@ -31,6 +31,9 @@
 
 <p align="center">Firereact is hooks, component and utilities library for Firebase and React.</p>
 
+> [!WARNING]
+> This library is on its alpha phase, meaning that you need to be extra careful while using it. Before starting to use it, check out the current [issue](https://github.com/erayerdin/firereact/issues). [The issues with high severity](https://github.com/erayerdin/firereact/issues?q=is%3Aissue+is%3Aopen+label%3Aseverity%7Chigh) is especially important to know.
+
 ## Installation
 
 You can install the package via NPM:
