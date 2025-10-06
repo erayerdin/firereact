@@ -126,7 +126,7 @@ export const useSignIn = (auth: Auth): UseSignIn => {
           const credential = await signInWithPopup(auth, provider);
           setState("authenticated");
           return credential;
-        } catch (e) {
+        } catch {
           const credential = await signInWithPopup(auth, provider);
           setState("authenticated");
           return credential;
