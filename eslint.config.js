@@ -1,30 +1,29 @@
 import js from "@eslint/js";
+import tseslint from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
 import prettierPlugin from "eslint-plugin-prettier";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import storybookPlugin from "eslint-plugin-storybook";
-import tseslint from "typescript-eslint";
+import globals from "globals";
 
 export default [
   {
-    root: true,
-
     languageOptions: {
       globals: {
-        ...js.environments.browser.globals,
-        ...js.environments.jest.globals,
+        ...globals.browser,
+        ...globals.node,
+        ...globals.jest,
       },
-      parser: tseslint.parser,
+      parser: tsParser,
     },
-
     plugins: {
-      "@typescript-eslint": tseslint.plugin,
+      "@typescript-eslint": tseslint,
       react: reactPlugin,
       "react-hooks": reactHooksPlugin,
       storybook: storybookPlugin,
       prettier: prettierPlugin,
     },
-
     rules: {
       ...js.configs.recommended.rules,
       ...reactPlugin.configs.recommended.rules,
@@ -33,8 +32,6 @@ export default [
       ...prettierPlugin.configs.recommended.rules,
       ...reactHooksPlugin.configs.recommended.rules,
       ...storybookPlugin.configs.recommended.rules,
-
-      // Custom overrides
       "react/react-in-jsx-scope": "off",
     },
   },
