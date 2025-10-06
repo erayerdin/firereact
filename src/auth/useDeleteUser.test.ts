@@ -106,7 +106,7 @@ describe("when authed, useDeleteUser hook", () => {
     const { result } = renderHook(() => useDeleteUser(auth));
     const { dispatch } = result.current;
     dispatch();
-    await sleep(1);
+    await sleep(2);
     const { state } = result.current;
     expect(state).toBe("loading");
   });
