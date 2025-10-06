@@ -8,6 +8,7 @@ import { Auth } from "firebase/auth";
 import { Firestore } from "firebase/firestore";
 import { Functions } from "firebase/functions";
 import { FirebaseStorage } from "firebase/storage";
+import React from "react";
 import {
   FirebaseAuthProvider,
   FirebaseFunctionsProvider,

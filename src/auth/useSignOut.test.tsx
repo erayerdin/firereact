@@ -40,9 +40,7 @@ describe("when authed, useSignOut hook", () => {
     const { result } = renderHook(() => useSignOut(auth));
     expect(result.current.state).toBe("ready");
   });
-  {
-    auth;
-  }
+
   it("should sign out", async () => {
     render(<SampleComponent />);
     const { result } = renderHook(() => useSignOut(auth));
